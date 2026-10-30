@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="data:," />
+<title>SAT Writing Crash Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:opsz,wght@12..144,600;12..144,700;12..144,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#f6f3ea; --ink:#23201a; --muted:#6d675c; --faint:#8d8778;
+  --card:#fffdf8; --line:#e0d8c4; --panel:#f0ead9; --panel-ink:#23201a;
+  --accent:#a34d16; --accent-ink:#fffdf8;
+  --moss:#2e6e46; --moss-ink:#f7fbf8;
+  --trap:#93330f; --trap-bg:#fbf0e7;
+  --good:#1d6b41; --good-bg:#e9f4ec;
+  --code:#7a5c14; --hl:#ffe9a8;
+  --radius:14px; --radius-s:9px;
+  --shadow:0 1px 2px rgba(35,32,26,.06), 0 8px 24px -12px rgba(35,32,26,.12);
+  --font-d:"Alegreya", Georgia, "Times New Roman", serif;
+  --font-b:"Atkinson Hyperlegible", -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#131410; --ink:#ece8da; --muted:#a9a393; --faint:#7e796d;
+    --card:#1b1c16; --line:#34362b; --panel:#23241c; --panel-ink:#ece8da;
+    --accent:#e08d4d; --accent-ink:#161310;
+    --moss:#5cc08a; --moss-ink:#0f1a14;
+    --trap:#e07f59; --trap-bg:#2b1b12;
+    --good:#5cc08a; --good-bg:#16241b;
+    --code:#d9b44a; --hl:#5a4a12;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 12px 32px -12px rgba(0,0,0,.5);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important; animation:none !important} }
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font-b); font-size:1.05rem; line-height:1.66;
+  -webkit-text-size-adjust:100%;
+}
+::selection{background:var(--hl)}
+a{color:var(--accent); text-decoration-thickness:.08em; text-underline-offset:.14em}
+h1,h2,h3,.dfont{font-family:var(--font-d); line-height:1.12; letter-spacing:-.01em}
+
+/* ---------- masthead ---------- */
+.masthead{
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(1100px 260px at 18% -60px, var(--panel), transparent 70%),
+    var(--bg);
+  padding:clamp(2.2rem,6vw,4rem) 1.25rem clamp(1.8rem,4vw,2.6rem);
+}
+.masthead .inner{max-width:66ch; margin:0 auto}
+.kicker{
+  display:inline-block; font-size:.78rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 1rem;
+}
+.masthead h1{font-size:clamp(2.1rem,5.4vw,3.3rem); font-weight:800; margin:0 0 1rem; max-width:20ch}
+.masthead h1 .soft{color:var(--faint); font-weight:600}
+.lede{font-size:1.14rem; color:var(--muted); max-width:56ch; margin:0 0 1.1rem}
+.lede strong{color:var(--ink)}
+.format-line{
+  display:flex; flex-wrap:wrap; gap:.45rem .7rem; align-items:center;
+  font-size:.92rem; color:var(--muted); margin:0;
+}
+.format-line .pill{
+  border:1px solid var(--line); background:var(--card); border-radius:999px;
+  padding:.15rem .7rem; white-space:nowrap; box-shadow:var(--shadow);
+}
+.format-line .pill b{color:var(--ink)}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px; margin:0 auto; padding:0 1.25rem}
+.layout{display:block; padding-top:2.2rem; padding-bottom:5rem}
+@media (min-width:1024px){
+  .layout{display:grid; grid-template-columns:248px minmax(0,1fr); gap:3rem; align-items:start}
+}
+main{min-width:0; max-width:46rem}
+main > section{scroll-margin-top:1.2rem}
+
+/* ---------- index (desktop sidebar / mobile jump) ---------- */
+.mobile-jump{
+  display:block; border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card); box-shadow:var(--shadow); margin-bottom:2rem;
+  position:relative; z-index:2;
+}
+@media (min-width:1024px){.mobile-jump{display:none}}
+.mobile-jump summary{
+  list-style:none; cursor:pointer; padding:.8rem 1.05rem; font-weight:700;
+  display:flex; justify-content:space-between; align-items:center; gap:.6rem;
+}
+.mobile-jump summary::-webkit-details-marker{display:none}
+.mobile-jump summary::after{content:"+"; font-size:1.3rem; color:var(--accent); line-height:1}
+.mobile-jump[open] summary::after{content:"−"}
+.mobile-jump .jump-body{border-top:1px solid var(--line); padding:.9rem 1.05rem 1.1rem}
+.index{
+  display:none; position:sticky; top:1.2rem; align-self:start;
+  max-height:calc(100vh - 2.4rem); overflow:auto;
+  border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--card); box-shadow:var(--shadow); padding:1rem .9rem;
+  scrollbar-width:thin;
+}
+@media (min-width:1024px){.index{display:block}}
+.index h2{font-family:var(--font-b); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:0 0 .7rem .45rem}
+.index ol{list-style:none; margin:0; padding:0; display:grid; gap:2px}
+.index a{
+  display:flex; align-items:baseline; gap:.55rem; padding:.42rem .5rem; border-radius:8px;
+  color:var(--ink); text-decoration:none; font-size:.93rem; line-height:1.35;
+}
+.index a:hover{background:var(--panel)}
+.index a.active{background:var(--panel); outline:1px solid var(--line)}
+.index .ino{font-family:var(--font-d); font-weight:700; color:var(--accent); font-size:.95em; flex:none; min-width:2.6ch}
+.index .tag{margin-left:auto; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); flex:none}
+.index .dhead{font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); padding:.8rem .5rem .25rem; pointer-events:none}
+.jump-body ol{list-style:none; margin:.2rem 0 0; padding:0; display:grid; gap:.15rem}
+.jump-body a{display:flex; gap:.6rem; padding:.5rem .4rem; color:var(--ink); text-decoration:none; border-bottom:1px dashed var(--line); font-size:.98rem}
+.jump-body a:last-child{border-bottom:0}
+.jump-body .ino{font-family:var(--font-d); font-weight:700; color:var(--accent)}
+.progress{font-size:.85rem; color:var(--muted); margin:.9rem .45rem 0; padding-top:.7rem; border-top:1px dashed var(--line)}
+.jump-body .progress{margin:.9rem .4rem 0}
+.progress b{color:var(--ink); font-variant-numeric:tabular-nums}
+
+/* ---------- part heads ---------- */
+.part{margin:3.4rem 0 0}
+.part-head{margin-bottom:1.4rem}
+.part-head .pno{font-family:var(--font-d); font-weight:700; color:var(--accent); font-size:1rem; letter-spacing:.06em}
+.part-head h2{font-size:clamp(1.7rem,3.6vw,2.3rem); font-weight:800; margin:.15rem 0 .7rem}
+.part-head p{color:var(--muted); max-width:58ch; margin:0}
+.part-head p strong{color:var(--ink)}
+
+/* ---------- terrain ---------- */
+.stat-band{display:grid; gap:.7rem; margin:1.6rem 0 1.8rem}
+@media (min-width:640px){.stat-band{grid-template-columns:repeat(3,1fr)}}
+.stat{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1rem 1.1rem; box-shadow:var(--shadow);
+}
+.stat .n{font-family:var(--font-d); font-weight:800; font-size:1.9rem; color:var(--ink); line-height:1}
+.stat .n small{font-size:.9rem; font-weight:600; color:var(--muted)}
+.stat p{margin:.5rem 0 0; font-size:.9rem; color:var(--muted); line-height:1.5}
+.order-flow{display:flex; flex-wrap:wrap; align-items:center; gap:.45rem; margin:1.2rem 0 1.6rem}
+.order-flow .step{
+  background:var(--panel); color:var(--panel-ink); border:1px solid var(--line);
+  border-radius:999px; padding:.35rem .9rem; font-size:.9rem; font-weight:700;
+}
+.order-flow .step.w{outline:2px solid var(--accent); outline-offset:1px}
+.order-flow .arr{color:var(--faint); font-weight:700}
+.foot-note{font-size:.9rem; color:var(--muted)}
+.check-list{margin:.8rem 0 0; padding:0; list-style:none; display:grid; gap:.55rem}
+.check-list li{padding-left:1.6rem; position:relative; max-width:60ch}
+.check-list li::before{
+  content:"✓"; position:absolute; left:0; top:.1em; color:var(--good); font-weight:700;
+}
+.terrain .foot-note a{white-space:nowrap}
+
+/* ---------- modules ---------- */
+.module{
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  box-shadow:var(--shadow); padding:clamp(1.3rem,3.4vw,2rem);
+  margin:0 0 1.8rem; scroll-margin-top:1.2rem;
+}
+.module-head{display:flex; flex-wrap:wrap; align-items:flex-start; gap:.4rem 1rem; margin-bottom:1rem}
+.module-num{
+  font-family:var(--font-d); font-weight:800; font-size:2.5rem; line-height:1;
+  color:var(--accent); letter-spacing:-.02em;
+}
+.module-title{flex:1 1 12rem; min-width:0}
+.module-title h3{margin:.1rem 0 .15rem; font-size:1.55rem; font-weight:800}
+.module-title .domain{font-size:.85rem; color:var(--muted)}
+.badge{
+  font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  border-radius:999px; padding:.32rem .75rem; white-space:nowrap; margin-top:.35rem;
+}
+.badge.must{background:var(--moss); color:var(--moss-ink)}
+.badge.nice{border:2px solid var(--accent); color:var(--accent)}
+.intuition{
+  background:var(--panel); color:var(--panel-ink);
+  border-radius:var(--radius-s); padding:1rem 1.15rem; margin:0 0 1.4rem;
+}
+.intuition .label, .takeaway .label, .trap .label{
+  font-size:.74rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
+  margin:0 0 .45rem; color:var(--accent);
+}
+.intuition p{margin:0 0 .6rem}
+.intuition p:last-child{margin-bottom:0}
+.intuition code, .reveal code, .trap code{font-family:ui-monospace, Menlo, Consolas, monospace; font-size:.92em; color:var(--code)}
+
+/* visuals */
+.visual{margin:0 0 1.5rem}
+.visual .cap{font-size:.8rem; color:var(--faint); margin:.55rem 0 0; max-width:56ch}
+.signal-grid{display:grid; gap:.55rem}
+@media (min-width:620px){.signal-grid{grid-template-columns:repeat(3,1fr)}}
+.signal{
+  border:1px solid var(--line); border-radius:var(--radius-s);
+  background:var(--bg); padding:.9rem 1rem .95rem;
+}
+.signal .mark{font-family:var(--font-d); font-weight:800; font-size:2.2rem; line-height:1; color:var(--accent)}
+.signal .name{font-weight:700; font-size:.95rem; margin:.25rem 0 .3rem}
+.signal p{margin:0; font-size:.87rem; color:var(--muted); line-height:1.5}
+.decide{
+  display:grid; gap:.5rem; margin-top:.8rem;
+  border:1px dashed var(--line); border-radius:var(--radius-s); padding:.95rem 1.05rem;
+  background:var(--card);
+}
+@media (min-width:620px){.decide{grid-template-columns:1fr 1fr}}
+.decide .q{font-weight:700}
+.decide .q small{display:block; font-weight:400; color:var(--muted); font-size:.86rem}
+.strip-demo{border:1px solid var(--line); border-radius:var(--radius-s); padding:1rem 1.15rem; background:var(--bg)}
+.strip-demo p{margin:.35rem 0; font-size:1.02rem}
+.strip-demo .before{color:var(--muted)}
+.strip-demo s{color:var(--faint); text-decoration-color:var(--trap); text-decoration-thickness:2px}
+.strip-demo .subj{background:var(--hl); border-radius:4px; padding:0 .25em; font-weight:700}
+.chip-row{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.8rem}
+.chip{
+  font-size:.86rem; font-weight:700; border:1px solid var(--line);
+  background:var(--card); border-radius:999px; padding:.2rem .75rem;
+}
+.chip em{font-style:normal; color:var(--accent)}
+.timeline{
+  border:1px solid var(--line); border-radius:var(--radius-s); background:var(--bg);
+  padding:1rem 1.15rem;
+}
+.timeline .track{position:relative; height:4px; background:var(--line); border-radius:99px; margin:2.4rem 1.6rem 1.1rem}
+.timeline .dot{position:absolute; top:50%; width:14px; height:14px; border-radius:50%; background:var(--accent); transform:translate(-50%,-50%)}
+.timeline .dot .t{position:absolute; bottom:18px; left:50%; transform:translateX(-50%); width:13rem; text-align:center; font-size:.84rem; line-height:1.45}
+.timeline .dot .t b{font-size:.92rem}
+.timeline .lbl{position:absolute; top:12px; left:50%; transform:translateX(-50%); font-size:.75rem; color:var(--faint); white-space:nowrap}
+.rule-card{
+  border:2px solid var(--accent); border-radius:var(--radius-s);
+  padding:.9rem 1.1rem; background:var(--card); text-align:center;
+  font-size:1.04rem;
+}
+.rule-card .arrow{color:var(--accent); font-weight:700}
+.rel-grid{display:grid; gap:.55rem}
+@media (min-width:620px){.rel-grid{grid-template-columns:repeat(2,1fr)}}
+.rel{border:1px solid var(--line); border-radius:var(--radius-s); background:var(--bg); padding:.85rem 1rem}
+.rel .name{font-weight:700; font-size:.95rem}
+.rel .name i{font-style:normal; color:var(--accent)}
+.rel .words{margin:.3rem 0 0; font-size:.88rem; color:var(--muted)}
+.rel .ex{margin:.35rem 0 0; font-size:.85rem; color:var(--muted); font-style:italic}
+
+/* examples */
+.examples{display:grid; gap:1.1rem; margin-bottom:1.4rem}
+.example{
+  border:1px solid var(--line); border-radius:var(--radius);
+  padding:1.1rem 1.15rem 1.2rem; background:var(--bg);
+  transition:border-color .15s ease;
+}
+.example.open{border-color:var(--accent)}
+.example-kicker{
+  display:inline-block; font-size:.72rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); margin:0 0 .6rem;
+  border-bottom:2px solid var(--accent); padding-bottom:2px;
+}
+.example-kicker.stretch::after{content:" — push it"; color:var(--faint)}
+.stem, .passage{margin:0 0 .75rem; font-size:1.02rem}
+.passage{background:var(--card); border:1px solid var(--line); border-radius:var(--radius-s); padding:.85rem 1rem; line-height:1.7}
+.stem .blank-underline{border-bottom:2px solid var(--faint)}
+.notes{padding-left:1.35rem; margin:0 0 .8rem}
+.notes li{margin:.25rem 0}
+.goal{background:var(--good-bg); border:1px solid var(--line); border-radius:var(--radius-s); padding:.7rem 1rem; margin:0 0 .9rem; font-size:.95rem}
+.goal b{color:var(--good)}
+.choices{list-style:none; padding:0; margin:0 0 .95rem; display:grid; gap:.45rem}
+@media (min-width:620px){.choices:not(.wide){grid-template-columns:1fr 1fr}}
+.choices li{
+  display:flex; gap:.65rem; align-items:baseline;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius-s);
+  padding:.55rem .8rem; font-size:.98rem; line-height:1.5;
+}
+.choices .letter{
+  font-family:var(--font-d); font-weight:800; color:var(--accent);
+  flex:none; min-width:1.2em; text-align:center;
+}
+.choices .nc{font-size:.8rem; font-weight:700; letter-spacing:.06em; color:var(--faint)}
+.example.open li[data-correct]{border-color:var(--good); background:var(--good-bg); box-shadow:inset 0 0 0 1px var(--good)}
+.example.open li[data-correct] .letter{color:var(--good)}
+
+details.check{margin-top:.1rem}
+details.check summary{
+  list-style:none; cursor:pointer; display:inline-block;
+  font-weight:700; font-size:.97rem; color:var(--accent-ink);
+  background:var(--accent); border:0;
+  border-radius:999px; padding:.5rem 1.25rem;
+  transition:transform .12s ease;
+}
+details.check summary::-webkit-details-marker{display:none}
+details.check summary:hover{transform:translateY(-1px)}
+details.check summary:active{transform:none}
+details.check summary:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+.reveal{border-top:1px dashed var(--line); margin-top:.95rem; padding-top:.95rem}
+.reveal .answer-line{margin:0 0 .6rem}
+.correct{
+  display:inline-block; background:var(--good); color:#fff;
+  border-radius:var(--radius-s); padding:.2rem .7rem; font-size:1rem;
+}
+@media (prefers-color-scheme: dark){.correct{background:var(--good); color:#0f1a14}}
+.reveal p{margin:0 0 .55rem; font-size:.99rem}
+.reveal p:last-child{margin-bottom:0}
+.reveal .why-wrong{color:var(--muted); font-size:.94rem}
+
+.takeaway{
+  border-radius:var(--radius-s); background:var(--good-bg);
+  border:1px solid var(--line); padding:.95rem 1.1rem; margin-bottom:.9rem;
+}
+.takeaway .label{color:var(--good)}
+.takeaway p{margin:0; font-weight:700; font-size:1.02rem}
+.trap{
+  border-radius:var(--radius-s); border:1px solid var(--line);
+  background:var(--trap-bg); padding:.95rem 1.1rem;
+}
+.trap .label{color:var(--trap)}
+.trap p{margin:0; font-size:.97rem}
+
+/* ---------- strategy ---------- */
+.protocol{display:grid; gap:.8rem; margin:1.3rem 0 1.4rem}
+.step-card{
+  display:grid; grid-template-columns:2.6rem 1fr; gap:1rem;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:1rem 1.15rem; box-shadow:var(--shadow);
+}
+.step-card .sn{
+  font-family:var(--font-d); font-weight:800; font-size:1.9rem; line-height:1;
+  color:var(--accent);
+}
+.step-card h4{margin:.1rem 0 .3rem; font-size:1.12rem; font-family:var(--font-b); font-weight:700}
+.step-card p{margin:0; color:var(--muted); font-size:.98rem; max-width:58ch}
+.step-card p strong{color:var(--ink)}
+.big-take{
+  border-radius:var(--radius); background:var(--panel); color:var(--panel-ink);
+  padding:1.2rem 1.3rem; border:1px solid var(--line);
+}
+.big-take .label{font-size:.74rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 .4rem}
+.big-take p{margin:0; font-family:var(--font-d); font-size:1.35rem; font-weight:700; line-height:1.35}
+
+/* ---------- quick ref ---------- */
+.qref{
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  box-shadow:var(--shadow); padding:clamp(1.3rem,3.4vw,2rem); margin-bottom:1.8rem;
+  scroll-margin-top:1.2rem;
+}
+.qref h3{margin:0 0 .4rem; font-size:1.5rem; font-weight:800}
+.qref .sub{color:var(--muted); font-size:.95rem; margin:0 0 1.1rem; max-width:58ch}
+table.ref{width:100%; border-collapse:collapse; font-size:.95rem}
+table.ref th{
+  text-align:left; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--faint); padding:.5rem .6rem; border-bottom:2px solid var(--line);
+}
+table.ref td{padding:.55rem .6rem; border-bottom:1px solid var(--line); vertical-align:top}
+table.ref tr:last-child td{border-bottom:0}
+table.ref tbody tr:hover{background:var(--panel)}
+.ref-id{font-family:var(--font-d); font-weight:800; color:var(--accent); white-space:nowrap}
+.ref-tag{white-space:nowrap; font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase}
+.ref-tag.must{color:var(--good)}
+.ref-tag.nice{color:var(--faint)}
+@media (max-width:560px){
+  table.ref thead{display:none}
+  table.ref, table.ref tbody, table.ref tr, table.ref td{display:block}
+  table.ref tr{border:1px solid var(--line); border-radius:var(--radius-s); margin-bottom:.6rem; padding:.3rem .4rem}
+  table.ref td{border-bottom:0; padding:.25rem .6rem}
+  table.ref td:first-child{padding-top:.5rem}
+}
+
+/* ---------- footer ---------- */
+footer.site{
+  border-top:1px solid var(--line); margin-top:1rem; padding:2.2rem 0 3rem;
+  color:var(--muted); font-size:.9rem;
+}
+footer.site .inner{max-width:66ch; margin:0 auto; padding:0 1.25rem}
+footer.site h2{font-family:var(--font-b); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin:0 0 .9rem}
+footer.site p{margin:0 0 .7rem; max-width:62ch}
+footer.site .fine{font-size:.82rem; color:var(--faint)}
+
+/* ---------- print: expand every answer ---------- */
+@media print{
+  :root{--bg:#fff; --ink:#1a1a1a; --muted:#4a4a4a; --faint:#6b6b6b; --card:#fff; --line:#d6d6d6; --panel:#f5f3ec; --panel-ink:#1a1a1a; --accent:#8a4212; --accent-ink:#fff; --moss:#256b3f; --moss-ink:#fff; --trap:#8a2f1d; --trap-bg:#f8eee7; --good:#1d6b41; --good-bg:#ecf5ee; --code:#6a5010; --hl:#fff1b8; --shadow:none}
+  .masthead, .wrap, .layout, main, .module, .step-card, .qref{box-shadow:none}
+  .index, .mobile-jump{display:none !important}
+  .layout{display:block; padding-bottom:1rem}
+  main{max-width:none}
+  details.check:not([open]) > *:not(summary){display:block !important}
+  details.check summary{display:none !important}
+  .reveal{border-top:1px solid var(--line)}
+  .module, .step-card, .qref, .example{break-inside:avoid}
+  html{scroll-behavior:auto}
+  body{font-size:10.5pt; line-height:1.55}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <p class="kicker">SAT Writing · Intuitive crash course</p>
+    <h1>The Writing section is the same patterns on <span class="soft">loop.</span></h1>
+    <p class="lede">Built for a student scoring around <strong>900</strong> and climbing toward <strong>1400+</strong>. Grammar questions recycle a small set of rules. Expression-of-ideas questions are logic questions in disguise. Learn the pattern once and the test's costumes stop working.</p>
+    <p class="format-line">
+      <span class="pill"><b>11 modules</b> · each with one pattern</span>
+      <span class="pill"><b>One simple</b> example to learn it</span>
+      <span class="pill"><b>One stretch</b> example to push it</span>
+      <span class="pill"><b>+</b> the one-line takeaway and the trap to avoid</span>
+    </p>
+  </div>
+</header>
+
+<div class="wrap">
+<div class="layout">
+
+  <aside class="index" aria-label="Module index">
+    <h2>Your map</h2>
+    <ol>
+      <li><a href="#terrain"><span class="ino">§</span>Know the terrain<span class="tag">setup</span></a></li>
+      <li class="dhead">Grammar — Standard English Conventions</li>
+      <li><a href="#w1"><span class="ino">W1</span>Sentence boundaries<span class="tag">must</span></a></li>
+      <li><a href="#w2"><span class="ino">W2</span>Punctuation signals<span class="tag">must</span></a></li>
+      <li><a href="#w3"><span class="ino">W3</span>Subject–verb agreement<span class="tag">must</span></a></li>
+      <li><a href="#w4"><span class="ino">W4</span>Verb tense &amp; form<span class="tag">must</span></a></li>
+      <li><a href="#w5"><span class="ino">W5</span>Pronoun clarity<span class="tag">must</span></a></li>
+      <li><a href="#w6"><span class="ino">W6</span>Modifier placement<span class="tag">must</span></a></li>
+      <li><a href="#w7"><span class="ino">W7</span>Parallelism<span class="tag">nice</span></a></li>
+      <li><a href="#w8"><span class="ino">W8</span>Apostrophes<span class="tag">nice</span></a></li>
+      <li class="dhead">Expression of ideas</li>
+      <li><a href="#w9"><span class="ino">W9</span>Transitions<span class="tag">must</span></a></li>
+      <li><a href="#w10"><span class="ino">W10</span>Rhetorical synthesis<span class="tag">must</span></a></li>
+      <li><a href="#w11"><span class="ino">W11</span>Precision &amp; concision<span class="tag">must</span></a></li>
+      <li class="dhead">Timing</li>
+      <li><a href="#strategy"><span class="ino">§</span>Adaptive strategy<span class="tag">must</span></a></li>
+      <li><a href="#qref"><span class="ino">§</span>Quick reference<span class="tag">—</span></a></li>
+    </ol>
+    <p class="progress"><b data-progress>0 of 22 practice checks opened</b></p>
+  </aside>
+
+  <main>
+    <details class="mobile-jump" aria-label="Jump to a module" open>
+      <summary>Jump to a module</summary>
+      <div class="jump-body">
+        <ol>
+          <li><a href="#terrain"><span class="ino">§</span> Know the terrain</a></li>
+          <li><a href="#w1"><span class="ino">W1</span> Sentence boundaries <span class="tag">· must-know</span></a></li>
+          <li><a href="#w2"><span class="ino">W2</span> Punctuation logic <span class="tag">· must-know</span></a></li>
+          <li><a href="#w3"><span class="ino">W3</span> Subject–verb agreement <span class="tag">· must-know</span></a></li>
+          <li><a href="#w4"><span class="ino">W4</span> Verb tense &amp; form <span class="tag">· must-know</span></a></li>
+          <li><a href="#w5"><span class="ino">W5</span> Pronoun clarity <span class="tag">· must-know</span></a></li>
+          <li><a href="#w6"><span class="ino">W6</span> Modifier placement <span class="tag">· must-know</span></a></li>
+          <li><a href="#w7"><span class="ino">W7</span> Parallelism <span class="tag">· nice-to-have</span></a></li>
+          <li><a href="#w8"><span class="ino">W8</span> Apostrophes <span class="tag">· nice-to-have</span></a></li>
+          <li><a href="#w9"><span class="ino">W9</span> Transitions <span class="tag">· must-know</span></a></li>
+          <li><a href="#w10"><span class="ino">W10</span> Rhetorical synthesis <span class="tag">· must-know</span></a></li>
+          <li><a href="#w11"><span class="ino">W11</span> Precision &amp; concision <span class="tag">· must-know</span></a></li>
+          <li><a href="#strategy"><span class="ino">§</span> Adaptive module strategy</a></li>
+          <li><a href="#qref"><span class="ino">§</span> Quick reference</a></li>
+        </ol>
+        <p class="progress"><b data-progress>0 of 22 practice checks opened</b></p>
+      </div>
+    </details>
+
+    <!-- ================= TERRAIN ================= -->
+    <section class="part terrain" id="terrain" aria-label="How the Writing section works">
+      <div class="part-head">
+        <span class="pno">Before you start</span>
+        <h2>Know the terrain</h2>
+        <p>Writing questions live inside the Reading &amp; Writing section: two 32-minute modules, 27 questions each. Grammar comes on test day in a fixed order — the section groups similar skills together, arranged <strong>roughly easiest to hardest within each group</strong>.</p>
+      </div>
+      <div class="stat-band">
+        <div class="stat">
+          <div class="n">54 <small>questions</small></div>
+          <p>across 64 minutes; <b>~71 seconds</b> a question. Keep moving — flagged questions can wait.</p>
+        </div>
+        <div class="stat">
+          <div class="n">≈11–15 <small>grammar Qs</small></div>
+          <p>Standard English Conventions (~26% of the section) + Expression of Ideas (~8–12 ≈ 20%) — weights per College Board's published specs.</p>
+        </div>
+        <div class="stat">
+          <div class="n">0 <small>penalty</small></div>
+          <p>No penalty for wrong answers. Never leave a question blank — guess on anything stuck.</p>
+        </div>
+      </div>
+      <p class="foot-note">Domain order on test day (your half is the last two):</p>
+      <div class="order-flow" aria-label="Domain order">
+        <span class="step">Craft &amp; Structure</span><span class="arr">→</span>
+        <span class="step">Information &amp; Ideas</span><span class="arr">→</span>
+        <span class="step w">Standard English Conventions</span><span class="arr">→</span>
+        <span class="step w">Expression of Ideas</span>
+      </div>
+      <ul class="check-list">
+        <li>Every question carries <b>its own short passage (25–150 words)</b> — you never carry context far.</li>
+        <li>The section <b>adapts</b>: a strong Module 1 unlocks a harder Module 2 — and a harder Module 2 unlocks the top score bands.</li>
+        <li>Within each module, work <b>in order</b>: early questions in a group are the easy on-ramp to the hard ones.</li>
+      </ul>
+    </section>
+
+    <!-- ================= PART A ================= -->
+    <section class="part" id="part-a" aria-label="Part A: Standard English Conventions">
+      <div class="part-head">
+        <span class="pno">Part A · Modules W1–W8</span>
+        <h2>Standard English Conventions</h2>
+        <p>The grammar loop. This is the SAT's most mechanical domain: a small rule set, applied the same way every test. Modules W1–W6 are the non-negotiables — nail those and nearly every grammar question is readable.</p>
+      </div>
+
+      <!-- W1 -->
+      <article class="module" id="w1">
+        <header class="module-head">
+          <span class="module-num">W1</span>
+          <div class="module-title">
+            <h3>Sentence boundaries</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>The SAT's favorite sentence crime is the <strong>comma splice</strong>: two complete sentences glued with just a comma. The fix menu is tiny — a <strong>period</strong>, a <strong>semicolon</strong>, or a <strong>comma + FANBOYS conjunction</strong> (<em>for, and, nor, but, or, yet, so</em>).</p>
+          <p>Also watch <strong>fragments</strong> (no main verb — "Running down the street") and <strong>run-ons</strong> (two sentences with no punctuation at all). The can't-unsee-it test: <strong>cover each side of the punctuation — if both sides could stand alone as sentences, a bare comma between them is always wrong.</strong></p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W1 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The museum extended its hours for the new exhibit<span class="blank-underline">,</span> <span class="blank-underline">___</span> drew record crowds.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — comma</span></li>
+              <li data-correct><span class="letter">B</span><span>exhibit<b>;</b> it</span></li>
+              <li data-wrong><span class="letter">C</span><span>exhibit<b>,</b> it</span></li>
+              <li data-wrong><span class="letter">D</span><span>exhibit it</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Both sides are complete sentences ("The museum extended its hours for the new exhibit" / "it drew record crowds"). A bare comma between two complete sentences = comma splice. <strong>B</strong> uses a semicolon — period-strength.</p>
+                <p class="why-wrong">A and C are comma splices. D is a run-on.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W1 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">Having trained for months, the marathon runner felt confident<span class="blank-underline">;</span> <span class="blank-underline">___</span> she had never raced in such extreme heat before.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — semicolon</span></li>
+              <li data-correct><span class="letter">B</span><span>confident<b>, although</b></span></li>
+              <li data-wrong><span class="letter">C</span><span>confident although</span></li>
+              <li data-wrong><span class="letter">D</span><span>confident<b>:</b> although</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>"Although she had never raced in such extreme heat before" is a <strong>dependent</strong> clause — it can't stand alone. A semicolon needs complete sentences on both sides, so A is wrong. <strong>B</strong> properly attaches the dependent clause with a comma + subordinating conjunction.</p>
+                <p class="why-wrong">C is a run-on-ish attachment with no punctuation. D misuses the colon: a colon must follow a complete thought, and "although" makes what follows dependent, breaking the colon's announcing structure.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Two complete sentences need period-strength punctuation — period, semicolon, or comma + FANBOYS. A bare comma is never enough.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>A <strong>semicolon where one side is a fragment</strong>; a <strong>colon that doesn't follow a complete thought</strong>.</p>
+        </div>
+      </article>
+
+      <!-- W2 -->
+      <article class="module" id="w2">
+        <header class="module-head">
+          <span class="module-num">W2</span>
+          <div class="module-title">
+            <h3>Punctuation logic — what each mark signals</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>Punctuation marks are <strong>traffic signals</strong>, and each has exactly one job. The move: ask <em>"are both sides complete sentences?"</em> — if yes, you're in semicolon/period territory. Ask <em>"does the second half explain the first?"</em> — that's colon/dash territory.</p>
+        </div>
+        <div class="visual" aria-label="Punctuation jobs">
+          <div class="signal-grid">
+            <div class="signal"><div class="mark">,</div><div class="name">Comma — brief pause</div><p>Separates items, sets off nonessential info, follows introductions. <b>Never</b> joins two complete sentences alone.</p></div>
+            <div class="signal"><div class="mark">;</div><div class="name">Semicolon — full stop in disguise</div><p>Complete sentence on both sides, always. Think of it as a period wearing a costume.</p></div>
+            <div class="signal"><div class="mark">:</div><div class="name">Colon — drumroll</div><p>Must follow a complete sentence, and what comes after explains, lists, or elaborates.</p></div>
+            <div class="signal"><div class="mark">—</div><div class="name">Single dash — dramatic colon</div><p>Same rules as a colon: a complete sentence must come before it.</p></div>
+            <div class="signal"><div class="mark">– –</div><div class="name">Pair of dashes or commas — parentheses</div><p>Fences around nonessential info. They must <b>match</b>: open with a dash, close with a dash.</p></div>
+            <div class="signal"><div class="mark">∅</div><div class="name">No punctuation</div><p>The default. When the sentence flows without a break, don't insert a mark just because it's an SAT question.</p></div>
+          </div>
+          <div class="decide">
+            <div class="q">Both sides complete sentences? <small>→ semicolon or period territory</small></div>
+            <div class="q">Second half explains the first? <small>→ colon or dash territory</small></div>
+          </div>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W2 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The scientist's most famous discovery <span class="blank-underline">___</span> penicillin <span class="blank-underline">___</span> revolutionized medicine.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — no punctuation</span></li>
+              <li data-wrong><span class="letter">B</span><span>discovery<b>:</b> penicillin<b>,</b></span></li>
+              <li data-correct><span class="letter">C</span><span>discovery<b>—</b>penicillin<b>—</b></span></li>
+              <li data-wrong><span class="letter">D</span><span>discovery<b>,</b> penicillin<b>;</b></span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>"Penicillin" is nonessential info renaming "discovery" — it needs <strong>matching fences</strong> on both sides. <strong>C</strong> opens with a dash and closes with a dash.</p>
+                <p class="why-wrong">A smashes the words together. B mixes a colon with a comma — mismatched. D mixes a comma with a semicolon — mismatched, and the semicolon wrongly implies a complete sentence follows.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W2 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">Three factors doomed the expedition<b>:</b> poor planning, inadequate supplies<span class="blank-underline">,</span> <span class="blank-underline">___</span> brutal winter arrived earlier than expected.</p>
+            <ol class="choices">
+              <li data-correct><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — comma</span></li>
+              <li data-wrong><span class="letter">B</span><span>supplies<b>;</b> and</span></li>
+              <li data-wrong><span class="letter">C</span><span>supplies<b>:</b> and</span></li>
+              <li data-wrong><span class="letter">D</span><span>supplies<b>—</b>and</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: A</span></p>
+                <p>The colon after "expedition" already did its job: complete sentence + drumroll + list. Inside the list, items are separated by plain commas — <strong>A</strong> is correct. The trap here: students see fancy punctuation nearby and assume the list needs upgrading too. It doesn't — <strong>the colon already fired.</strong></p>
+                <p class="why-wrong">B wrongly upgrades a list comma to a semicolon. C stacks a second colon for no reason. D's dash breaks the list structure.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Semicolon = period. Colon/dash = drumroll after a complete sentence. Fences must match in pairs.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p><strong>Mismatched pairs</strong> (open with a comma, close with a dash); <strong>upgrading simple list commas to semicolons</strong> because it looks more SAT-like.</p>
+        </div>
+      </article>
+
+      <!-- W3 -->
+      <article class="module" id="w3">
+        <header class="module-head">
+          <span class="module-num">W3</span>
+          <div class="module-title">
+            <h3>Subject–verb agreement — the skeleton strip</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>The SAT <strong>buries the subject</strong> under prepositional phrases and asides so your ear grabs the <em>nearest</em> noun instead of the <em>real</em> subject. The can't-unsee-it technique: <strong>strip the sentence to its skeleton</strong> — cross out prepositional phrases (<em>of ___</em>, <em>in ___</em>, <em>with ___</em>) and parenthetical asides, and the true subject and verb stand naked next to each other.</p>
+        </div>
+        <div class="visual" aria-label="Skeleton strip demo">
+          <div class="strip-demo">
+            <p class="before">Original: "The box of chocolates on the kitchen counter ___ missing."</p>
+            <p>Stripped: "The <span class="subj">box</span> <s>of chocolates</s> <s>on the kitchen counter</s> ___ missing." &nbsp;→&nbsp; subject = <b>box</b> (singular) → <b>is</b>.</p>
+          </div>
+          <div class="chip-row" aria-label="Always-singular subjects">
+            <span class="chip">Always singular: <em>each</em></span>
+            <span class="chip"><em>every</em></span>
+            <span class="chip"><em>everyone</em></span>
+            <span class="chip"><em>anyone</em></span>
+            <span class="chip"><em>neither</em></span>
+            <span class="chip"><em>either</em></span>
+            <span class="chip"><em>nobody</em></span>
+          </div>
+          <p class="cap">Memorize the lineup above — they're singular no matter what follows. And <em>neither…nor</em> verbs agree with the <strong>nearer</strong> subject.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W3 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The box of chocolates on the kitchen counter <span class="blank-underline">___</span> missing.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — are</span></li>
+              <li data-correct><span class="letter">B</span><span>is</span></li>
+              <li data-wrong><span class="letter">C</span><span>were</span></li>
+              <li data-wrong><span class="letter">D</span><span>have been</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Strip it: "The box <s>of chocolates</s> <s>on the kitchen counter</s> ___ missing." Subject = <strong>box</strong> (singular) — so the verb must be singular: <strong>is</strong>.</p>
+                <p class="why-wrong">A, C, and D all agree with "chocolates" — the decoy noun sitting closer to the verb.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W3 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">Neither the engineers nor the project manager <span class="blank-underline">___</span> satisfied with the test results, and each of the inspectors <span class="blank-underline">___</span> filed a separate complaint.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — were / have</span></li>
+              <li data-correct><span class="letter">B</span><span>was / has</span></li>
+              <li data-wrong><span class="letter">C</span><span>were / has</span></li>
+              <li data-wrong><span class="letter">D</span><span>was / have</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Two agreement points. (1) <em>Neither/nor</em> → the verb agrees with the <strong>nearer</strong> subject: "manager" (singular) → <strong>was</strong>. (2) Strip the second: "each <s>of the inspectors</s> ___ filed" — <strong>each is always singular</strong> → <strong>has</strong>.</p>
+                <p class="why-wrong">A fails both. C gets the second right but the first wrong (the classic nearer-subject trap). D gets the first right but trips on "each."</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Cross out the prepositional phrases; the subject left standing must match the verb.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>The <strong>decoy noun</strong> (nearest noun ≠ subject); <em>neither/nor</em> agreeing with the nearer subject; <em>each/every/everyone</em> always singular.</p>
+        </div>
+      </article>
+
+      <!-- W4 -->
+      <article class="module" id="w4">
+        <header class="module-head">
+          <span class="module-num">W4</span>
+          <div class="module-title">
+            <h3>Verb tense &amp; form consistency</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>The SAT tests <strong>time logic</strong>, not fancy tenses. Rule: <strong>don't shift tense unless the timeline shifts.</strong> If the sentence lives in the past, every verb lives in the past. Also check that the sentence actually has a <strong>main verb</strong> — one that starts with "Having…" or "Which…" and never delivers a real verb is a fraud.</p>
+        </div>
+        <div class="visual" aria-label="Past perfect timeline">
+          <div class="timeline">
+            <p style="margin:0;font-weight:700">The "past-before-past" pattern</p>
+            <p style="margin:.15rem 0 0;color:var(--muted);font-size:.9rem">Two past events — the earlier one takes <b>had</b>.</p>
+            <div class="track">
+              <div class="dot" style="left:25%"><span class="t"><b>"had approved"</b><br/>earlier event → <b>past perfect</b></span><span class="lbl">past-perfect</span></div>
+              <div class="dot" style="left:70%"><span class="t"><b>"released"</b><br/>later event → simple past</span><span class="lbl">simple past</span></div>
+            </div>
+          </div>
+          <p class="cap">Read the template into memory: <em>"by the time X happened (past), Y <b>had</b> already happened."</em></p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W4 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The researchers collected the samples in June and <span class="blank-underline">___</span> them to the lab for analysis.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — transport</span></li>
+              <li data-correct><span class="letter">B</span><span>transported</span></li>
+              <li data-wrong><span class="letter">C</span><span>will transport</span></li>
+              <li data-wrong><span class="letter">D</span><span>have transported</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>"Collected" sets the timeline: <strong>past</strong>. The parallel past action needs the past tense → <strong>transported</strong>.</p>
+                <p class="why-wrong">A, C, and D shift time for no reason — the sentence gives you no later timestamp to justify them.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W4 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">By the time the committee released its report, the city <span class="blank-underline">___</span> already approved the new zoning law.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — has</span></li>
+              <li data-correct><span class="letter">B</span><span>had</span></li>
+              <li data-wrong><span class="letter">C</span><span>will have</span></li>
+              <li data-wrong><span class="letter">D</span><span>has had</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Two past events, one before the other: the approval happened <em>before</em> the release. Past-before-past takes the <strong>past perfect ("had")</strong>.</p>
+                <p class="why-wrong">A ("has approved") is present perfect — wrong timeline entirely. C is future. The pattern to internalize: "by the time X happened, Y <b>had</b> already happened."</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>One timeline per sentence — shift tense only when time actually shifts; past-before-past takes "had."</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>Present perfect (<em>has/have</em>) sneaking into a purely past-tense sentence; a sentence with <strong>no main verb</strong> at all.</p>
+        </div>
+      </article>
+
+      <!-- W5 -->
+      <article class="module" id="w5">
+        <header class="module-head">
+          <span class="module-num">W5</span>
+          <div class="module-title">
+            <h3>Pronoun–antecedent clarity</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>Every pronoun must point to <strong>one clear, specific noun</strong> (its antecedent) and match it in <strong>number</strong>. The SAT's favorite trick: a pronoun with <strong>two possible antecedents</strong> — grammatically it could point at either, so the sentence is ambiguous and wrong.</p>
+          <p>Also: <em>they/them/their</em> can't point to a singular noun, and <em>it</em> can't point to a whole idea. When in doubt, <strong>the fix is to repeat the noun.</strong></p>
+        </div>
+        <div class="visual" aria-label="Pronoun pointers">
+          <div class="rule-card">
+            <b>pronoun</b> <span class="arrow">→</span> <b>one</b> unmistakable noun <span class="arrow">&amp;</span> same number
+          </div>
+          <div class="chip-row" aria-label="Singular collective nouns">
+            <span class="chip">Singular on the SAT: <em>committee</em></span>
+            <span class="chip"><em>team</em></span>
+            <span class="chip"><em>company</em></span>
+            <span class="chip"><em>jury</em></span>
+          </div>
+          <p class="cap">Words like <em>committee</em> and <em>team</em> are <b>singular</b> collective nouns — so "they" can never point at them.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W5 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">When Maya handed Priya her notes, <span class="blank-underline">___</span> was grateful for the help.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — she</span></li>
+              <li data-correct><span class="letter">B</span><span>Maya</span></li>
+              <li data-wrong><span class="letter">C</span><span>they</span></li>
+              <li data-wrong><span class="letter">D</span><span>it</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>"She" could be Maya <em>or</em> Priya — ambiguous, so wrong. <strong>B</strong> repeats the noun and kills the ambiguity.</p>
+                <p class="why-wrong">C and D don't even make sense — wrong number and wrong kind of thing entirely.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W5 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">The committee praised the volunteers, but <span class="blank-underline">___</span> noted that the fundraising goal had not yet been met.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — they</span></li>
+              <li data-wrong><span class="letter">B</span><span>it</span></li>
+              <li data-correct><span class="letter">C</span><span>the committee</span></li>
+              <li data-wrong><span class="letter">D</span><span>he</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>"They" is technically pointing at "the committee" — but <strong>committee is a singular collective noun</strong> on the SAT (like <em>team</em>, <em>company</em>, <em>jury</em>). A plural pronoun can't point to a singular noun. <strong>C</strong> repeats the noun. This is the stretch version because the ambiguity isn't obvious — <strong>it's number mismatch hiding behind a reasonable-sounding "they."</strong></p>
+                <p class="why-wrong">A has the number mismatch. B ("it") is cold and awkward pointing at people; the test prefers repeating the noun. D invents a person.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Every pronoun needs one unmistakable noun to point to — and must match it in number.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p><strong>"They" pointing to singular collective nouns</strong> (committee, team, company); two nouns of the same type making <em>it/he/she</em> ambiguous.</p>
+        </div>
+      </article>
+
+      <!-- W6 -->
+      <article class="module" id="w6">
+        <header class="module-head">
+          <span class="module-num">W6</span>
+          <div class="module-title">
+            <h3>Modifier placement</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>A describing phrase at the start of a sentence must describe <strong>the noun that comes right after the comma</strong>. If it doesn't, the modifier is <em>dangling</em> — describing nothing — or <em>misplaced</em> — describing the wrong thing. The fix is always mechanical: <strong>put the thing being described immediately after the comma.</strong></p>
+          <p>Read it literally and laugh at the absurd image: if the rain is suddenly walking to the store, you've found the error.</p>
+        </div>
+        <div class="visual" aria-label="Modifier rule">
+          <div class="rule-card">
+            <b>[describing phrase],</b> <span class="arrow">+</span> the thing it describes <span class="arrow">—</span> <b>immediately</b> after the comma
+          </div>
+          <p class="cap">The correct answer often <b>repeats the noun</b> from the modifier ("the achievement…") instead of using a pronoun ("it…"). Watch for that shape.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W6 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">Walking to the store, <span class="blank-underline">___</span> started to rain.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — it</span></li>
+              <li data-wrong><span class="letter">B</span><span>the rain</span></li>
+              <li data-wrong><span class="letter">C</span><span>I got caught as it</span></li>
+              <li data-correct><span class="letter">D</span><span>we were caught when it</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: D</span></p>
+                <p>"Walking to the store" must describe whoever comes after the comma. A and B make the <em>rain</em> walk to the store — read it literally and laugh. <strong>D</strong> puts "we" right after the comma: people can walk.</p>
+                <p class="why-wrong">C is grammatically passable but wordy and clunky; D is the clean SAT fix.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W6 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">Named in 1999 as one of the greatest achievements by a US chemist, <span class="blank-underline">___</span> was Percy Julian's synthesis of cortisone.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — it</span></li>
+              <li data-correct><span class="letter">B</span><span>the achievement</span></li>
+              <li data-wrong><span class="letter">C</span><span>chemists celebrated</span></li>
+              <li data-wrong><span class="letter">D</span><span>the honor belonged to</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Strip to the skeleton: "Named in 1999 as one of the greatest achievements by a US chemist, ___ was Percy Julian's synthesis." The someone/something that was <strong>named</strong> must come right after the comma. <strong>B</strong> — "the achievement was Percy Julian's synthesis" — nails it: the achievement is what was named. The real SAT's favorite shape: the correct answer <b>repeats the noun</b> from the modifier instead of using a pronoun.</p>
+                <p class="why-wrong">A lets "it" stand in for the synthesis, leaving the modifier dangling. C and D put the wrong noun after the comma.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Whatever the opening phrase describes must come immediately after the comma — read it literally.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>A pronoun (<em>it</em>, <em>they</em>) after the comma that points at the wrong noun; the correct answer <strong>repeating the noun</strong> instead of using a pronoun.</p>
+        </div>
+      </article>
+
+      <!-- W7 -->
+      <article class="module" id="w7">
+        <header class="module-head">
+          <span class="module-num">W7</span>
+          <div class="module-title">
+            <h3>Parallelism</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge nice">Nice-to-have</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>Items in a list — or two sides of a comparison — must wear <strong>the same grammatical uniform</strong>. Noun matches noun, verb matches verb, "-ing" matches "-ing." When the SAT breaks parallelism, one item will be in a different form, and your ear will catch the wobble if you <strong>read the list items <em>together</em></strong>, skipping the rest.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W7 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The job requires patience, attention to detail, and <span class="blank-underline">___</span>.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — to work well with others</span></li>
+              <li data-wrong><span class="letter">B</span><span>working well with others</span></li>
+              <li data-correct><span class="letter">C</span><span>collaboration</span></li>
+              <li data-wrong><span class="letter">D</span><span>being able to work well with others</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>The list so far: "patience" (noun), "attention to detail" (noun phrase), ___. <strong>C</strong> — "collaboration" (noun) — keeps the uniform.</p>
+                <p class="why-wrong">A, B, and D are infinitive or "-ing" phrases — the wrong uniform, even though the meaning is right.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W7 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">The coach emphasized not only physical conditioning but also <span class="blank-underline">___</span>.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — that mental toughness matters</span></li>
+              <li data-wrong><span class="letter">B</span><span>developing mental toughness</span></li>
+              <li data-correct><span class="letter">C</span><span>mental toughness</span></li>
+              <li data-wrong><span class="letter">D</span><span>to develop mental toughness</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>"Not only X but also Y" is a <strong>correlative pair</strong> — X and Y must match in form. X = "physical conditioning" (noun phrase), so Y must be a noun phrase: <strong>mental toughness</strong>.</p>
+                <p class="why-wrong">A is a whole clause, B and D are verb forms — all three break the uniform.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>List items and "not only/but also" pairs must match in grammatical form — read the items together and listen for the wobble.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>One item smuggled in as an infinitive or clause among nouns; the wobble hidden by a long list.</p>
+        </div>
+      </article>
+
+      <!-- W8 -->
+      <article class="module" id="w8">
+        <header class="module-head">
+          <span class="module-num">W8</span>
+          <div class="module-title">
+            <h3>Apostrophes — possession vs. plural</h3>
+            <span class="domain">Standard English Conventions</span>
+          </div>
+          <span class="badge nice">Nice-to-have</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>Apostrophes do <strong>two jobs and two jobs only</strong>: <strong>possession</strong> (the dog's bone = the bone of the dog) and <strong>contraction</strong> (it's = it is). <strong>They never, ever make plurals</strong> — "the 1990's" is wrong; "the 1990s" is right.</p>
+          <p>For possession, the test is mechanical: flip it to an <strong>"of" phrase</strong>. "The students' lounge" = "the lounge of the students" (plural possessors → apostrophe after the s).</p>
+        </div>
+        <div class="visual" aria-label="It's vs its check">
+          <div class="rule-card">
+            See <b>it's</b>? Expand it to <b>"it is"</b>. Sentence still works? <span class="arrow">✓</span> keep the apostrophe. &nbsp;Breaks? <span class="arrow">✗</span> you want <b>its</b>.
+          </div>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W8 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The <span class="blank-underline">___</span> coats were hung in the hallway closet.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — student's</span></li>
+              <li data-correct><span class="letter">B</span><span>students'</span></li>
+              <li data-wrong><span class="letter">C</span><span>students</span></li>
+              <li data-wrong><span class="letter">D</span><span>students's</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Multiple students own the coats → plural possessive → apostrophe after the s: <strong>students'</strong>.</p>
+                <p class="why-wrong">A is singular possessive (one student). C is just a plural with no possession. D is never correct in standard English.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W8 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem"><span class="blank-underline">___</span> going to be difficult for the team to maintain <span class="blank-underline">___</span> lead in the final quarter.</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span><span class="nc">NO CHANGE</span> — Its / their</span></li>
+              <li data-correct><span class="letter">B</span><span>It's / its</span></li>
+              <li data-wrong><span class="letter">C</span><span>Its / its</span></li>
+              <li data-wrong><span class="letter">D</span><span>It's / their</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>First blank: "___ going to be" = "it is going to be" → contraction → <strong>it's</strong>. Second blank: "maintain ___ lead" = "the lead of it (the team)" → possessive, no apostrophe → <strong>its</strong>.</p>
+                <p class="why-wrong">C and D flip the contraction/possessive. D also uses "their" for the singular collective noun "team" — see W5.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Apostrophes = possession or contraction only — expand "it's" to "it is" to check.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p><strong>"Its" vs. "it's"</strong> — the single most confused pair on the test; apostrophes on plain plurals (1990s, CDs, dogs).</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= PART B ================= -->
+    <section class="part" id="part-b" aria-label="Part B: Expression of Ideas">
+      <div class="part-head">
+        <span class="pno">Part B · Modules W9–W11</span>
+        <h2>Expression of Ideas</h2>
+        <p>These are <strong>logic questions wearing word costumes</strong>. They end every RW module, so they're often the last questions you meet — don't let fatigue turn logic into guessing.</p>
+      </div>
+
+      <!-- W9 -->
+      <article class="module" id="w9">
+        <header class="module-head">
+          <span class="module-num">W9</span>
+          <div class="module-title">
+            <h3>Transitions — name the relationship first</h3>
+            <span class="domain">Expression of Ideas</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>Transition questions are <strong>not vocabulary questions — they're logic questions</strong>. The word is just a label for the relationship between two ideas. The protocol:</p>
+          <p><strong>1.</strong> Summarize idea 1 and idea 2 in a few words each. <strong>2.</strong> <strong>Name the relationship — before looking at the choices</strong>: continuation (same direction), contrast (opposite direction), cause–effect, or example/sequence. <strong>3.</strong> Pick the word that labels that relationship. Students who match "fancy words" instead of relationships donate these points.</p>
+        </div>
+        <div class="visual" aria-label="Relationship to transition words">
+          <div class="rel-grid">
+            <div class="rel"><div class="name"><i>↔</i> Contrast</div><p class="words">however · but · in contrast · nonetheless</p><p class="ex">Second idea reverses or complicates the first.</p></div>
+            <div class="rel"><div class="name"><i>→→</i> Continuation</div><p class="words">moreover · also · specifically · in addition</p><p class="ex">Same direction — more of what was already said.</p></div>
+            <div class="rel"><div class="name"><i>⇒</i> Cause–effect</div><p class="words">consequently · therefore · as a result · thus</p><p class="ex">One idea leads to the other.</p></div>
+            <div class="rel"><div class="name"><i>∴</i> Example / sequence</div><p class="words">for example · for instance · first · finally</p><p class="ex">An instance of the claim, or a step in order.</p></div>
+          </div>
+          <p class="cap">Name the relationship from the <i>ideas</i> first, then scan the words — never the other way around.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W9 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="passage">Hummingbirds have the highest metabolism of any bird, burning energy at an astonishing rate. <span class="blank-underline">___</span> they must feed almost constantly, visiting hundreds of flowers each day.</p>
+            <p class="stem">Which choice completes the text with the most logical transition?</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span>However,</span></li>
+              <li data-wrong><span class="letter">B</span><span>For example,</span></li>
+              <li data-correct><span class="letter">C</span><span>Consequently,</span></li>
+              <li data-wrong><span class="letter">D</span><span>In contrast,</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>Idea 1: insane metabolism. Idea 2: must eat constantly. Relationship: <strong>cause → effect</strong> → <strong>Consequently</strong>.</p>
+                <p class="why-wrong">A and D signal contrast (wrong direction). B signals example — but idea 2 isn't an <i>example</i> of idea 1, it's a <i>result</i>.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W9 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="passage">The new zoning law was intended to increase affordable housing by allowing taller buildings near transit stations. <span class="blank-underline">___</span> developers have used the law primarily to build luxury apartments, arguing that only high-end units make the construction costs worthwhile.</p>
+            <p class="stem">Which choice completes the text with the most logical transition?</p>
+            <ol class="choices">
+              <li data-wrong><span class="letter">A</span><span>Moreover,</span></li>
+              <li data-correct><span class="letter">B</span><span>However,</span></li>
+              <li data-wrong><span class="letter">C</span><span>For instance,</span></li>
+              <li data-wrong><span class="letter">D</span><span>Specifically,</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Idea 1: law intended to create affordable housing. Idea 2: developers built luxury units instead. The outcome <strong>undercuts</strong> the intention — that's <strong>contrast</strong> → <strong>However</strong>.</p>
+                <p class="why-wrong">The stretch traps: <b>D ("Specifically")</b> is the comfort pick — idea 2 <i>feels</i> like detail about the law, but "specifically" continues the same direction while this sentence <i>reverses</i> it. <b>A ("Moreover")</b> is the same-direction sibling trap. <b>C</b> fails because luxury apartments are not an <i>example</i> of affordable housing.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Summarize both ideas, then name the relationship (continue / contrast / cause / example) <em>before</em> you look at the words.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p><strong>"Specifically" and "moreover" as comfort picks</strong> when the sentence actually reverses direction; near-synonym transitions labeling different relationships.</p>
+        </div>
+      </article>
+
+      <!-- W10 -->
+      <article class="module" id="w10">
+        <header class="module-head">
+          <span class="module-num">W10</span>
+          <div class="module-title">
+            <h3>Rhetorical synthesis — notes questions</h3>
+            <span class="domain">Expression of Ideas</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>You're given a student's messy notes and a <strong>goal</strong> ("the student wants to emphasize…"). The correct answer is the choice that <strong>achieves the goal using only the notes</strong> — nothing added, nothing important dropped. Two checks: <strong>(1)</strong> does it do what the goal asks? <strong>(2)</strong> is every claim traceable to the notes? Wrong answers smuggle in outside claims or quietly answer a different goal.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W10 simple example">
+            <p class="example-kicker">Simple</p>
+            <ul class="notes">
+              <li>The axolotl is a salamander native to Lake Xochimilco, Mexico.</li>
+              <li>It can regenerate lost limbs and parts of its heart and brain.</li>
+              <li>Wild populations are critically endangered due to habitat loss.</li>
+            </ul>
+            <p class="goal"><b>Goal:</b> The student wants to introduce the axolotl to an audience unfamiliar with it, <b>emphasizing its remarkable abilities</b>.</p>
+            <ol class="choices wide">
+              <li data-correct><span class="letter">A</span><span>The axolotl, a salamander native to Lake Xochimilco, can regenerate lost limbs and even parts of its heart and brain.</span></li>
+              <li data-wrong><span class="letter">B</span><span>The axolotl is critically endangered due to habitat loss in Mexico.</span></li>
+              <li data-wrong><span class="letter">C</span><span>Salamanders are amphibians that live in lakes throughout the world.</span></li>
+              <li data-wrong><span class="letter">D</span><span>Scientists should do more to protect the critically endangered axolotl.</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: A</span></p>
+                <p>Goal = introduce + emphasize remarkable abilities. <strong>A</strong> introduces (what and where it is) and covers the abilities (regeneration) — both from the notes.</p>
+                <p class="why-wrong">B drops the abilities — wrong goal. C adds an outside claim ("throughout the world") not in the notes. D argues a position — a different goal entirely.</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W10 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <ul class="notes">
+              <li>Study 1 (2021): 8 weeks of meditation reduced participants' self-reported anxiety by 25%.</li>
+              <li>Study 2 (2023): 8 weeks of meditation reduced cortisol (a stress hormone) levels by 12%, but self-reported anxiety fell only 5%.</li>
+              <li>Both studies used adult beginners with no prior meditation experience.</li>
+            </ul>
+            <p class="goal"><b>Goal:</b> The student wants to present the findings of the two studies, <b>noting a discrepancy between them</b>.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span>Two studies of adult beginners found that 8 weeks of meditation reduced anxiety and cortisol, proving meditation eliminates stress.</span></li>
+              <li data-correct><span class="letter">B</span><span>While a 2021 study found meditation reduced self-reported anxiety by 25%, a 2023 study found only a 5% drop in self-reported anxiety despite a 12% drop in cortisol.</span></li>
+              <li data-wrong><span class="letter">C</span><span>Meditation is more effective than medication for treating anxiety in adults.</span></li>
+              <li data-wrong><span class="letter">D</span><span>Cortisol levels dropped 12% in a 2023 study of experienced meditators.</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: B</span></p>
+                <p>Goal = present both findings + note the discrepancy. <strong>B</strong> gives both studies' numbers, and the discrepancy is explicit: big anxiety drop vs. small anxiety drop alongside a cortisol drop.</p>
+                <p class="why-wrong">A adds "proving meditation eliminates stress" — extreme and not in the notes. C compares to medication — never studied. D twists "adult beginners" into "experienced meditators" — the <b>one-word trap</b> — and drops Study 1.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Match the goal, use only the notes — every claim must be traceable, nothing added.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>Choices that achieve a <strong>different</strong> goal; <strong>one-word twists</strong> (<em>beginners</em> → <em>experienced</em>); extreme conclusions ("proves," "eliminates").</p>
+        </div>
+      </article>
+
+      <!-- W11 -->
+      <article class="module" id="w11">
+        <header class="module-head">
+          <span class="module-num">W11</span>
+          <div class="module-title">
+            <h3>Precision &amp; concision</h3>
+            <span class="domain">Expression of Ideas</span>
+          </div>
+          <span class="badge must">Must-know</span>
+        </header>
+        <div class="intuition">
+          <p class="label">The intuition</p>
+          <p>When several choices are grammatically fine, the SAT prefers the one that says the thing <strong>clearly and without waste</strong>. Redundancy (<em>"the end result," "repeat again," "the reason is because"</em>) is always wrong.</p>
+          <p>But — and this is the stretch insight — <strong>shortest is not automatically right</strong>: the answer must still be complete and precise. A shorter choice that drops needed meaning loses to a longer one that keeps it.</p>
+        </div>
+        <div class="examples">
+          <section class="example" aria-label="W11 simple example">
+            <p class="example-kicker">Simple</p>
+            <p class="stem">The committee's <span class="blank-underline">___</span> decision was announced on Friday.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span>final outcome of the</span></li>
+              <li data-wrong><span class="letter">B</span><span>ultimate end</span></li>
+              <li data-correct><span class="letter">C</span><span>decision</span></li>
+              <li data-wrong><span class="letter">D</span><span>final decision that was made</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>"Decision" already means a final outcome — <strong>C</strong> is one clean word saying the whole thing.</p>
+                <p class="why-wrong">A, B, and D pad it with redundancy: "final outcome," "ultimate end," "decision that was made."</p>
+              </div>
+            </details>
+          </section>
+          <section class="example" aria-label="W11 stretch example">
+            <p class="example-kicker stretch">Stretch</p>
+            <p class="stem">The biologist spent three years tracking the wolves, and her data <span class="blank-underline">___</span> that pack territories shift with prey migration.</p>
+            <ol class="choices wide">
+              <li data-wrong><span class="letter">A</span><span>clearly and unmistakably demonstrated beyond any doubt</span></li>
+              <li data-wrong><span class="letter">B</span><span>suggested</span></li>
+              <li data-correct><span class="letter">C</span><span>indicated</span></li>
+              <li data-wrong><span class="letter">D</span><span>proved conclusively</span></li>
+            </ol>
+            <details class="check">
+              <summary>Reveal the answer</summary>
+              <div class="reveal">
+                <p class="answer-line"><span class="correct">Correct: C</span></p>
+                <p>A and D are redundant/overstated ("clearly and unmistakably demonstrated beyond any doubt"; "proved conclusively" — and "proved" overstates what tracking data can do). Between B and C, both are concise, but "suggested" <em>understates</em> three years of data — <strong>"indicated" is the precise verb for what data does.</strong></p>
+                <p class="why-wrong">The lesson: concision serves precision — never sacrifice the exact meaning to save a word.</p>
+              </div>
+            </details>
+          </section>
+        </div>
+        <div class="takeaway">
+          <p class="label">One-line takeaway</p>
+          <p>Cut redundancy ruthlessly — but the winner is the clearest and most precise choice, not merely the shortest.</p>
+        </div>
+        <div class="trap">
+          <p class="label">The trap</p>
+          <p>Redundant pairs (<em>advance forward</em>, <em>end result</em>); a <strong>shorter</strong> choice that drops essential meaning.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= STRATEGY ================= -->
+    <section class="part" id="strategy" aria-label="Adaptive module strategy">
+      <div class="part-head">
+        <span class="pno">Test day · Must-know</span>
+        <h2>Adaptive module strategy for R&amp;W</h2>
+        <p>The digital SAT adapts: Module 1 mixes difficulties, and your performance routes you to an easier or harder Module 2. A harder Module 2 is how you access the top score bands. The protocol is mechanical — follow it.</p>
+      </div>
+      <div class="protocol">
+        <div class="step-card">
+          <span class="sn">1</span>
+          <div><h4>Module 1 is the gateway</h4><p>Take it seriously from question 1 — a strong Module 1 unlocks the harder (higher-ceiling) Module 2. <strong>Don't "warm up" into the test.</strong></p></div>
+        </div>
+        <div class="step-card">
+          <span class="sn">2</span>
+          <div><h4>Every question counts — none can be skipped strategically</h4><p>No penalty for wrong answers, so <strong>never leave a blank</strong> — guess on anything you're stuck on.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="sn">3</span>
+          <div><h4>Budget ~71 seconds per question</h4><p>32 minutes for 27 questions a module. If one question passes 2 minutes, <strong>flag it and move</strong> — the easy questions later are worth just as much.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="sn">4</span>
+          <div><h4>Use the tools</h4><p>Bluebook's annotation and highlight are free. <strong>Cross out eliminated choices with the strikethrough tool</strong> — it makes elimination visual and deliberate.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="sn">5</span>
+          <div><h4>Don't get psyched out by difficulty</h4><p>If Module 2 feels harder, <strong>that's good news</strong> — it means Module 1 went well. Stay steady; those questions are worth more.</p></div>
+        </div>
+        <div class="step-card">
+          <span class="sn">6</span>
+          <div><h4>Trust the built-in order</h4><p>The section orders itself: Craft &amp; Structure → Information &amp; Ideas → grammar → Expression of Ideas. <strong>If grammar is your strength, bank those points fast</strong> and buy time for the harder reading questions.</p></div>
+        </div>
+      </div>
+      <div class="big-take">
+        <p class="label">One-line takeaway</p>
+        <p>Crush Module 1 to unlock the hard Module 2, keep a 71-second pace, and never leave a question blank.</p>
+      </div>
+    </section>
+
+    <!-- ================= QUICK REF ================= -->
+    <section class="part" aria-label="Quick reference">
+      <div class="qref" id="qref">
+        <h3>Quick reference</h3>
+        <p class="sub">Every pattern, one row. Short on time? Study the must-knows in this order first — W1–W6 alone cover nearly everything the grammar domain can throw at you.</p>
+        <table class="ref">
+          <thead><tr><th scope="col">Module</th><th scope="col">Pattern</th><th scope="col">Priority</th></tr></thead>
+          <tbody>
+            <tr><td class="ref-id">W1</td><td>Sentence boundaries — comma splices, fragments, run-ons</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W2</td><td>Punctuation logic — what each mark signals</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W3</td><td>Subject–verb agreement — the skeleton strip</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W4</td><td>Verb tense &amp; form consistency</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W5</td><td>Pronoun–antecedent clarity</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W6</td><td>Modifier placement</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W7</td><td>Parallelism</td><td><span class="ref-tag nice">Nice-to-have</span></td></tr>
+            <tr><td class="ref-id">W8</td><td>Apostrophes — possession vs. plural</td><td><span class="ref-tag nice">Nice-to-have</span></td></tr>
+            <tr><td class="ref-id">W9</td><td>Transitions — name the relationship first</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W10</td><td>Rhetorical synthesis — notes questions</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">W11</td><td>Precision &amp; concision</td><td><span class="ref-tag must">Must-know</span></td></tr>
+            <tr><td class="ref-id">§</td><td>Adaptive module strategy</td><td><span class="ref-tag must">Must-know</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+</div>
+
+<footer class="site">
+  <div class="inner">
+    <h2>Where this comes from</h2>
+    <p>Section structure, timing, and domain weights follow College Board's published specifications for the digital SAT Reading &amp; Writing section (including its K-12 reporting content specs), compiled in background research: Craft &amp; Structure ≈13–15 questions, Information &amp; Ideas ≈11–14, Standard English Conventions ≈11–15, Expression of Ideas ≈8–12, out of 54 total. Weight figures are approximate. Frequency characterizations beyond the published specs are approximate guides, not official counts.</p>
+    <p>All example passages, questions, and answer choices on this page are <b>original compositions in the style of the test</b> — they do not appear on any official exam. The patterns they teach are the reps you then do on Khan Academy or Bluebook.</p>
+    <p class="fine">Print tip: this page prints cleanly — every answer expands automatically when printed, so it doubles as an offline copy.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var checks = Array.prototype.slice.call(document.querySelectorAll("details.check"));
+  var opened = {};
+  var progressEls = document.querySelectorAll("[data-progress]");
+
+  function renderProgress(){
+    var n = Object.keys(opened).length;
+    var text = n + " of " + checks.length + " practice checks opened";
+    for (var i = 0; i < progressEls.length; i++) { progressEls[i].textContent = text; }
+  }
+
+  checks.forEach(function(d, idx){
+    var card = d.closest(".example");
+    var id = "check-" + idx;
+    d.addEventListener("toggle", function(){
+      var s = d.querySelector("summary");
+      if (d.open) {
+        opened[id] = true;
+        if (card) card.classList.add("open");
+        if (s) s.textContent = "Hide the answer";
+      } else {
+        delete opened[id];
+        if (card) card.classList.remove("open");
+        if (s) s.textContent = "Reveal the answer";
+      }
+      renderProgress();
+    });
+  });
+  renderProgress();
+
+  /* Printing: reveal every answer, then restore whatever was closed. */
+  var wasClosed = [];
+  window.addEventListener("beforeprint", function(){
+    wasClosed = checks.filter(function(d){ return !d.open; });
+    wasClosed.forEach(function(d){ d.open = true; });
+  });
+  window.addEventListener("afterprint", function(){
+    wasClosed.forEach(function(d){ d.open = false; });
+    wasClosed = [];
+  });
+
+  /* Sidebar: highlight the section in view. */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".index a"));
+  if ("IntersectionObserver" in window && links.length) {
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          links.forEach(function(a){
+            a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+          });
+        }
+      });
+    }, { rootMargin: "-35% 0px -55% 0px" });
+    links.forEach(function(a){
+      var el = document.getElementById(a.getAttribute("href").slice(1));
+      if (el) obs.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>

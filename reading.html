@@ -1,0 +1,1460 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="The digital SAT reading section distilled into nine recurring patterns — with a simple and a stretch example for each. Once you see them, you can't unsee them." />
+<link rel="icon" href="data:," />
+<title>SAT Reading Crash Course</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light dark;
+  --bg:#ffffff;
+  --bg2:#f6f4ee;
+  --panel:#ffffff;
+  --ink:#1b2433;
+  --muted:#58617a;
+  --faint:#8a93a8;
+  --line:#e4e2d8;
+  --choice:#d9dde6;
+  --accent:#a6192e;
+  --accent-deep:#7e1220;
+  --accent-soft:#fbe9ea;
+  --callout:#fff3c2;
+  --callout-line:#d8a92e;
+  --good:#146c43;
+  --good-soft:#e6f4ec;
+  --bad:#b3202c;
+  --bad-soft:#fcecee;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#10131a;
+    --bg2:#151a24;
+    --panel:#151a24;
+    --ink:#eceff6;
+    --muted:#a6aec2;
+    --faint:#6e7791;
+    --line:#262d3e;
+    --choice:#313a50;
+    --accent:#f0637b;
+    --accent-deep:#ff8ca0;
+    --accent-soft:rgba(240,99,123,.13);
+    --callout:rgba(255,205,70,.10);
+    --callout-line:#8a6d1f;
+    --good:#43d68a;
+    --good-soft:rgba(67,214,138,.12);
+    --bad:#ff7b83;
+    --bad-soft:rgba(255,123,131,.12);
+  }
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:1.03rem;
+  line-height:1.68;
+  -webkit-text-size-adjust:100%;
+}
+::selection{background:var(--callout)}
+a{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:var(--accent-deep)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+button{font:inherit}
+
+/* ---------- sticky top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  max-width:1180px;margin:0 auto;padding:10px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.topbar .brand{font-family:var(--serif);font-weight:700;font-size:1.02rem;letter-spacing:.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar nav{display:flex;gap:4px}
+.topbar nav a{
+  text-decoration:none;color:var(--muted);font-size:.86rem;font-weight:700;
+  padding:6px 12px;border-radius:999px;white-space:nowrap;
+}
+.topbar nav a:hover{color:var(--ink);background:var(--bg2)}
+.topbar nav a.cb{color:var(--accent)}
+.progress{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:var(--accent);transition:width .12s linear}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.prose{max-width:74ch}
+main{display:block}
+section.block{padding:56px 0}
+section.block + section.block{border-top:1px solid var(--line)}
+
+h1,h2,h3{font-family:var(--serif);line-height:1.15;margin:0 0 .5em;font-weight:700}
+.eyebrow{
+  font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 10px;
+}
+h1{font-size:clamp(2.1rem,4.6vw,3rem);letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,3.4vw,2.05rem);letter-spacing:-.01em}
+h3{font-size:1.25rem;margin:1.6em 0 .5em}
+.lede{font-size:1.12rem;color:var(--muted);max-width:62ch}
+.lede strong{color:var(--ink)}
+p{margin:0 0 1em}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:28px 0}
+.stat{border:1px solid var(--line);border-radius:var(--radius);padding:14px 10px;text-align:center;background:var(--panel)}
+.stat b{font-family:var(--serif);font-size:1.9rem;display:block;color:var(--accent);line-height:1.1}
+.stat span{font-size:.84rem;color:var(--muted)}
+@media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- how-to ---------- */
+.howto{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px 26px;margin:28px 0;max-width:74ch}
+.howto ol{margin:10px 0 0;padding-left:22px}
+.howto li{margin:.55em 0}
+.howto li::marker{color:var(--accent);font-weight:700}
+.howto .t{font-family:var(--serif);font-size:1.2rem;font-weight:700}
+
+/* ---------- table of contents ---------- */
+.toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:28px 0 0}
+.toc a{
+  text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:var(--radius);
+  padding:15px 17px;display:block;background:var(--panel);transition:border-color .15s,transform .15s;
+}
+.toc a:hover{border-color:var(--accent)}
+.toc a.active{border-color:var(--accent);background:var(--accent-soft)}
+.toc .tnum{color:var(--accent);font-weight:700;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase}
+.toc .tt{font-family:var(--serif);font-size:1.14rem;font-weight:700;display:block;margin:3px 0 2px}
+.toc .td{color:var(--muted);font-size:.9rem;line-height:1.5}
+
+/* ---------- domains ---------- */
+.domains{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:18px 0}
+.dom{border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:.9rem;background:var(--panel)}
+.dom.you{border-color:var(--accent);background:var(--accent-soft);font-weight:700}
+.dom-arrow{color:var(--faint);font-size:.9rem}
+.legend{font-size:.86rem;color:var(--muted)}
+.factlist{margin:14px 0 0;padding:0;list-style:none}
+.factlist li{margin:.6em 0;padding-left:26px;position:relative}
+.factlist li::before{content:"—";position:absolute;left:2px;color:var(--accent);font-weight:700}
+
+/* ---------- module sections ---------- */
+.module{max-width:74ch}
+.module-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
+.module-num{
+  font-family:var(--serif);font-weight:800;font-size:2.9rem;line-height:1;
+  color:transparent;-webkit-text-stroke:2px var(--accent);
+  flex:0 0 auto;user-select:none;
+}
+.module-head h2{margin:0;padding-top:4px}
+.move{
+  background:var(--callout);border:1px solid var(--callout-line);border-radius:var(--radius);
+  padding:16px 22px;margin:22px 0;
+}
+.move .move-title{font-weight:700;margin-bottom:6px}
+.move p:last-child,.move ul:last-child,.move ol:last-child{margin-bottom:0}
+.move ol{margin:8px 0 0;padding-left:22px}
+.move ol li{margin:.45em 0}
+.move ol li::marker{color:var(--accent);font-weight:700}
+.trapname{font-weight:700;color:var(--accent-deep)}
+@media (prefers-color-scheme: dark){.trapname{color:var(--accent)}}
+
+/* ---------- functional diagrams ---------- */
+.fig{margin:22px 0;padding:6px 0}
+.fig svg{display:block;max-width:100%;height:auto}
+.fig .cap{font-size:.85rem;color:var(--muted);margin-top:8px;max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{
+  border:1px dashed var(--callout-line);background:var(--callout);
+  padding:6px 13px;border-radius:999px;font-size:.9rem;font-style:italic;font-family:var(--serif);
+}
+.chip b{font-style:normal;font-family:var(--sans);font-size:.78rem;display:block;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+
+/* ---------- practice questions ---------- */
+.practice{margin:34px 0}
+.practice-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.practice-head h3{margin:0}
+.diff{
+  font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);
+}
+.diff.stretch{color:var(--accent);border-color:var(--accent)}
+.passage{
+  background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px 22px;margin:14px 0;
+}
+.passage p{margin:0 0 .7em}
+.passage p:last-child{margin-bottom:0}
+.passage .plab{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin:0 0 8px}
+.stem{font-weight:700;margin:16px 0 10px}
+.stem .w{font-style:italic}
+.stem u.hl,.passage u.hl{text-decoration:none;background:var(--callout);border-radius:3px;padding:0 3px;box-shadow:inset 0 -2px 0 var(--callout-line)}
+
+.choices{display:grid;gap:10px;margin:12px 0 4px}
+.choice{
+  display:flex;gap:14px;align-items:flex-start;text-align:left;
+  background:var(--panel);border:1.5px solid var(--choice);border-radius:10px;
+  padding:13px 16px;cursor:pointer;color:inherit;line-height:1.55;
+  transition:border-color .15s,background .15s;
+}
+.choice:hover:not(:disabled){border-color:var(--accent)}
+.choice:disabled{cursor:default}
+.choice .letter{
+  flex:0 0 28px;height:28px;border-radius:50%;border:1.5px solid var(--choice);
+  display:grid;place-items:center;font-weight:700;font-size:.88rem;margin-top:1px;
+  transition:background .15s,border-color .15s,color .15s;
+}
+.choice.is-correct{border-color:var(--good);background:var(--good-soft)}
+.choice.is-correct .letter{background:var(--good);border-color:var(--good);color:#fff}
+.choice.is-picked-wrong{border-color:var(--bad);background:var(--bad-soft)}
+.choice.is-picked-wrong .letter{background:var(--bad);border-color:var(--bad);color:#fff}
+.choice.is-dim{opacity:.62}
+
+.verdict{border-radius:10px;padding:12px 16px;margin:14px 0 6px;font-size:.98rem}
+.verdict.ok{background:var(--good-soft);border:1px solid var(--good)}
+.verdict.no{background:var(--bad-soft);border:1px solid var(--bad)}
+.verdict .vhint{display:block;margin-top:6px;font-size:.86rem;color:var(--muted)}
+
+.breakdown-toggle{
+  background:none;border:none;color:var(--accent);font-weight:700;cursor:pointer;
+  padding:8px 0;display:inline-flex;align-items:center;gap:8px;font-size:.95rem;
+}
+.breakdown-toggle .arr{display:inline-block;transition:transform .2s}
+.breakdown-toggle[aria-expanded="true"] .arr{transform:rotate(90deg)}
+.breakdown{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+  padding:4px 20px;margin:6px 0 0;
+}
+.bd-row{display:grid;grid-template-columns:34px 1fr;gap:4px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.bd-row:first-child{border-top:none}
+.bd-letter{font-weight:700}
+.bd-verdict{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.bd-verdict.right{color:var(--good)}
+.bd-verdict.wrong{color:var(--bad)}
+.bd-why{font-size:.96rem;color:var(--ink);margin:2px 0 0}
+
+/* ---------- bottom-line strip ---------- */
+.bottomline{border:1px solid var(--line);border-radius:var(--radius);margin:30px 0 0;background:var(--panel)}
+.bl-row{display:grid;grid-template-columns:128px 1fr;gap:16px;padding:14px 20px;align-items:baseline}
+.bl-row + .bl-row{border-top:1px dashed var(--line)}
+.bl-label{font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.bl-text{font-size:.99rem}
+.bl-text p{margin:0}
+@media (max-width:560px){.bl-row{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- protocol list ---------- */
+.proto{margin:16px 0;padding:0;list-style:none;counter-reset:p}
+.proto li{counter-increment:p;margin:0 0 14px;padding:0 0 0 46px;position:relative}
+.proto li::before{
+  content:counter(p);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;
+  background:var(--accent-soft);border:1.5px solid var(--accent);color:var(--accent);
+  display:grid;place-items:center;font-weight:700;font-size:.9rem;
+}
+.proto li b.ti{font-family:var(--serif);font-size:1.08rem}
+
+/* ---------- missions ---------- */
+.mission{
+  border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);
+  padding:16px 20px;margin:14px 0;
+}
+.mission .mstem{font-style:italic;font-family:var(--serif);font-size:1.08rem;margin-bottom:6px}
+.mission .mgo{font-size:.95rem}
+.mission .mgo b{color:var(--accent-deep)}
+@media (prefers-color-scheme: dark){.mission .mgo b{color:var(--accent)}}
+
+/* ---------- timer ---------- */
+.timer{
+  display:flex;gap:24px;align-items:center;flex-wrap:wrap;
+  background:var(--bg2);border:1px solid var(--line);border-radius:14px;
+  padding:20px 24px;margin:24px 0;
+}
+.timer .dial{position:relative;width:132px;height:132px;flex:0 0 auto}
+.timer .dial svg{transform:rotate(-90deg)}
+.timer .tlabel{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  font-family:var(--serif);font-weight:700;font-size:1.55rem;font-variant-numeric:tabular-nums;
+}
+.timer .tbody{flex:1 1 260px}
+.timer .tbody p{font-size:.95rem;color:var(--muted);margin:0 0 12px}
+.timer .tbody p b{color:var(--ink)}
+.tpresets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.tpreset{
+  border:1.5px solid var(--choice);background:var(--panel);border-radius:999px;
+  padding:6px 14px;font-size:.88rem;font-weight:700;cursor:pointer;color:var(--muted);
+}
+.tpreset[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.tcontrols{display:flex;gap:10px;flex-wrap:wrap}
+.btn{
+  border:none;border-radius:10px;padding:10px 22px;font-weight:700;cursor:pointer;
+  background:var(--accent);color:#fff;transition:filter .15s;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.45;cursor:default;filter:none}
+.btn.ghost{background:transparent;border:1.5px solid var(--choice);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--accent)}
+.timer.done .tlabel{color:var(--accent)}
+
+/* ---------- data table ---------- */
+.datatable{width:100%;max-width:440px;border-collapse:collapse;margin:14px 0;font-size:.98rem}
+.datatable th,.datatable td{border:1px solid var(--line);padding:9px 14px;text-align:left}
+.datatable th{background:var(--bg2);font-size:.82rem;letter-spacing:.05em;text-transform:uppercase}
+.datatable td:last-child{font-variant-numeric:tabular-nums}
+
+/* ---------- cheat sheet ---------- */
+.cheat{list-style:none;margin:20px 0 0;padding:0;max-width:74ch}
+.cheat li{
+  display:grid;grid-template-columns:64px 1fr;gap:14px;padding:13px 0;
+  border-top:1px solid var(--line);align-items:baseline;
+}
+.cheat li:last-child{border-bottom:1px solid var(--line)}
+.cheat .cnum{font-family:var(--serif);font-weight:700;color:var(--accent);font-size:1.05rem}
+.cheat .ct{font-weight:700}
+.cheat .cd{color:var(--muted);font-size:.95rem}
+@media (max-width:560px){.cheat li{grid-template-columns:52px 1fr}}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);margin-top:20px;padding:36px 0 60px;font-size:.9rem;color:var(--muted)}
+footer h2{font-size:1.3rem;color:var(--ink)}
+footer ul{margin:10px 0;padding-left:20px}
+footer li{margin:.4em 0}
+footer .note{
+  background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 18px;margin:18px 0 0;
+}
+.totop{display:inline-block;margin-top:18px;font-weight:700}
+
+@media print{
+  .topbar{position:static}
+  .topbar nav,.progress,.breakdown-toggle,.tcontrols,.tpreset,.vhint,.timer .tlabel small{display:none!important}
+  .breakdown{display:block!important}
+  .choice{break-inside:avoid}
+  .choice[data-correct="true"]{border:2px solid #000;background:#f0f0f0}
+  .choice[data-correct="true"] .letter{background:#000;border-color:#000;color:#fff}
+  .verdict{break-inside:avoid}
+  section.block{padding:36px 0}
+  body{font-size:11pt;line-height:1.6}
+  .stats{grid-template-columns:repeat(4,1fr)}
+  a{text-decoration:none;color:inherit}
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
+@media (max-width:680px){
+  .topbar nav a:not(.cb){display:none}
+  .topbar .brand{font-size:.94rem}
+  .topbar-inner{padding:10px 16px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">SAT Reading Crash Course</span>
+    <nav aria-label="Sections">
+      <a href="#patterns">Patterns</a>
+      <a href="#r9">Strategy</a>
+      <a class="cb" href="#cheatsheet">Cheat sheet</a>
+    </nav>
+  </div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</header>
+
+<main>
+<!-- ============================= INTRO ============================= -->
+<section class="block" id="top">
+  <div class="wrap">
+    <div class="prose">
+      <p class="eyebrow">Digital SAT · Reading &amp; Writing · Reading half</p>
+      <h1>SAT Reading Crash Course</h1>
+      <p class="lede">The reading section is a <strong>pattern test wearing a content costume</strong>. The passages change; the question types and the traps don't. This course distills the reading-focused question types into <strong>nine patterns</strong> — each with the intuition in plain words, one simple example, and one stretch example. Learn them until you can't unsee them, then do your reps on Khan Academy and Bluebook.</p>
+    </div>
+
+    <div class="stats" role="list" aria-label="Full Reading and Writing section facts">
+      <div class="stat" role="listitem"><b>54</b><span>questions · 64 minutes</span></div>
+      <div class="stat" role="listitem"><b>1:11</b><span>per question, roughly</span></div>
+      <div class="stat" role="listitem"><b>25–150</b><span>words per passage</span></div>
+      <div class="stat" role="listitem"><b>0</b><span>penalty for wrong answers</span></div>
+    </div>
+    <p class="legend">Figures above describe the full Reading &amp; Writing section; this guide covers its reading half — roughly 24–29 of the 54 questions.</p>
+
+    <div class="howto">
+      <span class="t">How to use this guide</span>
+      <ol>
+        <li><strong>Attempt before you reveal.</strong> On every practice question, tap an answer <em>before</em> you read the breakdown. Getting caught by a trap is how you learn to see it.</li>
+        <li><strong>Name the trap out loud.</strong> Each breakdown labels <em>why</em> every wrong choice is wrong. Steal that language until it's automatic — that's the real skill.</li>
+        <li><strong>Go in order.</strong> Pattern 1 (the wrong-answer taxonomy) is the operating system everything else runs on. Master it first.</li>
+      </ol>
+    </div>
+
+    <h2 style="font-size:1.4rem;margin-top:40px">The nine patterns</h2>
+    <nav class="toc" id="patterns" aria-label="The nine patterns">
+      <a href="#r1"><span class="tnum">Pattern 1</span><span class="tt">The Wrong-Answer Taxonomy</span><span class="td">Every wrong choice is one of four traps. Learn to name them.</span></a>
+      <a href="#r2"><span class="tnum">Pattern 2</span><span class="tt">Main Idea &amp; Purpose</span><span class="td">The bucket test: big enough for the whole passage, no bigger.</span></a>
+      <a href="#r3"><span class="tnum">Pattern 3</span><span class="tt">Detail Retrieval</span><span class="td">A lookup task, not a memory test. Match the claim word by word.</span></a>
+      <a href="#r4"><span class="tnum">Pattern 4</span><span class="tt">Inference: The One Safe Step</span><span class="td">The answer is one small step past the text. Two steps is too far.</span></a>
+      <a href="#r5"><span class="tnum">Pattern 5</span><span class="tt">Command of Evidence</span><span class="td">For text <em>and</em> data questions: the answer must pass both.</span></a>
+      <a href="#r6"><span class="tnum">Pattern 6</span><span class="tt">Words in Context</span><span class="td">Don't define the word — let the sentence's logic hand you the meaning.</span></a>
+      <a href="#r7"><span class="tnum">Pattern 7</span><span class="tt">Text Structure &amp; Function</span><span class="td">Ignore what the sentence says; name what it <em>does</em>.</span></a>
+      <a href="#r8"><span class="tnum">Pattern 8</span><span class="tt">Cross-Text Connections</span><span class="td">Two texts, three possible relationships: agree, disagree, qualify.</span></a>
+      <a href="#r9"><span class="tnum">Pattern 9</span><span class="tt">Reading Strategy</span><span class="td">Stem first, predict before peeking, a 71-second pace, no blanks.</span></a>
+      <a href="#adaptive"><span class="tnum">Bonus</span><span class="tt">Adaptive Module Strategy</span><span class="td">Crush Module 1 to unlock the high-ceiling Module 2.</span></a>
+      <a href="#cheatsheet"><span class="tnum">Review</span><span class="tt">Cheat Sheet</span><span class="td">All nine patterns, one line each. Re-read before test day.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ============================= SECTION FACTS ============================= -->
+<section class="block" id="section">
+  <div class="wrap">
+    <div class="prose">
+      <p class="eyebrow">The battlefield</p>
+      <h2>How the section works</h2>
+      <ul class="factlist">
+        <li><strong>54 questions, 64 minutes</strong>, split into two 32-minute modules — about <strong>1 minute 11 seconds</strong> per question.</li>
+        <li><strong>Every question gets its own short passage</strong> (25–150 words) about literature, history, social studies, humanities, or science. One passage, one question — no long reading sets.</li>
+        <li>Questions that test similar skills are <strong>grouped together</strong>, arranged <strong>roughly easiest to hardest</strong> within each group. Early questions are your on-ramp — don't skip them.</li>
+        <li><strong>Adaptive:</strong> your Module 1 performance routes you to an easier or harder Module 2. Harder Module 2 means access to the top score bands.</li>
+        <li><strong>No penalty for wrong answers.</strong> A guess is worth 25%; a blank is worth 0%. Answer everything.</li>
+      </ul>
+      <p style="margin-top:18px"><strong>The domains, in the order they appear on test day:</strong></p>
+      <div class="domains">
+        <span class="dom you">Craft &amp; Structure</span><span class="dom-arrow" aria-hidden="true">→</span>
+        <span class="dom you">Information &amp; Ideas</span><span class="dom-arrow" aria-hidden="true">→</span>
+        <span class="dom">Standard English Conventions</span><span class="dom-arrow" aria-hidden="true">→</span>
+        <span class="dom">Expression of Ideas</span>
+      </div>
+      <p class="legend">This guide covers the two highlighted reading domains (roughly 24–29 of the 54 questions, per College Board's published specs). The grammar and expression-of-ideas questions belong to the companion writing material.</p>
+    </div>
+  </div>
+</section>
+<!-- ============================= R1 ============================= -->
+<section class="block" id="r1">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 1 · The operating system</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">1</span><h2>The Wrong-Answer Taxonomy</h2></div>
+    <p>The SAT never writes a wrong answer by accident. Every wrong choice is a trap built to catch one specific mistake a rushed reader makes — and there are only about <strong>four traps</strong>, showing up on nearly every question. The moment you stop asking <em>"which one feels right?"</em> and start asking <em>"how is this one wrong?"</em>, the whole section changes. <strong>Correct answers survive scrutiny; wrong ones always have one cracked word if you poke them.</strong></p>
+
+    <div class="move">
+      <p class="move-title">The move: learn the four traps, then interrogate every choice</p>
+      <ol>
+        <li><span class="trapname">True but doesn't answer the question asked.</span> Accurate to the passage, wrong for the question. (The most common trap on the test.)</li>
+        <li><span class="trapname">Half-right, half-wrong.</span> First half matches the text; second half twists, adds, or reverses something.</li>
+        <li><span class="trapname">Extreme language.</span> "Always," "never," "completely," "all," "proves" — when the passage said "sometimes," "may," "suggests." A single quantifier word flips a true claim into a false one.</li>
+        <li><span class="trapname">Not in the text / beyond the text.</span> Plausible, even real-world true — but the passage never says it. Your outside knowledge is not evidence.</li>
+      </ol>
+    </div>
+
+    <p><strong>The master discipline:</strong> when two choices look alike, find the <strong>one word that differs</strong> — that word is the trap. And if you can't point to textual proof for <em>every word</em> of your chosen answer, you don't have the answer yet.</p>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Drill 1 — Name the trap</h3><span class="diff">Warm-up</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>A 2024 study of 200 college students found that those who slept at least 7 hours scored <em>slightly</em> higher on a memory quiz than those who slept less.</p>
+      </div>
+      <p class="stem">Choice: "Sleep completely determines memory performance." Which trap is it?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Wrong trap. The choice isn't merely beside the point — it takes the passage's mild finding ('slightly higher') and makes it absolute ('completely determines')."><span class="letter" aria-hidden="true">A</span><span class="ctext">True but doesn't answer the question</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Right. One word — 'completely' — turns a 'slightly higher' result into an absolute claim. Extreme words are fuses: find them and the choice detonates."><span class="letter" aria-hidden="true">B</span><span class="ctext">Extreme language</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Wrong trap. There's no true half here; the whole claim is the passage's mild finding cranked to maximum."><span class="letter" aria-hidden="true">C</span><span class="ctext">Half-right, half-wrong</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Close, but the core sin is the extreme word 'completely.' The topic (sleep and memory) is in the text — the claim just overstates it."><span class="letter" aria-hidden="true">D</span><span class="ctext">Not in the text / beyond the text</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each trap</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">The choice isn't merely beside the point — it overstates the finding.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct — extreme language</span><p class="bd-why">"Completely determines" vs. "slightly higher." One quantifier flips true into false.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">No true half anchors this claim; the whole thing is overstated.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">The topic is in the text — the failure is the extreme word, not missing evidence.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Drill 2 — Name the trap</h3><span class="diff">Warm-up</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Dr. Amara Okafor tested whether background music affects reading comprehension. Participants read one passage in silence and one with instrumental music. Scores were lower with music — but only among participants who found the music distracting.</p>
+      </div>
+      <p class="stem">Question: "Which choice best states the study's main finding?" Choice: "Okafor's experiment involved two reading conditions." Which trap is it?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="true" data-why="Right. The choice is accurate to the passage — two conditions were used — but the question asked for the main finding, not the setup. The test never rewards what it didn't ask."><span class="letter" aria-hidden="true">A</span><span class="ctext">True but doesn't answer the question</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="Wrong trap. No extreme words ('never,' 'all,' 'completely') appear — the choice is accurate, just irrelevant to the question."><span class="letter" aria-hidden="true">B</span><span class="ctext">Extreme language</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Wrong trap. It's fully right, not half. The problem is it answers a different question than the one asked."><span class="letter" aria-hidden="true">C</span><span class="ctext">Half-right, half-wrong</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Wrong trap. The two conditions are stated plainly in the passage. The problem isn't evidence — it's relevance."><span class="letter" aria-hidden="true">D</span><span class="ctext">Not in the text / beyond the text</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each trap</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict right">Correct — true but off-question</span><p class="bd-why">Accurate detail (two conditions), wrong for what was asked (the main finding).</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">No extreme quantifiers; the failing is relevance, not intensity.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">Fully true, not half. The choice answers a question nobody asked.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">The evidence is in the passage; the problem is what the question asked.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Drill 3 — Name the trap</h3><span class="diff">Warm-up</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Engineers in Osaka tested a new sea wall design during a simulated tsunami and found it reduced wave impact by 30%.</p>
+      </div>
+      <p class="stem">Choice: "Sea walls of this type were first developed in the Netherlands." Which trap is it?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Wrong trap. It can't be 'true but off-question' — the passage never establishes this claim at all. The failing is evidence, not relevance."><span class="letter" aria-hidden="true">A</span><span class="ctext">True but doesn't answer the question</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="Wrong trap. There are no extreme quantifiers — 'first developed' is a plain factual claim the passage simply never makes."><span class="letter" aria-hidden="true">B</span><span class="ctext">Extreme language</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Wrong trap. There's no true half here to anchor the claim — the passage says nothing about where sea walls originated."><span class="letter" aria-hidden="true">C</span><span class="ctext">Half-right, half-wrong</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="true" data-why="Right. It might even be real-world true — the Netherlands does build dikes — but the passage never says it. Outside knowledge is not evidence."><span class="letter" aria-hidden="true">D</span><span class="ctext">Not in the text / beyond the text</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each trap</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">The passage never supports this, so it can't be the "true but irrelevant" case.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">No extreme words — the failing is unsupported evidence, not intensity.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">No true half exists here; the whole claim floats without textual support.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict right">Correct — not in the text</span><p class="bd-why">Plausible, maybe even real-world true — but the passage never says it. No evidence = wrong.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Drill 4 — Name the trap</h3><span class="diff">Warm-up</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Dr. Liu's experiment showed that plants grew taller with more light — but growth leveled off past 12 hours of light per day.</p>
+      </div>
+      <p class="stem">Choice: "Plants grew taller with more light, so greenhouses should run lights 24 hours a day." Which trap is it?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Wrong trap. It isn't irrelevant — it addresses the passage's topic directly. The problem is the second half contradicts the text."><span class="letter" aria-hidden="true">A</span><span class="ctext">True but doesn't answer the question</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="Wrong trap. '24 hours a day' is a specific number, not an extreme quantifier like 'always.' The failing is a true half glued to a contradicting half."><span class="letter" aria-hidden="true">B</span><span class="ctext">Extreme language</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="true" data-why="Right. First half is true (more light grew taller plants); the recommendation contradicts the passage, since growth plateaus past 12 hours. The first half is so true you stop reading — that's the design."><span class="letter" aria-hidden="true">C</span><span class="ctext">Half-right, half-wrong</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Wrong trap. The passage's first half IS in the text — this is the half-right pattern, not the beyond-text pattern."><span class="letter" aria-hidden="true">D</span><span class="ctext">Not in the text / beyond the text</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each trap</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">It's on-topic; the issue is the second half contradicts the passage.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">Not an intensity problem — a true claim followed by a false recommendation.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict right">Correct — half-right, half-wrong</span><p class="bd-why">True half: more light grew taller plants. Wrong half: 24-hour lighting helps — growth plateaus past 12 hours.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong trap</span><p class="bd-why">The first half is explicitly in the text, so this isn't the beyond-text pattern.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A — the taxonomy in action</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Marine biologist Elena Ruiz spent six summers tracking humpback whales off the coast of Baja California. She found that individual whales returned to the same feeding grounds year after year, suggesting strong site loyalty. She also noted that whales occasionally altered their routes in response to shifting krill populations, but she did not observe any permanent abandonment of a feeding site.</p>
+      </div>
+      <p class="stem">Based on the text, what did Ruiz find about humpback whales' feeding behavior?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Whales did adjust their routes — but the passage says she 'did not observe any permanent abandonment.' The second half contradicts the text."><span class="letter" aria-hidden="true">A</span><span class="ctext">They abandon feeding grounds permanently when krill populations decline.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Every word checks out: 'loyalty to specific feeding grounds' matches 'suggesting strong site loyalty'; 'temporarily adjust their routes' matches 'occasionally altered' with no permanent abandonment."><span class="letter" aria-hidden="true">B</span><span class="ctext">They show loyalty to specific feeding grounds but may temporarily adjust their routes.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="'Never' and 'under any circumstances' vs. the passage's 'occasionally altered.' One extreme word kills an otherwise tempting answer."><span class="letter" aria-hidden="true">C</span><span class="ctext">They never change their migration routes under any circumstances.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="The passage never says why whales choose Baja or anything about 'largest krill populations.' Plausible biology, zero textual evidence."><span class="letter" aria-hidden="true">D</span><span class="ctext">They migrate to Baja California because it has the largest krill populations in the world.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — half-right, half-wrong</span><p class="bd-why">Route adjustments are real — but the passage explicitly denies <em>permanent</em> abandonment.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Loyalty to specific feeding grounds" + "temporarily adjust their routes" — every word is supported.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — extreme language</span><p class="bd-why">"Never … under any circumstances" vs. "occasionally altered." Dead on one word.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">The "why" of Baja and the "largest krill populations" are never mentioned. No evidence = wrong.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B — the 650→750 separator</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>The city of Lisbon's "green corridor" project planted 20,000 trees along former industrial land. A 2024 study found that neighborhoods adjacent to the corridor experienced summer temperatures 2–3°C lower than comparable neighborhoods without tree cover. However, the study's authors cautioned that the cooling effect varied significantly with tree density and that the results could not be generalized to cities with different climates.</p>
+      </div>
+      <p class="stem">Which statement about the Lisbon study is most accurate?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="'Proved' and 'all cities' — the authors explicitly said results 'could not be generalized to cities with different climates.' Double kill."><span class="letter" aria-hidden="true">A</span><span class="ctext">The study proved that planting trees lowers temperatures in all cities.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Matches on both halves: 'found a cooling effect near the corridor' (2–3°C lower) and 'warned against applying the findings too broadly' ('could not be generalized'). Every word survives scrutiny."><span class="letter" aria-hidden="true">B</span><span class="ctext">The study found a cooling effect near the corridor, but its authors warned against applying the findings too broadly.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="The study compared tree-covered vs. non-tree-covered neighborhoods, not industrial vs. residential land. It answers a question nobody asked."><span class="letter" aria-hidden="true">C</span><span class="ctext">The study showed that industrial land causes higher temperatures than residential areas.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Tree density did matter ('varied significantly with tree density') — but 'the only factor' is an extreme twist the passage never supports. Watch for the almost-right first half."><span class="letter" aria-hidden="true">D</span><span class="ctext">The study concluded that tree density is the only factor influencing urban temperatures.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — extreme + beyond text</span><p class="bd-why">"Proved" and "all cities" are directly contradicted: the authors refused to generalize.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Found a cooling effect" (2–3°C lower) + "warned against applying findings too broadly" (could not be generalized). Both halves hold.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — true-but-irrelevant</span><p class="bd-why">The comparison it describes (industrial vs. residential) isn't what the study tested.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — half-right, half-wrong</span><p class="bd-why">Tree density mattered — but "the <em>only</em> factor" is an extreme claim the text never makes. This is the trap that separates 650s from 750s: the first half is so true you stop reading.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Wrong answers are built from four traps — poke every word until each choice proves itself against the text.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>When two choices look alike, the one word that differs is the trap. If your pick has a word you can't prove from the text, you don't have the answer yet.</p></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- ============================= R2 ============================= -->
+<section class="block" id="r2">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 2 · Information &amp; Ideas</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">2</span><h2>Main Idea &amp; Purpose: The Bucket Test</h2></div>
+    <p>The correct main-idea answer is a <strong>summary of the whole passage</strong>, not a detail from one sentence. Think of it as a bucket: it must be big enough to hold everything the passage says, but not so big it holds things the passage doesn't. Wrong answers fail the bucket test in exactly two ways — <strong>too narrow</strong> (true, but only covers one sentence) or <strong>too broad</strong> (covers the passage plus stuff it never claimed).</p>
+
+    <div class="fig" role="img" aria-label="Diagram of the bucket test: a too-narrow answer misses the passage, the correct answer fits it exactly, and a too-broad answer adds claims.">
+      <svg viewBox="0 0 520 205">
+        <text x="0" y="28" font-size="14.5" font-weight="700" fill="var(--ink)">too narrow</text>
+        <text x="0" y="48" font-size="12.5" fill="var(--muted)">true, but one sentence</text>
+        <rect x="170" y="14" width="250" height="40" rx="8" fill="none" stroke="var(--faint)" stroke-dasharray="6 5" stroke-width="1.5"/>
+        <rect x="170" y="14" width="120" height="40" rx="8" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/>
+        <text x="352" y="41" font-size="17" font-weight="700" fill="var(--bad)">✗</text>
+        <text x="0" y="94" font-size="14.5" font-weight="700" fill="var(--ink)">fits</text>
+        <text x="0" y="114" font-size="12.5" fill="var(--muted)">the whole passage</text>
+        <rect x="170" y="80" width="250" height="40" rx="8" fill="var(--good-soft)" stroke="var(--good)" stroke-width="2"/>
+        <text x="284" y="107" font-size="17" font-weight="700" fill="var(--good)">✓</text>
+        <text x="0" y="160" font-size="14.5" font-weight="700" fill="var(--ink)">too broad</text>
+        <text x="0" y="180" font-size="12.5" fill="var(--muted)">adds unmade claims</text>
+        <rect x="170" y="146" width="250" height="40" rx="8" fill="none" stroke="var(--faint)" stroke-dasharray="6 5" stroke-width="1.5"/>
+        <rect x="170" y="146" width="330" height="40" rx="8" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/>
+        <text x="455" y="173" font-size="17" font-weight="700" fill="var(--bad)">✗</text>
+      </svg>
+      <p class="cap">The bucket test in one glance: the dashed outline is the passage itself. The correct answer is the bucket that exactly fits it — no smaller, no bigger.</p>
+    </div>
+
+    <div class="move">
+      <p class="move-title">The move: summarize before you look</p>
+      <ol>
+        <li>Read the passage, look away, and say <strong>"this passage is about ___"</strong> in one sentence. That's your prediction — the correct choice will cover the same ground.</li>
+        <li>"Best states the <strong>main idea</strong>" and "best describes the overall <strong>structure</strong>" are the same question in two coats: both want the <em>whole</em> passage summarized, not a highlight reel.</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Honeybees communicate the location of food sources through the "waggle dance," a figure-eight movement that encodes distance and direction. Recent research shows that bees also perform a shorter "tremble dance" when a food source is overcrowded, signaling to other foragers to wait. Together, these dances form a surprisingly sophisticated system for managing the colony's foraging efforts.</p>
+      </div>
+      <p class="stem">Which choice best states the main idea of the text?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="True — but only from the first sentence about the waggle dance. It bucket-fits nothing beyond that one detail."><span class="letter" aria-hidden="true">A</span><span class="ctext">The waggle dance encodes distance and direction.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="The bucket fits: 'multiple dances' (waggle + tremble) 'to coordinate the colony's foraging' (the final sentence's point about managing foraging efforts)."><span class="letter" aria-hidden="true">B</span><span class="ctext">Honeybees use multiple dances to coordinate the colony's foraging.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="'Insects … over millions of years' goes far beyond anything this passage about honeybees claims."><span class="letter" aria-hidden="true">C</span><span class="ctext">Insects have evolved complex communication systems over millions of years.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="True detail, one sentence only. The tremble dance alone isn't the whole passage — the waggle dance and the colony-level point are left out."><span class="letter" aria-hidden="true">D</span><span class="ctext">The tremble dance is performed when food sources are overcrowded.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — too narrow</span><p class="bd-why">True from a single sentence. The bucket must also hold the tremble dance.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Multiple dances" + "coordinate the colony's foraging" — the passage's full arc in one sentence.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — too broad</span><p class="bd-why">All insects over millions of years? The passage never makes that claim.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — too narrow</span><p class="bd-why">One-sentence detail. Tempting because it's true — wrong because it's small.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>In the 1920s, urban planners championed the "garden city" movement, arguing that integrating green space into cities would improve public health. By the 1960s, however, many garden-city developments had been absorbed into sprawling suburbs, and critics declared the movement a failure. Yet recent scholarship suggests a more complicated verdict: while the movement's utopian ambitions were never realized, its emphasis on green space quietly shaped modern zoning codes and park planning.</p>
+      </div>
+      <p class="stem">Which choice best describes the overall structure and main point of the text?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="true" data-why="Three-part arc, whole passage covered: rise (1920s champions), decline (1960s 'failure'), partial vindication (recent scholarship). The bucket fits exactly."><span class="letter" aria-hidden="true">A</span><span class="ctext">It traces the rise, apparent decline, and partial vindication of an urban planning movement.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="The passage says the movement's utopian ambitions were 'never realized' — 'unqualified success' reverses the verdict the passage actually gives."><span class="letter" aria-hidden="true">B</span><span class="ctext">It argues that the garden city movement was an unqualified success.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="The zoning influence is only the final sentence. It can't carry the 1920s–1960s arc that makes up most of the passage."><span class="letter" aria-hidden="true">C</span><span class="ctext">It compares the garden city movement to modern zoning practices.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="That's only the first sentence's content — a three-sentence passage can't be summarized by one of them."><span class="letter" aria-hidden="true">D</span><span class="ctext">It explains why urban planners in the 1920s favored green spaces.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Rise → apparent decline → partial vindication mirrors the passage's three sentences.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong — opposite</span><p class="bd-why">"Unqualified success" reverses the passage's measured verdict.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — too narrow</span><p class="bd-why">Final-sentence detail only. The bucket needs the full rise-and-fall arc.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — too narrow</span><p class="bd-why">First-sentence content. Also: notice C and D are both too-narrow — the test stacks them.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>The right answer is the bucket that fits — big enough for the whole passage, no bigger.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>A detail from a single sentence dressed up as the main idea (too narrow); a grand claim the passage never made (too broad).</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================= R3 ============================= -->
+<section class="block" id="r3">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 3 · Information &amp; Ideas</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">3</span><h2>Detail Retrieval — "According to the Text"</h2></div>
+    <p>These are the easiest points on the test — and students still miss them by <strong>answering from memory instead of from the text</strong>. The pattern: the question asks something specific, the passage states it plainly, and the traps paraphrase it <em>almost</em> right. Treat it like a lookup task — go find the exact sentence, then match the claim word by word.</p>
+
+    <div class="move">
+      <p class="move-title">The move: the lookup discipline</p>
+      <ol>
+        <li>Spot the trigger: <strong>"According to the text"</strong> / <strong>"Based on the text, what is true…"</strong> means the answer is <em>stated</em>, not inferred.</li>
+        <li>Find the sentence that addresses it and read it <strong>word by word</strong> — no skimming.</li>
+        <li>Check the choice with the same precision: <strong>every claim in the choice must land in the passage</strong>. One unspoken word is enough to kill it.</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>The axolotl, a salamander native to Lake Xochimilco in Mexico, can regenerate lost limbs, portions of its heart, and even parts of its brain. Unlike most amphibians, it retains its larval features throughout its adult life, a phenomenon known as neoteny. Wild axolotl populations have declined sharply due to habitat loss and pollution, and the species is now critically endangered.</p>
+      </div>
+      <p class="stem">According to the text, what is true of axolotls?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="The passage never says 'only.' One unspoken word smuggled into a true statement — the classic detail-trap recipe."><span class="letter" aria-hidden="true">A</span><span class="ctext">They are the only amphibians capable of regenerating lost limbs.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Both halves land in the text: 'retains its larval features throughout its adult life' (neoteny) and 'now critically endangered.' Word by word, it matches."><span class="letter" aria-hidden="true">B</span><span class="ctext">They retain larval features into adulthood and are critically endangered.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="No migration of any kind is mentioned. If you can't find the sentence, the choice is wrong."><span class="letter" aria-hidden="true">C</span><span class="ctext">They migrate from Lake Xochimilco to other lakes during the dry season.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Opposite. The passage says wild populations 'have declined sharply' — the choice claims a full recovery."><span class="letter" aria-hidden="true">D</span><span class="ctext">They have fully recovered thanks to conservation efforts.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">"Only" is never stated. The regeneration claim is true; the exclusivity is invented.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Both halves stated plainly. The lookup finds the sentence; the sentence confirms the choice.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — not in the text</span><p class="bd-why">Migration is never mentioned. No sentence, no points.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — opposite</span><p class="bd-why">"Declined sharply" ≠ "fully recovered." The detail-memory trap in pure form.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Dr. Amara Okafor's 2023 experiment tested whether background music affects reading comprehension. Participants read two passages — one in silence, one with instrumental music — and answered questions afterward. Scores were 8% lower with music, but only among participants who reported finding the music distracting; those who said they barely noticed the music performed equally well in both conditions.</p>
+      </div>
+      <p class="stem">Based on the text, which finding would Okafor's results most strongly support?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="'Always' — and it's directly contradicted by the subgroup that showed no difference. One word kills it."><span class="letter" aria-hidden="true">A</span><span class="ctext">Background music always harms reading comprehension.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="The conditional result was the whole finding: worse scores 'only among' those who found the music distracting. The word 'only' in the passage does the work."><span class="letter" aria-hidden="true">B</span><span class="ctext">The effect of background music on comprehension depends on whether the listener finds it distracting.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="The experiment never compared music types — instrumental only. The lookup finds no sentence for this."><span class="letter" aria-hidden="true">C</span><span class="ctext">Instrumental music is more distracting than music with lyrics.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Overgeneralization. The study tests neither 'all students' nor a recommended strategy — just the conditions it measured."><span class="letter" aria-hidden="true">D</span><span class="ctext">Reading in silence is the best strategy for all students.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — extreme</span><p class="bd-why">"Always" vs. "only among" — the passage's own qualifier is the weapon.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">The finding <em>is</em> the conditional: it depends on perceived distraction.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">No comparison of music types was ever made.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — overgeneralization</span><p class="bd-why">"Best," "all students," "strategy" — three unspoken claims wrapped in one sentence.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Look it up in the text; match the claim word by word; never answer from memory.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>Choices that add one unspoken word ("only," "always," "all") to an otherwise accurate restatement.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================= R4 ============================= -->
+<section class="block" id="r4">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 4 · Information &amp; Ideas</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">4</span><h2>Inference: The One Safe Step</h2></div>
+    <p>"Which choice most logically completes the text?" looks scary but follows a strict rule: the correct answer is <strong>one small logical step</strong> beyond the passage — never two. If the passage hands you A and the answer requires A→B→C, it's too far. The right answer is the thing the passage is <em>pointing at</em> but hasn't quite said. Ask yourself: <strong>"What would the author agree with, given only what's written?"</strong></p>
+
+    <div class="fig" role="img" aria-label="Diagram: from the passage, one logical step leads to the answer; two steps is too far.">
+      <svg viewBox="0 0 520 170">
+        <circle cx="80" cy="80" r="44" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="80" y="76" text-anchor="middle" font-size="13" fill="var(--muted)">the</text>
+        <text x="80" y="96" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--ink)">PASSAGE</text>
+        <line x1="136" y1="80" x2="196" y2="80" stroke="var(--good)" stroke-width="3"/>
+        <polygon points="196,72 196,88 210,80" fill="var(--good)"/>
+        <circle cx="265" cy="80" r="44" fill="var(--good-soft)" stroke="var(--good)" stroke-width="2"/>
+        <text x="265" y="76" text-anchor="middle" font-size="13" fill="var(--muted)">one safe</text>
+        <text x="265" y="96" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--ink)">STEP</text>
+        <text x="265" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="var(--good)">✓ the answer</text>
+        <line x1="321" y1="80" x2="380" y2="80" stroke="var(--bad)" stroke-width="3" stroke-dasharray="7 6"/>
+        <polygon points="380,72 380,88 394,80" fill="var(--bad)"/>
+        <circle cx="450" cy="80" r="44" fill="var(--bad-soft)" stroke="var(--bad)" stroke-width="2"/>
+        <text x="450" y="76" text-anchor="middle" font-size="13" fill="var(--muted)">two</text>
+        <text x="450" y="96" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--ink)">STEPS</text>
+        <text x="450" y="142" text-anchor="middle" font-size="14" font-weight="700" fill="var(--bad)">✗ too far</text>
+        <text x="80" y="142" text-anchor="middle" font-size="14" fill="var(--muted)">evidence</text>
+      </svg>
+      <p class="cap">The whole pattern: the correct inference is the stone you can reach in a single step from the evidence. Anything requiring a second step — a new fact, a judgment, a policy opinion — is a trap wearing a smart conclusion's clothes.</p>
+    </div>
+
+    <div class="move">
+      <p class="move-title">The move: count the steps</p>
+      <ol>
+        <li>Link each piece of the answer back to a sentence in the passage. If every link exists, it's one step.</li>
+        <li>If you need to supply a fact, a judgment, or a policy opinion the passage never hints at — you're on step two. Kill it.</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Sea otters must eat roughly 25% of their body weight daily to survive in cold Pacific waters. Unlike seals and whales, they lack a thick layer of blubber, so they rely on their exceptionally dense fur — the thickest of any mammal — to trap insulating air against their skin. When oil spills coat their fur, the air layer collapses.</p>
+      </div>
+      <p class="stem">Which choice most logically completes the text?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="true" data-why="One step: fur is their insulation → oil collapses the fur's air layer → they are especially vulnerable. Every link is in the text."><span class="letter" aria-hidden="true">A</span><span class="ctext">Sea otters are therefore especially vulnerable to oil spills.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="A policy recommendation two steps beyond the evidence. The passage describes a problem and gestures at no solution."><span class="letter" aria-hidden="true">B</span><span class="ctext">Sea otters should be relocated to warmer waters.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="'Never' — extreme, and beyond the text. The passage compares blubber, not oil-spill outcomes."><span class="letter" aria-hidden="true">C</span><span class="ctext">Seals and whales never suffer from oil spills.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="The passage gives no comparison of total food intake across marine mammals — 25% of body weight is not 'more than any other.'"><span class="letter" aria-hidden="true">D</span><span class="ctext">Sea otters eat more than any other marine mammal.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict right">Correct — one step</span><p class="bd-why">Insulation depends on fur; oil kills the fur's insulation. Conclusion: vulnerability. One step.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong — two steps</span><p class="bd-why">A "should" is a policy judgment the passage never hints at.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — extreme + beyond text</span><p class="bd-why">"Never" is doing all the killing here.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">No cross-species comparison of total intake is given.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>In a 2022 study, economists compared two towns with similar demographics. Town A introduced a congestion tax on downtown driving; Town B did not. Over three years, downtown retail revenue in Town A fell 12%, while in Town B it rose 4%. However, air quality monitors in Town A recorded a 20% drop in particulate pollution, and pedestrian traffic in its downtown increased 30%. Town B showed no significant change in either measure.</p>
+      </div>
+      <p class="stem">Which choice most logically completes the text?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="'Best policy for all cities' — a universal prescription from one town comparison. That's two steps and a leap."><span class="letter" aria-hidden="true">A</span><span class="ctext">Congestion taxes are therefore the best policy for all cities.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="One step: revenue down (economic cost) + pollution down and foot traffic up (gains) = a trade-off. That's the data stated once."><span class="letter" aria-hidden="true">B</span><span class="ctext">The congestion tax in Town A involved trade-offs between economic and environmental outcomes.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Nothing about store quality — the tax is the stated difference between the towns."><span class="letter" aria-hidden="true">C</span><span class="ctext">Town B's retailers outperformed Town A's because Town B has better stores.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Reverses the logic: in Town A pollution fell while revenue fell — so pollution can't be the cause of the revenue drop."><span class="letter" aria-hidden="true">D</span><span class="ctext">Air pollution is the primary cause of declining retail revenue.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — two steps too far</span><p class="bd-why">One comparison can't crown the "best policy for all cities." Feels smart; leaps anyway.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct — one step</span><p class="bd-why">Down costs + up gains = trade-offs. Nothing added.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">Store quality is invented; the tax is the only stated difference.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — reversed logic</span><p class="bd-why">Pollution fell while revenue fell — it cannot explain the revenue drop.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>The answer is one logical step past the text — if it needs two steps or a leap, it's wrong.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>Answers that feel like smart conclusions but require information or judgments the passage never provides.</p></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- ============================= R5 ============================= -->
+<section class="block" id="r5">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 5 · Craft &amp; Structure</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">5</span><h2>Command of Evidence: Text &amp; Data</h2></div>
+    <p>Two flavors, one rule. In <strong>textual</strong> evidence questions, you're given a claim and asked which quote best supports or illustrates it — so match the <em>specific</em> claim, not the general topic. In <strong>quantitative</strong> questions, a passage is paired with a table or graph, and the correct answer is the <strong>only choice true of BOTH the text and the data</strong>. Students fail these by checking only one of the two. The move you can't unsee: for every choice, ask <strong>"does the text say this AND does the chart show this?"</strong></p>
+
+    <div class="fig" role="img" aria-label="Diagram: the correct answer must be true of both the text and the chart.">
+      <svg viewBox="0 0 520 180">
+        <rect x="70" y="22" width="230" height="100" rx="14" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="220" y="22" width="230" height="100" rx="14" fill="var(--good-soft)" stroke="var(--good)" stroke-width="2"/>
+        <text x="140" y="70" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--accent-deep)">true of the</text>
+        <text x="140" y="92" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--accent-deep)">TEXT</text>
+        <text x="380" y="70" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--good)">true of the</text>
+        <text x="380" y="92" text-anchor="middle" font-size="14.5" font-weight="700" fill="var(--good)">CHART</text>
+        <line x1="260" y1="150" x2="260" y2="134" stroke="var(--ink)" stroke-width="2.5"/>
+        <polygon points="252,144 268,144 260,132" fill="var(--ink)"/>
+        <text x="260" y="172" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">the answer is here — and only here</text>
+      </svg>
+      <p class="cap">True of the chart but not the passage? Dead. True of the passage but not the chart? Dead. The answer must live in the overlap — check both, every time.</p>
+    </div>
+
+    <div class="move">
+      <p class="move-title">The move: match the claim, check both sources</p>
+      <ol>
+        <li><strong>Textual flavor</strong> ("most effectively illustrates her claim"): match the <em>exact</em> claim, not the general topic. The choice that matches the topic while ignoring the claim is Trap 1.</li>
+        <li><strong>Quantitative flavor</strong>: before reading the choices, note the chart's units and what each row and column actually measures.</li>
+        <li>For every choice, run the double check: <strong>text AND chart</strong>. One "no" kills the choice.</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A — textual evidence</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Coral reefs are often called the "rainforests of the sea" for their biodiversity. Marine ecologist Dr. Priya Nair argues that this nickname is misleading, however. In a recent paper, she contends that the metaphor encourages people to think of reefs as pristine wildernesses untouched by humans, when in fact many reefs have been shaped by centuries of human fishing practices.</p>
+      </div>
+      <p class="stem">Which quotation from Nair's paper would most effectively illustrate her claim about the "rainforests of the sea" nickname?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Biodiversity is the reason for the nickname — but her claim is that the nickname is misleading. Topic matched, claim missed: Trap 1."><span class="letter" aria-hidden="true">A</span><span class="ctext">"Coral reefs support approximately 25% of all marine species."</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Restates her exact claim in her own terms: the nickname misleads because it hides the long human history of these ecosystems."><span class="letter" aria-hidden="true">B</span><span class="ctext">"The nickname invites a vision of untouched wilderness that obscures the long human history of these ecosystems."</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="A rainforest-reef comparison she never makes. It answers a different question than the one asked."><span class="letter" aria-hidden="true">C</span><span class="ctext">"Rainforests and reefs both face threats from climate change."</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Twisted: she says reefs were shaped by centuries of fishing — not that fishing practices were unchanged. True topic, wrong claim."><span class="letter" aria-hidden="true">D</span><span class="ctext">"Fishing practices near reefs have remained unchanged for centuries."</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — true-but-irrelevant</span><p class="bd-why">Supports the <em>nickname</em>, not her <em>criticism</em> of it. Trap 1 in formal dress.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Illustrates exactly her claim: nickname → vision of untouched wilderness → obscures human history.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — off-claim</span><p class="bd-why">A comparison she never makes; doesn't touch her argument.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — half-right, half-wrong</span><p class="bd-why">"Shaped by fishing" ≠ "unchanged fishing." The second half twists her words.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B — quantitative evidence</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Researchers hypothesized that a new tutoring program would improve math scores more for students who attended at least 80% of sessions than for those who attended fewer. The table shows average score gains (in points) for participants grouped by attendance.</p>
+      </div>
+      <table class="datatable">
+        <caption style="caption-side:bottom;font-size:.85rem;color:var(--muted);padding-top:8px">Table: average math score gain by tutoring attendance.</caption>
+        <thead><tr><th scope="col">Attendance</th><th scope="col">Avg. score gain</th></tr></thead>
+        <tbody>
+          <tr><td>90–100% of sessions</td><td>+18</td></tr>
+          <tr><td>80–89% of sessions</td><td>+15</td></tr>
+          <tr><td>60–79% of sessions</td><td>+6</td></tr>
+          <tr><td>Below 60%</td><td>+2</td></tr>
+        </tbody>
+      </table>
+      <p class="stem">Which choice most effectively uses data from the table to support the researchers' hypothesis?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="True of the data — but 'most' overreaches, and the hypothesis is about the 80% threshold, which the correct choice states precisely. Data ✓, hypothesis half-missed."><span class="letter" aria-hidden="true">A</span><span class="ctext">Students attending 90–100% of sessions gained 18 points, showing the program helps high attenders most.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="'Proving that any attendance is sufficient' goes beyond the data — and ignores that the hypothesis is about who benefits MORE. Fails the passage-check."><span class="letter" aria-hidden="true">B</span><span class="ctext">The program raised scores for all groups, proving that any attendance is sufficient.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Contradicts the hypothesis the question asked you to support — and '+2' isn't 'ineffective.' It picked the wrong side of the argument."><span class="letter" aria-hidden="true">C</span><span class="ctext">Students with the lowest attendance gained only 2 points, which shows the program was ineffective.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="true" data-why="True of the data (15 and 18 ≥ 15; gains rise with attendance) AND matches the hypothesis (≥80% benefits more). Both checks pass — that's the whole game."><span class="letter" aria-hidden="true">D</span><span class="ctext">Score gains increased steadily with attendance, with students at 80% attendance or above gaining at least 15 points.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — half-right (overreach)</span><p class="bd-why">True of the data, but misses the 80% threshold precision the hypothesis demands.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong — beyond the data</span><p class="bd-why">"Proving any attendance is sufficient" isn't in the data and ignores the hypothesis.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — wrong side</span><p class="bd-why">The question asks you to <em>support</em> the hypothesis; this choice attacks it.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Chart ✓ ("at least 15" for both ≥80% groups) and passage ✓ (the hypothesis). Overlap = answer.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>For data questions, the answer must be true of the chart AND the passage — check both, every time.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>Choices supported by the chart but contradicting the passage's claim (or vice versa); choices that describe the data without addressing the hypothesis.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================= R6 ============================= -->
+<section class="block" id="r6">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 6 · Craft &amp; Structure</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">6</span><h2>Words in Context: Let the Sentence Hand You the Meaning</h2></div>
+    <p>The SAT doesn't test whether you know a word's dictionary definition — it tests whether you can let the sentence <strong>hand you</strong> the meaning. The sentence always contains a logic clue. <strong>Cover the word with your thumb</strong>, read the logic around it, predict a plain synonym, then match. The trap answers are the word's <em>other</em> common meanings — the ones your brain reaches for first.</p>
+
+    <div class="chips" aria-label="The four logic clues">
+      <span class="chip"><b>Contrast</b>but, however, yet, rather than</span>
+      <span class="chip"><b>Cause</b>because, so, leading to</span>
+      <span class="chip"><b>Restatement</b>a comma phrase saying it twice</span>
+      <span class="chip"><b>Example</b>for example, such as</span>
+    </div>
+
+    <div class="move">
+      <p class="move-title">The move: the thumb trick</p>
+      <ol>
+        <li>Cover the word. Read the sentence around it and <strong>find the logic clue</strong> — contrast? cause? restatement? example?</li>
+        <li><strong>Predict a plain-English stand-in</strong> ("decreased," "fake," "careful").</li>
+        <li>Uncover and match. If two choices are close, check the <strong>tone</strong>: is the word praise or criticism right here?</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>The mayor's proposal to build a downtown stadium was initially popular, but support <em>waned</em> as cost estimates doubled and then tripled over the course of a year.</p>
+      </div>
+      <p class="stem">As used in the text, <span class="w">"waned"</span> most nearly means</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Opposite. The 'but' after 'initially popular' tells you support did the reverse of rising."><span class="letter" aria-hidden="true">A</span><span class="ctext">increased</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="The logic: 'initially popular, but…' — contrast. Costs rose, so support faded. Predict 'decreased,' and diminished is sitting right there."><span class="letter" aria-hidden="true">B</span><span class="ctext">diminished</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Too vague — 'shifted' doesn't say which direction, and the contrast demands the opposite of 'popular.'"><span class="letter" aria-hidden="true">C</span><span class="ctext">shifted</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Extreme. 'Waned' means faded — not vanished. The contrast can't upgrade fading to disappearing."><span class="letter" aria-hidden="true">D</span><span class="ctext">disappeared completely</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — opposite</span><p class="bd-why">"But" rules it out: support went the other way from "popular."</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Contrast clue ("but") + rising costs → support diminished. The thumb trick works.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — too vague</span><p class="bd-why">"Shifted" is directionless; the sentence demands a direction.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — extreme</span><p class="bd-why">Faded ≠ vanished. Trap 3 again — extreme words are everywhere on this test.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Critics called the novel's plot <em>contrived</em>, arguing that the sudden inheritance, the long-lost twin, and the perfectly timed storm felt less like organic developments than machinery assembled to rescue the protagonist.</p>
+      </div>
+      <p class="stem">As used in the text, <span class="w">"contrived"</span> most nearly means</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="'Clever' is the word's other face — contrived-as-scheming. Here the sentence judges it negatively, so the praise-spin is bait."><span class="letter" aria-hidden="true">A</span><span class="ctext">clever</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="'Less like organic developments than machinery assembled' — contrast. Predict 'fake, forced,' and artificial is the only one carrying the criticism."><span class="letter" aria-hidden="true">B</span><span class="ctext">artificial</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Confuses complexity with artificiality. The complaint is about fakeness, not difficulty — a 'complicated' plot can still feel organic."><span class="letter" aria-hidden="true">C</span><span class="ctext">complicated</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Close but tone-wrong: 'deliberate' isn't a criticism — 'artificial' is. Cover the word, predict the plain version, match the tone."><span class="letter" aria-hidden="true">D</span><span class="ctext">deliberate</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — the other meaning</span><p class="bd-why">"Clever" is a valid sense of "contrived" — just not the one this sentence is using.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Organic vs. machinery = real vs. fake. The tone is negative; the meaning follows.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — near-miss</span><p class="bd-why">Complex ≠ artificial. The contrast is about naturalness, not intricacy.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — wrong tone</span><p class="bd-why">"Deliberate" is neutral. The critics are criticizing.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Don't define the word — let the sentence's logic (contrast, cause, restatement) hand you the meaning.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>The word's <em>other</em> familiar meaning; a near-synonym with the wrong tone (positive vs. negative).</p></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- ============================= R7 ============================= -->
+<section class="block" id="r7">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 7 · Craft &amp; Structure</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">7</span><h2>Text Structure &amp; Function: Name the Move</h2></div>
+    <p>These questions ask what a sentence or the passage <strong>does</strong>, not what it <strong>says</strong>. Strip the content, watch the move: does it introduce, give an example, present a counterargument, concede a point, draw a conclusion? Authors make only a handful of moves. Learn to name the move — <em>"that's an example," "that's a qualification"</em> — and the answer becomes obvious.</p>
+
+    <div class="move">
+      <p class="move-title">The move: the move vocabulary</p>
+      <ol>
+        <li><strong>Introduce / define / summarize</strong> — sets up or wraps up.</li>
+        <li><strong>Illustrate</strong> — gives an example of a claim.</li>
+        <li><strong>Concede</strong> (admits a point) or <strong>qualify</strong> (adds a limit).</li>
+        <li><strong>Counter</strong> (pushes back) or <strong>conclude</strong> (lands the argument).</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Octopuses are renowned problem-solvers. In one experiment, an octopus learned to unscrew a jar lid to reach a crab inside — after watching another octopus do it just once. <u class="hl">Such rapid observational learning was once thought to be limited to vertebrates like primates and crows.</u></p>
+      </div>
+      <p class="stem">Which choice best describes the function of the <u>underlined sentence</u>?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Wrong move. No viewpoint is contrasted — the sentence only notes a prior belief to show the finding is a big deal."><span class="letter" aria-hidden="true">A</span><span class="ctext">It presents a contrasting viewpoint held by most scientists.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="Wrong move. Nothing about the experiment's motivation appears — 'why it was conducted' is never discussed."><span class="letter" aria-hidden="true">B</span><span class="ctext">It explains why the experiment was conducted.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="true" data-why="'Once thought limited to vertebrates' tells you the octopus result is a big deal. The move is emphasis of significance — content ignored, function named."><span class="letter" aria-hidden="true">C</span><span class="ctext">It emphasizes the significance of the finding described.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Wrong move. The result was already stated in the previous sentence; this one comments on its importance — that's different from summarizing."><span class="letter" aria-hidden="true">D</span><span class="ctext">It summarizes the main result of the experiment.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — wrong move</span><p class="bd-why">No contrasting viewpoint appears — just a prior belief the finding overturns.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong — wrong move</span><p class="bd-why">Motivation is never discussed. Ignore content you want to see; name what's there.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Once thought limited to…" is the tell: the sentence is here to make the finding feel significant.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — wrong move</span><p class="bd-why">The result was already stated. This sentence comments on its <em>importance</em>.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Passage</p>
+        <p>Some historians argue that the printing press caused the Reformation by spreading Luther's ideas. <u class="hl">Yet Luther's theses spread rapidly through Germany in 1517 largely via handwritten copies and word of mouth, months before printed editions appeared in most cities.</u></p>
+      </div>
+      <p class="stem">Which choice best describes the function of the <u>underlined sentence</u>?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="true" data-why="'Yet' + a fact that undercuts the neat cause-and-effect story. 'Qualifies' is the precise verb — it complicates the claim without destroying it."><span class="letter" aria-hidden="true">A</span><span class="ctext">It provides evidence that qualifies the claim in the preceding sentence.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="false" data-why="Wrong move. The sentence doesn't introduce anything new — it responds to the claim that's already on the table."><span class="letter" aria-hidden="true">B</span><span class="ctext">It introduces a new argument about the causes of the Reformation.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Wrong degree. 'No role' is extreme — the sentence complicates the timing; it never denies the press's role entirely."><span class="letter" aria-hidden="true">C</span><span class="ctext">It concedes that the printing press played no role in the Reformation.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Wrong direction. The sentence challenges the historians' claim — it doesn't restate their consensus."><span class="letter" aria-hidden="true">D</span><span class="ctext">It summarizes the consensus view among historians.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Yet" is the tell. Qualifies = complicates without destroying. That's the move, named precisely.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict wrong">Wrong — wrong move</span><p class="bd-why">Response ≠ introduction. Watch for direction, not just topic.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — one degree too strong</span><p class="bd-why">"No role" over-presses what the sentence does. The classic verb trap.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — wrong direction</span><p class="bd-why">It pushes back on the consensus, not gathers it up.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Ignore what the sentence says; name what it <em>does</em> — example, concession, qualification, conclusion.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>Verbs that are one degree too strong ("refutes" vs. "qualifies," "proves" vs. "suggests").</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================= R8 ============================= -->
+<section class="block" id="r8">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 8 · Craft &amp; Structure</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">8</span><h2>Cross-Text Connections: Agree, Disagree, or Qualify</h2></div>
+    <p>Two short texts, one question: how do they relate? There are only <strong>three relationships</strong> that matter: <strong>agree</strong> (Text 2 supports Text 1), <strong>disagree</strong> (Text 2 challenges Text 1), or <strong>qualify</strong> (Text 2 partly agrees but adds a limit). The move: summarize each text's <strong>stance in five words</strong>, then compare stances. <strong>Never compare details — compare positions.</strong></p>
+
+    <div class="fig" role="img" aria-label="Diagram of the three cross-text relationships: agree, disagree, and qualify.">
+      <svg viewBox="0 0 520 196">
+        <text x="0" y="44" font-size="12.5" font-weight="700" letter-spacing="1.5" fill="var(--good)">AGREE</text>
+        <line x1="112" y1="34" x2="192" y2="34" stroke="var(--good)" stroke-width="3"/>
+        <polygon points="192,27 192,41 206,34" fill="var(--good)"/>
+        <line x1="112" y1="48" x2="192" y2="48" stroke="var(--good)" stroke-width="3"/>
+        <polygon points="192,41 192,55 206,48" fill="var(--good)"/>
+        <text x="256" y="45" font-size="14.5" fill="var(--ink)">Text 2 supports Text 1</text>
+        <text x="0" y="104" font-size="12.5" font-weight="700" letter-spacing="1.5" fill="var(--bad)">DISAGREE</text>
+        <line x1="192" y1="94" x2="112" y2="94" stroke="var(--bad)" stroke-width="3"/>
+        <polygon points="112,87 112,101 98,94" fill="var(--bad)"/>
+        <line x1="112" y1="108" x2="192" y2="108" stroke="var(--bad)" stroke-width="3"/>
+        <polygon points="192,101 192,115 206,108" fill="var(--bad)"/>
+        <text x="256" y="105" font-size="14.5" fill="var(--ink)">Text 2 challenges Text 1</text>
+        <text x="0" y="164" font-size="12.5" font-weight="700" letter-spacing="1.5" fill="var(--accent)">QUALIFY</text>
+        <line x1="112" y1="154" x2="232" y2="154" stroke="var(--accent)" stroke-width="3"/>
+        <polygon points="232,147 232,161 246,154" fill="var(--accent)"/>
+        <line x1="112" y1="168" x2="172" y2="168" stroke="var(--accent)" stroke-width="3"/>
+        <polygon points="172,161 172,175 186,168" fill="var(--accent)"/>
+        <text x="280" y="165" font-size="14.5" fill="var(--ink)">Text 2 partly agrees, adds a limit</text>
+      </svg>
+      <p class="cap">Three relationships, three pictures. "Qualify" — one arrow falling short of the other — is the one that shows up on the hardest questions.</p>
+    </div>
+
+    <div class="move">
+      <p class="move-title">The move: the stance habit</p>
+      <ol>
+        <li>Cover Text 2. Summarize <strong>Text 1's position in five words</strong> ("beekeeping good for cities").</li>
+        <li>Do the same for <strong>Text 2</strong> ("beekeeping harms native bees").</li>
+        <li>Compare <strong>positions</strong>, never details: agree, disagree, or qualify?</li>
+      </ol>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice A</h3><span class="diff">Simple</span></div>
+      <div class="passage">
+        <p class="plab">Text 1</p>
+        <p>Urban beekeeping has exploded in popularity, with rooftop hives appearing in cities worldwide. Proponents argue that city bees boost local pollination and reconnect urban residents with nature.</p>
+        <p class="plab" style="margin-top:14px">Text 2</p>
+        <p>Entomologist Dr. Luis Vega warns that the urban beekeeping boom may harm native pollinators. Honeybees, he notes, outcompete native wild bees for limited floral resources, and most city hives are kept by hobbyists with little training in disease management.</p>
+      </div>
+      <p class="stem">How would Vega (Text 2) most likely respond to the proponents described in Text 1?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Opposite relationship. Vega warns of harms — he doesn't agree that the practice benefits ecosystems."><span class="letter" aria-hidden="true">A</span><span class="ctext">By agreeing that urban beekeeping benefits local ecosystems.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="Stances: Text 1 = pro (benefits). Text 2 = con (harms native pollinators). Vega's response is disagreement framed as a trade-off."><span class="letter" aria-hidden="true">B</span><span class="ctext">By arguing that the practice's harms to native pollinators outweigh its claimed benefits.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Extreme. He warns against harms — he never calls for banning beekeeping in all cities."><span class="letter" aria-hidden="true">C</span><span class="ctext">By suggesting that beekeeping should be banned in all cities.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="Beyond the text. Whether honeybees can survive in cities is never questioned — the question is their effect on others."><span class="letter" aria-hidden="true">D</span><span class="ctext">By questioning whether honeybees can survive in urban environments.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — opposite</span><p class="bd-why">Stances: pro (T1) vs. con (T2). Agreement isn't on the table.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">Disagreement, stated as a trade-off: harms outweigh claimed benefits. Positions compared, not details.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — extreme</span><p class="bd-why">"Banned in all cities" — his warning never becomes a demand.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — beyond the text</span><p class="bd-why">Survival is never questioned; effects on native pollinators are the topic.</p></div></div>
+      </div>
+    </div>
+
+    <div class="practice" data-quiz>
+      <div class="practice-head"><h3>Practice B</h3><span class="diff stretch">Stretch</span></div>
+      <div class="passage">
+        <p class="plab">Text 1</p>
+        <p>Psychologist Carol Dweck's "growth mindset" research suggests that students who believe abilities can be developed achieve more than those who believe abilities are fixed. Schools worldwide have adopted mindset interventions based on this work.</p>
+        <p class="plab" style="margin-top:14px">Text 2</p>
+        <p>A 2023 meta-analysis found that growth-mindset interventions produce small but statistically significant improvements in academic achievement, particularly for at-risk students. The authors conclude that mindset programs are a useful tool, though not the transformative solution some advocates have claimed.</p>
+      </div>
+      <p class="stem">Based on the texts, how would the authors of Text 2 most likely characterize the claim in Text 1 that mindset beliefs affect achievement?</p>
+      <div class="choices">
+        <button type="button" class="choice" data-letter="A" data-correct="false" data-why="Too strong — they found real, significant improvements. 'Entirely without merit' is total rejection of partial agreement."><span class="letter" aria-hidden="true">A</span><span class="ctext">As entirely without merit.</span></button>
+        <button type="button" class="choice" data-letter="B" data-correct="true" data-why="'Small but significant… useful tool, though not the transformative solution' is a qualification: partial agreement with a limit. The five-word stances: T1 'mindset boosts achievement,' T2 'mindset helps, not transformative.'"><span class="letter" aria-hidden="true">B</span><span class="ctext">As overstated in its strongest form but supported by modest evidence.</span></button>
+        <button type="button" class="choice" data-letter="C" data-correct="false" data-why="Too strong. They found significant effects — contradicting the claim is the opposite of what their data does."><span class="letter" aria-hidden="true">C</span><span class="ctext">As contradicted by the majority of recent research.</span></button>
+        <button type="button" class="choice" data-letter="D" data-correct="false" data-why="'Particularly for at-risk' was twisted into 'only for at-risk.' One word — the classic trap."><span class="letter" aria-hidden="true">D</span><span class="ctext">As applicable only to at-risk students.</span></button>
+      </div>
+      <p class="verdict" role="status" hidden></p>
+      <button type="button" class="breakdown-toggle" aria-expanded="false" hidden><span class="arr" aria-hidden="true">▶</span> Walk through each choice</button>
+      <div class="breakdown" hidden>
+        <div class="bd-row"><span class="bd-letter">A</span><div><span class="bd-verdict wrong">Wrong — too strong</span><p class="bd-why">They found significant improvements; "without merit" is total rejection.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">B</span><div><span class="bd-verdict right">Correct</span><p class="bd-why">"Useful tool, though not transformative" = qualification. Partial agreement with a ceiling.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">C</span><div><span class="bd-verdict wrong">Wrong — too strong</span><p class="bd-why">Their own data shows real effects; "contradicted" misreads it.</p></div></div>
+        <div class="bd-row"><span class="bd-letter">D</span><div><span class="bd-verdict wrong">Wrong — one-word trap</span><p class="bd-why">"Particularly" → "only." This single-word twist shows up constantly at high difficulty.</p></div></div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Summarize each text's stance in five words, then name the relationship: agree, disagree, or qualify.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>"Particularly" twisted into "only"; partial agreement presented as total rejection (or vice versa).</p></div></div>
+    </div>
+  </div></div>
+</section>
+<!-- ============================= R9 ============================= -->
+<section class="block" id="r9">
+  <div class="wrap"><div class="module">
+    <p class="eyebrow">Pattern 9 · The meta-pattern</p>
+    <div class="module-head"><span class="module-num" aria-hidden="true">9</span><h2>Reading Strategy: 71 Seconds a Question</h2></div>
+    <p>With roughly 71 seconds per question and one question per passage, the winning strategy is <strong>mechanical, not heroic</strong>: read the question stem first (it tells you what to hunt for), read the passage with that mission, predict the answer in your own words before looking at the choices, then eliminate with named reasons. Students who "pick what feels right" are donating points.</p>
+
+    <ol class="proto">
+      <li><b class="ti">Question stem first.</b> "Main idea?" → read for the overall point. "According to the text?" → hunt the detail. "Most nearly means?" → find the logic clue. The stem tells you what to hunt for.</li>
+      <li><b class="ti">Read actively, annotate lightly.</b> One underline: the sentence carrying the main claim. In Bluebook, use the annotation tool — mark the claim, not everything.</li>
+      <li><b class="ti">Predict before you peek.</b> Cover the choices; say the answer in plain words. This inoculates you against trap phrasing.</li>
+      <li><b class="ti">Eliminate with a reason.</b> For each choice, name it: "too narrow," "extreme," "beyond text," "half-right." If you can't name why it's wrong, you haven't earned the elimination.</li>
+      <li><b class="ti">Keep moving.</b> 71 seconds is the budget. If a question eats 2 minutes, it's stealing from two easier questions later. Flag it, move on, return if time remains.</li>
+      <li><b class="ti">Answer everything.</b> No penalty for wrong answers. A guess among four choices is worth 25% — a blank is worth 0%.</li>
+    </ol>
+
+    <h3>Two missions in action</h3>
+    <div class="mission">
+      <p class="mstem">Stem: "Which choice best states the main idea of the text?"</p>
+      <p class="mgo"><b>Mission:</b> hunt the overall point (Pattern 2), not a detail. Predict before peeking: after reading, say "this passage is about ___" in one sentence, then match.</p>
+    </div>
+    <div class="mission">
+      <p class="mstem">Stem: "Which choice most logically completes the text?" — with a data table.</p>
+      <p class="mgo"><b>Mission:</b> one safe step (Pattern 4) that is true of <em>both</em> text and data (Pattern 5). Predict: "the answer will say [the trend] but won't claim [more than the data shows]." Then eliminate anything needing two steps.</p>
+    </div>
+
+    <div class="timer" id="timer">
+      <div class="dial" aria-hidden="true">
+        <svg width="132" height="132" viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="var(--line)" stroke-width="10"/>
+          <circle class="ring-fg" cx="60" cy="60" r="54" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="0"/>
+        </svg>
+        <div class="tlabel">01:11</div>
+      </div>
+      <div class="tbody" role="timer" aria-label="Pacing timer">
+        <div class="tpresets" role="group" aria-label="Timer presets">
+          <button type="button" class="tpreset" data-secs="71" aria-pressed="true">Question · 1:11</button>
+          <button type="button" class="tpreset" data-secs="1920" aria-pressed="false">Module · 32:00</button>
+        </div>
+        <p><b>Train the pace.</b> Drill a single question against 1:11 until the elimination discipline survives the clock — then string questions into a 32-minute module run.</p>
+        <div class="tcontrols">
+          <button type="button" class="btn" data-t="start">Start</button>
+          <button type="button" class="btn ghost" data-t="pause" disabled>Pause</button>
+          <button type="button" class="btn ghost" data-t="reset" disabled>Reset</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottomline">
+      <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Stem first, predict before peeking, eliminate with named reasons, never leave a blank.</p></div></div>
+      <div class="bl-row"><span class="bl-label">The trap</span><div class="bl-text"><p>Spending 3 minutes on one hard question and rushing three easy ones — the test rewards steady pace, not heroics.</p></div></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ============================= ADAPTIVE ============================= -->
+<section class="block" id="adaptive">
+  <div class="wrap">
+    <div class="prose">
+      <p class="eyebrow">Bonus · The algorithm</p>
+      <h2>Adaptive Module Strategy</h2>
+      <p>The digital SAT adapts: Module 1 is a mix of difficulties; your performance routes you to an easier or harder Module 2. <strong>A harder Module 2 means access to the top score bands.</strong> Within each module, work the questions in order — each domain group runs easy→hard, and the early questions are your on-ramp.</p>
+      <ol class="proto">
+        <li><b class="ti">Module 1 is the gateway.</b> Take it seriously from question 1 — a strong Module 1 unlocks the harder, higher-ceiling Module 2. Don't "warm up" into the test.</li>
+        <li><b class="ti">Every question counts; none can be skipped strategically.</b> There is no penalty for wrong answers, so <strong>never leave a blank</strong> — guess on anything you're stuck on.</li>
+        <li><b class="ti">Budget ~71 seconds per question.</b> That's 32 minutes for 27 questions per module. If one question passes 2 minutes, flag it and move — easy questions later are worth just as much.</li>
+        <li><b class="ti">Use the tools.</b> Bluebook's highlight and annotation tools are free, and so is the built-in calculator for data questions. Cross out eliminated choices with the strikethrough tool — it makes Pattern 1's elimination discipline visual.</li>
+        <li><b class="ti">Don't get psyched out by difficulty.</b> If Module 2 feels harder, that's <em>good news</em> — it means Module 1 went well. Stay steady; the questions are worth more.</li>
+        <li><b class="ti">Trust the section's order.</b> Craft &amp; Structure → Information &amp; Ideas → grammar → Expression of Ideas. If grammar is your strength, bank those points fast and buy time for the harder reading questions.</li>
+      </ol>
+      <div class="bottomline">
+        <div class="bl-row"><span class="bl-label">One-line takeaway</span><div class="bl-text"><p>Crush Module 1 to unlock the hard Module 2, keep a 71-second pace, and never leave a question blank.</p></div></div>
+        <div class="bl-row"><span class="bl-label">Remember</span><div class="bl-text"><p>The only guaranteed zero on this test is a blank. The algorithm can't reward what you never answer.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= CHEAT SHEET ============================= -->
+<section class="block" id="cheatsheet">
+  <div class="wrap">
+    <div class="prose">
+      <p class="eyebrow">Review</p>
+      <h2>Cheat Sheet: All Nine Patterns</h2>
+      <p class="lede">One line each. Re-read this page the morning of the test — then go predict, eliminate, and keep moving.</p>
+    </div>
+    <ol class="cheat">
+      <li><span class="cnum">R1</span><div><span class="ct">The Wrong-Answer Taxonomy.</span> <span class="cd">Ask "how is this one wrong?" — then name it: true-but-off-question, half-right, extreme, beyond text.</span></div></li>
+      <li><span class="cnum">R2</span><div><span class="ct">Main Idea &amp; Purpose.</span> <span class="cd">The bucket must fit: big enough for the whole passage, no bigger.</span></div></li>
+      <li><span class="cnum">R3</span><div><span class="ct">Detail Retrieval.</span> <span class="cd">Look it up in the text; match the claim word by word; never answer from memory.</span></div></li>
+      <li><span class="cnum">R4</span><div><span class="ct">Inference.</span> <span class="cd">One small step past the text. Two steps = wrong.</span></div></li>
+      <li><span class="cnum">R5</span><div><span class="ct">Command of Evidence.</span> <span class="cd">Textual: match the exact claim. Data: true of the chart AND the passage — check both.</span></div></li>
+      <li><span class="cnum">R6</span><div><span class="ct">Words in Context.</span> <span class="cd">Thumb over the word; let the sentence's logic (contrast, cause, restatement) hand you the meaning.</span></div></li>
+      <li><span class="cnum">R7</span><div><span class="ct">Structure &amp; Function.</span> <span class="cd">Ignore what it says; name what it does. Watch for one-degree-too-strong verbs.</span></div></li>
+      <li><span class="cnum">R8</span><div><span class="ct">Cross-Text Connections.</span> <span class="cd">Stance each text in five words; name the relationship: agree, disagree, or qualify.</span></div></li>
+      <li><span class="cnum">R9</span><div><span class="ct">Strategy.</span> <span class="cd">Stem first, predict before peeking, eliminate with a named reason, 71-second pace, never blank.</span></div></li>
+      <li><span class="cnum">★</span><div><span class="ct">Adaptive.</span> <span class="cd">Crush Module 1 to unlock the hard Module 2.</span></div></li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><div class="prose" style="max-width:86ch">
+    <h2>Sources</h2>
+    <ul>
+      <li>College Board, "The Reading and Writing Section – SAT Suite" — section structure, passage length, domains, adaptive modules.</li>
+      <li>College Board K-12 Reporting Portal, "Reading and Writing Content Specifications" — approximate domain weights.</li>
+      <li>UWorld College Prep, SAT Reading and Writing Section Syllabus &amp; Format 2026 — 54 questions / 64 minutes, one question per passage.</li>
+      <li>Target Test Prep SAT Blog and The Test Advantage — question-type taxonomies, practice-test analyses.</li>
+      <li>Community SAT prep study guides — wrong-answer trap taxonomies.</li>
+    </ul>
+    <div class="note">
+      All example passages, questions, and answer choices in this guide are original compositions written in the style of the test — not reproduced from any official exam. Frequency characterizations beyond the official specs are approximate.
+    </div>
+    <a class="totop" href="#top">Back to top ↑</a>
+  </div></div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  /* ---------- quiz engine: tap an answer, get a verdict, open the breakdown ---------- */
+  document.querySelectorAll("[data-quiz]").forEach(function(quiz){
+    var choices = Array.prototype.slice.call(quiz.querySelectorAll(".choice"));
+    var verdict = quiz.querySelector(".verdict");
+    var toggle = quiz.querySelector(".breakdown-toggle");
+    var breakdown = quiz.querySelector(".breakdown");
+    if(!choices.length || !verdict) return;
+
+    choices.forEach(function(btn){
+      btn.addEventListener("click", function(){
+        if(quiz.getAttribute("data-done")==="1") return;
+        quiz.setAttribute("data-done","1");
+
+        var correctBtn = choices.filter(function(b){
+          return b.getAttribute("data-correct")==="true";
+        })[0];
+        var correctLetter = correctBtn.getAttribute("data-letter");
+        var isRight = (btn === correctBtn);
+
+        choices.forEach(function(b){
+          b.disabled = true;
+          if(b === correctBtn){ b.classList.add("is-correct"); }
+          else if(b !== btn){ b.classList.add("is-dim"); }
+        });
+        if(!isRight){ btn.classList.add("is-picked-wrong"); }
+
+        verdict.classList.add(isRight ? "ok" : "no");
+        verdict.innerHTML =
+          (isRight
+            ? "<strong>✓ Correct.</strong> "
+            : "<strong>✗ Not quite — the answer is " + correctLetter + ".</strong> ") +
+          escapeHtml(btn.getAttribute("data-why")) +
+          (toggle ? '<span class="vhint">Open the breakdown below to see every choice labeled.</span>' : "");
+        verdict.hidden = false;
+        if(toggle){ toggle.hidden = false; }
+      });
+    });
+
+    if(toggle && breakdown){
+      toggle.addEventListener("click", function(){
+        var open = toggle.getAttribute("aria-expanded")==="true";
+        toggle.setAttribute("aria-expanded", open ? "false" : "true");
+        breakdown.hidden = open;
+        if(!open && !window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+          breakdown.scrollIntoView({block:"nearest", behavior:"smooth"});
+        }
+      });
+    }
+  });
+
+  /* ---------- 71-second pacing timer ---------- */
+  var timerEl = document.getElementById("timer");
+  if(timerEl){
+    var label = timerEl.querySelector(".tlabel");
+    var ring = timerEl.querySelector(".ring-fg");
+    var startBtn = timerEl.querySelector('[data-t="start"]');
+    var pauseBtn = timerEl.querySelector('[data-t="pause"]');
+    var resetBtn = timerEl.querySelector('[data-t="reset"]');
+    var chips = Array.prototype.slice.call(timerEl.querySelectorAll(".tpreset"));
+    var CIRC = 2 * Math.PI * 54;
+    var total = 71, left = 71, endAt = 0, iv = null, running = false;
+
+    function fmt(s){
+      s = Math.max(0, Math.ceil(s));
+      var m = Math.floor(s/60), sec = s%60;
+      return (m<10?"0":"")+m + ":" + (sec<10?"0":"")+sec;
+    }
+    function paint(){
+      label.textContent = fmt(left);
+      ring.style.strokeDashoffset = (CIRC*(1 - Math.max(0,left)/total)).toFixed(1);
+      startBtn.disabled = running;
+      pauseBtn.disabled = !running;
+      resetBtn.disabled = (!running && Math.ceil(left)===total && !timerEl.classList.contains("done"));
+    }
+    function tick(){
+      left = Math.max(0, (endAt - Date.now())/1000);
+      if(left <= 0){ stop(true); }
+      else paint();
+    }
+    function start(){
+      if(running) return;
+      timerEl.classList.remove("done");
+      endAt = Date.now() + left*1000;
+      running = true;
+      iv = setInterval(tick, 200);
+      paint();
+    }
+    function stop(finished){
+      if(iv){ clearInterval(iv); iv = null; }
+      running = false;
+      if(finished){ left = 0; timerEl.classList.add("done"); }
+      paint();
+    }
+    startBtn.addEventListener("click", start);
+    pauseBtn.addEventListener("click", function(){ stop(false); });
+    resetBtn.addEventListener("click", function(){
+      stop(false);
+      timerEl.classList.remove("done");
+      left = total;
+      paint();
+    });
+    chips.forEach(function(ch){
+      ch.addEventListener("click", function(){
+        chips.forEach(function(c){ c.setAttribute("aria-pressed","false"); });
+        ch.setAttribute("aria-pressed","true");
+        stop(false);
+        timerEl.classList.remove("done");
+        total = parseInt(ch.getAttribute("data-secs"), 10);
+        left = total;
+        paint();
+      });
+    });
+    paint();
+  }
+
+  /* ---------- scroll progress ---------- */
+  var prog = document.getElementById("progress");
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    prog.style.width = (max>0 ? (h.scrollTop/max*100) : 0).toFixed(2) + "%";
+  }
+  document.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- active TOC link ---------- */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll("#patterns a"));
+  if("IntersectionObserver" in window && tocLinks.length){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = "#" + e.target.id;
+          tocLinks.forEach(function(a){
+            a.classList.toggle("active", a.getAttribute("href")===id);
+          });
+        }
+      });
+    }, {rootMargin:"-35% 0px -55% 0px"});
+    tocLinks.forEach(function(a){
+      var el = document.getElementById(a.getAttribute("href").slice(1));
+      if(el) obs.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>

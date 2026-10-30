@@ -1,0 +1,1674 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="An intuitive SAT Math crash course: the 22 recurring patterns on the digital SAT, each in plain words with worked examples, sketches, and the traps to dodge." />
+<link rel="icon" href="data:," />
+<title>SAT Math Crash Course — See the Patterns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&amp;family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..700&amp;display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#f7f5f1; --paper:#ffffff; --paper-soft:#efece4; --ink:#1d252a; --muted:#5d6870;
+    --line:#e2ddd0; --red:#b23723; --red-soft:#f9e9e3; --teal:#0d6b57; --teal-soft:#e3f1ea;
+    --gold:#8a6412; --gold-soft:#f7eeda;
+    --d1:#0d6b57; --d1s:#e1f0ea; --d2:#b23723; --d2s:#f9e7e0; --d3:#94640c; --d3s:#f7edd6; --d4:#2f5c8c; --d4s:#e7eef6;
+    --shadow:0 1px 2px rgba(29,37,42,.06), 0 10px 26px rgba(29,37,42,.07);
+    --r-lg:14px; --r-md:10px; --r-sm:6px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0f1519; --paper:#171f24; --paper-soft:#222c33; --ink:#f0ece2; --muted:#a6b1b6;
+      --line:#2a353c; --red:#e47a60; --red-soft:#39231e; --teal:#4fbd9a; --teal-soft:#133b30;
+      --gold:#d3ac4b; --gold-soft:#35301c;
+      --d1:#4fbd9a; --d1s:#133b30; --d2:#e47a60; --d2s:#39231e; --d3:#d3ac4b; --d3s:#35301c; --d4:#7ea3cc; --d4s:#1d2c40;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;color-scheme:light dark}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} *{transition:none !important; animation:none !important} }
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Atkinson Hyperlegible',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    font-size:1.02rem;line-height:1.62;-webkit-text-size-adjust:100%}
+  .wrap{max-width:920px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+  .skip{flex:none;font-size:.76rem;font-weight:700;color:var(--teal);text-decoration:none;border:1px solid var(--line);border-radius:99px;padding:4px 11px;background:var(--paper);white-space:nowrap}
+  .skip:hover{border-color:var(--teal)}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:4px}
+
+  /* progress */
+  .track{position:sticky;top:0;z-index:40;background:var(--paper);border-bottom:1px solid var(--line)}
+  .track-inner{max-width:920px;margin:0 auto;padding:8px clamp(16px,4vw,40px);display:flex;align-items:center;gap:12px}
+  .track .bar{flex:1;height:8px;border-radius:99px;background:var(--paper-soft);overflow:hidden}
+  .track .bar i{display:block;height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .3s ease}
+  .track .lbl{font-size:.78rem;color:var(--muted);white-space:nowrap}
+  .track .lbl b{color:var(--ink)}
+
+  h1,h2,h3,.serif{font-family:'Newsreader',Georgia,'Times New Roman',serif;letter-spacing:-.01em;line-height:1.2}
+  .eq,.math{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:1.08em;letter-spacing:.005em;white-space:nowrap}
+  .eq.mid{font-size:1.18em}
+  .frac{display:inline-flex;flex-direction:column;text-align:center;vertical-align:middle;margin:0 .1em;font-size:.88em;line-height:1.15}
+  .frac>span{padding:0 .25em}
+  .frac>span:first-child{border-bottom:1.5px solid currentColor}
+  sup,sub{font-size:.72em;line-height:0}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line);background:var(--paper)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:30px 30px;opacity:.35;
+    -webkit-mask-image:linear-gradient(to bottom,transparent,#000 26%,#000 70%,transparent);
+    mask-image:linear-gradient(to bottom,transparent,#000 26%,#000 70%,transparent)}
+  .hero .wrap{position:relative;padding-top:clamp(30px,5vw,58px);padding-bottom:clamp(30px,5vw,52px)}
+  .eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--d1)}
+  .hero h1{font-size:clamp(1.9rem,4.6vw,2.7rem);margin:.55rem 0 .8rem;font-weight:700}
+  .hero .lede{font-size:clamp(1.02rem,2vw,1.16rem);max-width:56ch;color:var(--ink)}
+  .hero .lede strong{color:var(--red)}
+  .hero .meta{margin-top:1rem;font-size:.88rem;color:var(--muted);max-width:62ch}
+
+  /* facts */
+  .facts{padding:clamp(24px,4vw,40px) 0}
+  .facts h2,.sec-title{font-size:1.5rem;margin:0 0 .3rem;font-weight:700}
+  .sec-sub{color:var(--muted);margin:0 0 1.4rem;font-size:.95rem}
+  .fact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:1.2rem}
+  @media(max-width:760px){.fact-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.fact-grid{grid-template-columns:1fr}}
+  .fact{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;box-shadow:var(--shadow)}
+  .fact b{display:block;font-family:'Newsreader',Georgia,serif;font-size:1.25rem;line-height:1.15;margin-bottom:2px}
+  .fact span{font-size:.85rem;color:var(--muted)}
+  .src-line{font-size:.82rem;color:var(--muted);margin-top:1rem}
+
+  /* weights */
+  .weights{padding:8px 0 clamp(24px,4vw,40px)}
+  .wrow{display:grid;grid-template-columns:minmax(150px,210px) 1fr auto;gap:12px;align-items:center;margin:10px 0;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:10px 14px;box-shadow:var(--shadow)}
+  .wrow .wn{font-weight:700;font-size:.95rem}
+  .wrow .wn small{display:block;font-weight:400;color:var(--muted);font-size:.78rem}
+  .wtrack{height:14px;border-radius:99px;background:var(--paper-soft);overflow:hidden}
+  .wfill{display:block;height:100%;border-radius:99px}
+  .wval{font-family:'Newsreader',Georgia,serif;font-weight:700;white-space:nowrap}
+  .callout{background:var(--gold-soft);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;margin-top:16px;font-size:.98rem}
+  .callout b{color:var(--gold)}
+
+  /* how to use */
+  .howto{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(18px,3vw,28px);box-shadow:var(--shadow);margin:0 0 6px}
+  .howto ol{margin:12px 0 0;padding-left:22px;display:grid;gap:10px}
+  .howto li{padding-left:4px}
+
+  /* controls / nav */
+  .controls{position:sticky;top:41px;z-index:30;background:var(--bg);padding-top:14px;margin-top:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .chip{text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:7px 14px;font-size:.86rem;font-weight:700;box-shadow:var(--shadow)}
+  .chip:hover{border-color:var(--teal)}
+  .chip i{display:inline-block;width:9px;height:9px;border-radius:99px;margin-right:7px}
+  .tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .tbtn{font:inherit;font-size:.84rem;font-weight:700;background:var(--paper-soft);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:7px 13px;cursor:pointer}
+  .tbtn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .tools .spacer{flex:1}
+
+  /* domains & patterns */
+  .domain{margin:34px 0 8px;scroll-margin-top:130px}
+  .dhead{display:flex;align-items:flex-end;gap:14px;border-bottom:3px solid var(--dc,#333);padding-bottom:10px;margin-bottom:18px}
+  .dhead .dnum{font-family:'Newsreader',Georgia,serif;font-size:2.4rem;font-weight:800;color:var(--dc);line-height:1}
+  .dhead h2{margin:0;font-size:1.55rem}
+  .dhead p{margin:2px 0 0;color:var(--muted);font-size:.92rem}
+  .d1{--dc:var(--d1);--dc-s:var(--d1s)} .d2{--dc:var(--d2);--dc-s:var(--d2s)} .d3{--dc:var(--d3);--dc-s:var(--d3s)} .d4{--dc:var(--d4);--dc-s:var(--d4s)}
+
+  .pattern{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);margin:0 0 14px;box-shadow:var(--shadow);overflow:hidden}
+  .pattern[hidden]{display:none}
+  .p-head{display:flex;align-items:stretch}
+  .p-toggle{flex:1;display:flex;gap:14px;align-items:center;text-align:left;background:none;border:0;padding:16px 8px 16px 18px;cursor:pointer;color:var(--ink);font:inherit;min-width:0}
+  .pnum{flex:none;width:44px;height:44px;border-radius:12px;background:var(--dc-s);color:var(--dc);display:flex;align-items:center;justify-content:center;font-family:'Newsreader',Georgia,serif;font-weight:800;font-size:1.3rem}
+  .ptitles{min-width:0}
+  .ptitles .pn{font-family:'Newsreader',Georgia,serif;font-weight:700;font-size:1.12rem;line-height:1.25}
+  .ptitles .prow{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;align-items:center}
+  .tag{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:99px}
+  .must{background:var(--dc);color:#fff}
+  @media (prefers-color-scheme: dark){.must{color:#0f1519}}
+  .nice{border:1.5px solid var(--dc);color:var(--dc)}
+  .chev{flex:none;align-self:center;margin-right:14px;width:10px;height:10px;border-right:2.5px solid var(--muted);border-bottom:2.5px solid var(--muted);transform:rotate(45deg);transition:transform .2s ease}
+  .pattern.open .chev{transform:rotate(-135deg)}
+  .p-seen{flex:none;align-self:center;margin-right:10px;font:inherit;font-size:.78rem;font-weight:700;border:1.5px solid var(--line);background:var(--paper);color:var(--muted);border-radius:99px;padding:6px 12px;cursor:pointer;white-space:nowrap}
+  .p-seen[aria-pressed="true"]{background:var(--teal-soft);border-color:var(--teal);color:var(--teal)}
+  .p-body{display:none;border-top:1px dashed var(--line);padding:clamp(16px,3vw,26px)}
+  .pattern.open .p-body{display:block}
+
+  .insight{background:var(--dc-s);border-radius:var(--r-md);padding:14px 18px;margin-bottom:18px}
+  .insight .k{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--dc);margin-bottom:6px}
+  .insight p{margin:.4em 0}
+  .insight p:last-child{margin-bottom:0}
+
+  .ex{border:1px solid var(--line);border-radius:var(--r-md);margin:0 0 12px;overflow:hidden}
+  .ex-top{display:flex;gap:12px;align-items:flex-start;padding:14px 16px 10px}
+  .diff{flex:none;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:99px;margin-top:2px}
+  .d-simple{background:var(--teal-soft);color:var(--teal)}
+  .d-mid{background:var(--gold-soft);color:var(--gold)}
+  .d-stretch{background:var(--red-soft);color:var(--red)}
+  .ex-q{flex:1;min-width:0}
+  .ex-q p{margin:0 0 8px}
+  .ex-foot{padding:0 16px 14px 66px}
+  .reveal{font:inherit;font-size:.85rem;font-weight:700;background:var(--paper-soft);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:7px 16px;cursor:pointer}
+  .reveal:hover{border-color:var(--teal)}
+  .walk{display:none;margin:0;padding:0}
+  .walk.open{display:block;border-top:1px dashed var(--line)}
+  .walk-inner{padding:14px 16px 16px 66px}
+  .walk .ans{font-weight:700;color:var(--teal);margin-bottom:8px}
+  .steps{margin:0;padding-left:20px;display:grid;gap:7px;font-size:.96rem}
+  .steps li::marker{color:var(--dc,var(--teal));font-weight:800}
+  .checkline{margin-top:10px;font-size:.88rem;color:var(--muted);border-left:3px solid var(--teal);padding-left:10px}
+
+  .sketch{margin:4px 0 18px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 12px 8px}
+  .sketch svg{display:block;width:100%;height:auto;max-height:340px}
+  .sketch figcaption{font-size:.82rem;color:var(--muted);padding:6px 4px 4px;text-align:center}
+  .sketch figcaption b{color:var(--ink)}
+
+  .takeaway{background:var(--teal-soft);border-radius:var(--r-md);padding:13px 18px;margin:18px 0 10px;font-size:.96rem}
+  .takeaway .k{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+  .trap{background:var(--red-soft);border-radius:var(--r-md);padding:13px 18px;margin:0;font-size:.96rem}
+  .trap .k{font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+
+  svg .ax{stroke:var(--muted);stroke-width:1.2}
+  svg .grid{stroke:var(--line);stroke-width:1}
+  svg .tick{stroke:var(--muted);stroke-width:1}
+  svg text{fill:var(--muted);font-family:'Atkinson Hyperlegible',sans-serif;font-size:11px}
+  svg .pt{fill:var(--dc,var(--teal));stroke:var(--paper);stroke-width:2}
+  svg .fn{fill:none;stroke-width:2.6;stroke-linecap:round}
+
+  /* strategy + roadmap */
+  .strategy{margin:36px 0 8px;scroll-margin-top:130px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(18px,3vw,30px);box-shadow:var(--shadow)}
+  .strat{display:grid;gap:14px;margin-top:16px}
+  .si{display:grid;grid-template-columns:42px 1fr;gap:12px;align-items:start}
+  .si-n{width:36px;height:36px;border-radius:99px;background:var(--paper-soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:'Newsreader',Georgia,serif;font-weight:800;font-size:1.1rem}
+  .si h3{margin:0 0 4px;font-size:1.06rem;font-family:inherit;font-weight:700}
+  .si p{margin:0;font-size:.95rem;color:var(--ink)}
+  .si p span.k{color:var(--muted)}
+
+  .roadmap{margin:36px 0 8px;scroll-margin-top:130px}
+  .road{display:grid;gap:10px;margin-top:16px}
+  .step{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--shadow)}
+  .step .sn{flex:none;font-family:'Newsreader',Georgia,serif;font-weight:800;font-size:1.35rem;color:var(--teal)}
+  .step h3{margin:0 0 2px;font-size:1.02rem;font-family:inherit;font-weight:700}
+  .step p{margin:0;font-size:.93rem;color:var(--muted)}
+  .step p b{color:var(--ink)}
+
+  footer{margin:44px 0 0;border-top:1px solid var(--line);padding:26px 0 60px;color:var(--muted);font-size:.86rem}
+  footer p{margin:.5em 0;max-width:70ch}
+
+  .tablebox{overflow-x:auto;margin:4px 0 18px}
+  table.dt{border-collapse:collapse;width:100%;background:var(--paper);font-size:.92rem}
+  table.dt caption{font-size:.82rem;color:var(--muted);padding:8px 4px 4px}
+  table.dt th,table.dt td{border:1px solid var(--line);padding:9px 12px;text-align:center}
+  table.dt th{background:var(--paper-soft)}
+  table.dt .hl{background:var(--dc-s)}
+  @media(max-width:560px){.ex-foot,.walk-inner{padding-left:16px}.p-seen .long{display:none}}
+
+  @media print{
+    .track,.controls,.p-seen,.reveal,.hero::before{display:none !important}
+    .p-body{display:block !important}
+    .walk{display:block !important}
+    .pattern{box-shadow:none;break-inside:avoid}
+    .hero{background:#fff;border-bottom:2px solid #000}
+    body{background:#fff}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+<div class="track"><div class="track-inner"><a class="skip" href="#guide">Skip to patterns ↓</a><div class="bar"><i id="bar"></i></div><div class="lbl"><b id="seenCount">0</b> / 22 patterns seen</div></div></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Digital SAT · Mathematics</div>
+    <h1>SAT Math Crash Course</h1>
+    <p class="lede">The SAT is a pattern test wearing a content costume. Below are the <strong>22 moves the test keeps repeating</strong> — each distilled to its intuition in plain words, with one simple example, one mid-range one, and one stretch one, plus the trap it likes to set. Learn each pattern until you can't unsee it; then grind reps on Khan Academy and Bluebook practice.</p>
+    <p class="meta">Built from the official College Board test structure (domain weights, module format, adaptive rules). Question shares are approximate — the test varies test to test.</p>
+  </div>
+</header>
+
+<main class="wrap" id="guide">
+
+  <!-- KNOW THE ARENA -->
+  <section class="facts" aria-labelledby="arena">
+    <h2 id="arena">Know the arena</h2>
+    <p class="sec-sub">The format itself is half the battle. These rules shape every decision you make on test day.</p>
+    <div class="fact-grid">
+      <div class="fact"><b>44 questions</b><span>over 70 minutes — about 95 seconds apiece</span></div>
+      <div class="fact"><b>2 modules of 22</b><span>separately timed; no returning once time's up</span></div>
+      <div class="fact"><b>Adaptive</b><span>overall Module 1 performance sets Module 2's difficulty — accuracy across the whole module</span></div>
+      <div class="fact"><b>≈75% / ≈25%</b><span>multiple choice vs. student-produced grid-ins</span></div>
+      <div class="fact"><b>≈30% in context</b><span>word problems — translation matters more than math</span></div>
+      <div class="fact"><b>Desmos built in</b><span>graphing + scientific calculator, plus a formula sheet</span></div>
+      <div class="fact"><b>No penalty</b><span>never leave a question blank — a blank is a guaranteed miss</span></div>
+      <div class="fact"><b>Grid-in rules</b><span>negatives allowed — don't forget the minus sign; fractions and decimals fine, no mixed numbers</span></div>
+    </div>
+    <p class="src-line">Test facts verified against College Board's Assessment Framework and the official Bluebook test directions.</p>
+  </section>
+
+  <!-- WHERE THE POINTS LIVE -->
+  <section class="weights" aria-labelledby="points">
+    <h2 id="points" class="sec-title">Where the points live</h2>
+    <p class="sec-sub">The four content domains, by official weight. The first two domains carry roughly 70% of the section.</p>
+    <div class="wrow">
+      <div class="wn d1">Algebra<small>Domain 1 · Patterns 1–4</small></div>
+      <div class="wtrack"><span class="wfill" style="width:35%;background:var(--d1)"></span></div>
+      <div class="wval">≈35% · 13–15 Q</div>
+    </div>
+    <div class="wrow">
+      <div class="wn d2">Advanced Math<small>Domain 2 · Patterns 5–10</small></div>
+      <div class="wtrack"><span class="wfill" style="width:35%;background:var(--d2)"></span></div>
+      <div class="wval">≈35% · 13–15 Q</div>
+    </div>
+    <div class="wrow">
+      <div class="wn d3">Problem-Solving &amp; Data<small>Domain 3 · Patterns 11–16</small></div>
+      <div class="wtrack"><span class="wfill" style="width:15%;background:var(--d3)"></span></div>
+      <div class="wval">≈15% · 5–7 Q</div>
+    </div>
+    <div class="wrow">
+      <div class="wn d4">Geometry &amp; Trig<small>Domain 4 · Patterns 17–22</small></div>
+      <div class="wtrack"><span class="wfill" style="width:15%;background:var(--d4)"></span></div>
+      <div class="wval">≈15% · 5–7 Q</div>
+    </div>
+    <div class="callout"><b>The priority map:</b> Algebra + Advanced Math carry ≈70% of the section. A student climbing from the 900s should spend roughly 70% of math study time on those two domains first.</div>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section class="howto" aria-labelledby="howto">
+    <h2 id="howto" class="sec-title" style="font-size:1.3rem">How to use this guide</h2>
+    <ol>
+      <li><b>Go in order.</b> Domains 1 → 4, <b>Must-know</b> patterns before <b>Nice-to-have</b> ones. Everything builds forward.</li>
+      <li><b>Cover before you check.</b> For each example, attempt the question with the walkthrough hidden — then reveal and compare reasoning. The gap between your attempt and the reveal is where learning lives.</li>
+      <li><b>Practice by pattern.</b> When you miss a practice question, don't ask "what did I miscalculate?" — ask <em>"which pattern did I fail to see?"</em> Then come back here and re-read it.</li>
+    </ol>
+  </section>
+
+  <div class="controls" role="region" aria-label="Navigation and filters">
+    <div class="chips">
+      <a class="chip" href="#d1"><i style="background:var(--d1)"></i>Algebra</a>
+      <a class="chip" href="#d2"><i style="background:var(--d2)"></i>Advanced Math</a>
+      <a class="chip" href="#d3"><i style="background:var(--d3)"></i>Problem-Solving &amp; Data</a>
+      <a class="chip" href="#d4"><i style="background:var(--d4)"></i>Geometry &amp; Trig</a>
+      <a class="chip" href="#strategy"><i style="background:var(--teal)"></i>Test-day strategy</a>
+    </div>
+    <div class="tools">
+      <button class="tbtn" id="filterMust" aria-pressed="false">Must-knows only</button>
+      <button class="tbtn" id="expandAll">Expand all</button>
+      <button class="tbtn" id="collapseAll">Collapse all</button>
+      <span class="spacer"></span>
+    </div>
+  </div>
+
+  <!-- ============ DOMAIN 1: ALGEBRA ============ -->
+  <section class="domain d1" id="d1" aria-labelledby="d1h">
+    <div class="dhead">
+      <div><div class="dnum">1</div></div>
+      <div><h2 id="d1h">Algebra</h2><p>≈35% of the test · Patterns 1–4 · The biggest lever — master these first</p></div>
+    </div>
+
+    <!-- PATTERN 1 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">1</span>
+          <span class="ptitles"><span class="pn">"y = mx + b" is two numbers with jobs</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Every linear equation is a <b>starting amount</b> plus a <b>rate</b>. In <span class="eq">y = mx + b</span>, the slope <span class="eq">m</span> is the rate — how fast <span class="eq">y</span> changes per unit of <span class="eq">x</span>. The intercept <span class="eq">b</span> is the starting value — what <span class="eq">y</span> is when <span class="eq">x = 0</span>, before anything happens. Once you see which number is "the rate" and which is "the head start," word problems turn into fill-in-the-blank.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p1"></div><figcaption><b>Slope and intercept, visually:</b> the intercept is where the line starts on the y-axis; the slope is the rise for every run of 1.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>A plumber charges a $45 service fee plus $60 per hour of work. The cost <span class="eq">C</span> for <span class="eq">h</span> hours is <span class="eq">C = 60h + 45</span>. What do the 60 and the 45 represent?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">45 = the flat fee (intercept); 60 = the hourly rate (slope).</div>
+            <ol class="steps">
+              <li>45 stands alone — it's the cost when <span class="eq">h = 0</span>: the fee charged before any work happens. That's <span class="eq">b</span>, the y-intercept.</li>
+              <li>60 multiplies the variable — it's the cost added per hour. That's <span class="eq">m</span>, the rate of change.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A phone plan charges a flat $25 activation fee plus $12 per GB of data. Write the equation for total cost <span class="eq">C</span> given <span class="eq">g</span> GB, and find the cost for 8 GB.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">C = 12g + 25; 8 GB costs $121.</div>
+            <ol class="steps">
+              <li>$25 is charged once, before any data — it's the starting value: <span class="eq">C = <b>?</b>g + 25</span>.</li>
+              <li>$12 multiplies each GB — it's the rate: <span class="eq">C = 12g + 25</span>.</li>
+              <li><span class="eq">C(8) = 12(8) + 25 = 96 + 25 = 121</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>The graph of a linear function <span class="eq">f</span> passes through <span class="eq">(3, 11)</span> and <span class="eq">(7, 27)</span>. What is <span class="eq">f(10)</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">f(10) = 39</div>
+            <ol class="steps">
+              <li>Slope <span class="eq">m</span> = (rise)/(run) = <span class="eq"><span class="frac"><span>27 − 11</span><span>7 − 3</span></span> = 4</span>. Every +1 in <span class="eq">x</span> adds 4 to <span class="eq">f</span>.</li>
+              <li>From <span class="eq">x = 7</span> to <span class="eq">x = 10</span> is +3 steps: <span class="eq">f(10) = 27 + 4(3) = 39</span>.</li>
+            </ol><p class="checkline">Check via the full equation: <span class="eq">b = 11 − 4(3) = −1</span>, so <span class="eq">f(x) = 4x − 1</span> and <span class="eq">f(10) = 40 − 1 = 39</span> ✓</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>In <span class="eq">y = mx + b</span>, <span class="eq">m</span> is the rate per unit and <span class="eq">b</span> is the value at zero. Every linear word problem is asking you to spot those two numbers.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"What does the 45 represent?" with the rate offered as a distractor. If a number <b>multiplies</b> the variable, it's the rate; if it <b>stands alone</b>, it's the starting value. Never mix them.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 2 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">2</span>
+          <span class="ptitles"><span class="pn">Parallel never meets; perpendicular flips and negates</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Slope is direction. Parallel lines walk the same direction → <b>identical slopes</b>. Perpendicular lines turn 90° → the slope becomes the <b>negative reciprocal</b> (flip the fraction, flip the sign). The SAT hides this in standard form <span class="eq">Ax + By = C</span>, where you must <b>solve for y first</b> to see the slope.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>What is the slope of a line perpendicular to <span class="eq">y = 2x + 5</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">−1/2</div>
+            <ol class="steps"><li>Slope is 2 = <span class="eq">2/1</span>. Flip → <span class="eq">1/2</span>; negate → <span class="eq">−1/2</span>.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Write the equation of a line parallel to <span class="eq">y = 3x − 2</span> that passes through the point <span class="eq">(1, 5)</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">y = 3x + 2</div>
+            <ol class="steps">
+              <li>Parallel → same slope: <span class="eq">m = 3</span>.</li>
+              <li>Through <span class="eq">(1, 5)</span>: <span class="eq">y − 5 = 3(x − 1)</span> → <span class="eq">y = 3x + 2</span>. (At <span class="eq">x = 1</span>: <span class="eq">y = 5</span> ✓)</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>Line <span class="eq">L</span> has equation <span class="eq">3x + 4y = 12</span>. A line perpendicular to <span class="eq">L</span> passes through <span class="eq">(2, 1)</span>. What is its y-intercept?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">−5/3</div>
+            <ol class="steps">
+              <li>Solve <span class="eq">L</span> for <span class="eq">y</span>: <span class="eq">4y = −3x + 12</span> → <span class="eq">y = −(3/4)x + 3</span>. Slope of <span class="eq">L</span> is <span class="eq">−3/4</span>.</li>
+              <li>Perpendicular slope = negative reciprocal = <span class="eq">4/3</span>.</li>
+              <li>Through <span class="eq">(2, 1)</span>: <span class="eq">y − 1 = (4/3)(x − 2)</span>. Set <span class="eq">x = 0</span>: <span class="eq">y = 1 + (4/3)(−2) = 1 − 8/3 = −5/3</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Parallel = same slope. Perpendicular = negative reciprocal (flip the fraction, flip the sign). In standard form, isolate <span class="eq">y</span> first.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Forgetting to flip the <b>sign</b> (perpendicular to −3/4 is <b>4/3</b>, not −4/3). And reading slope straight off <span class="eq">Ax + By = C</span> as if it were <span class="eq">m</span> — always solve for <span class="eq">y</span> first.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 3 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">3</span>
+          <span class="ptitles"><span class="pn">A system is just asking: where do the graphs meet?</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Two equations, two unknowns = two graphs. The solution <span class="eq">(x, y)</span> is the single point where they cross — the one point that makes <b>both</b> true. Solve by <b>elimination</b> (add/subtract to kill a variable) or <b>substitution</b>. And on the digital SAT, Desmos trivializes these: graph both, click the intersection.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p3"></div><figcaption><b>Two lines, one solution:</b> the ordered pair <span class="eq">(3, 1)</span> sits on both lines — it's the only point that satisfies both equations.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Solve: <span class="eq">2x + y = 7</span> and <span class="eq">x − y = 2</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x = 3, y = 1</div>
+            <ol class="steps">
+              <li>Add the equations: the <span class="eq">y</span>'s cancel → <span class="eq">3x = 9</span> → <span class="eq">x = 3</span>.</li>
+              <li>Plug back into <span class="eq">x − y = 2</span>: <span class="eq">3 − y = 2</span> → <span class="eq">y = 1</span>.</li>
+            </ol><p class="checkline">Check: <span class="eq">2(3) + 1 = 7</span> ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Solve by substitution: <span class="eq">y = 2x + 1</span> and <span class="eq">3x + y = 11</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x = 2, y = 5</div>
+            <ol class="steps">
+              <li>Substitute <span class="eq">y = 2x + 1</span> into the second: <span class="eq">3x + 2x + 1 = 11</span> → <span class="eq">5x = 10</span> → <span class="eq">x = 2</span>.</li>
+              <li>Then <span class="eq">y = 2(2) + 1 = 5</span>. (Check: <span class="eq">3(2) + 5 = 11</span> ✓)</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>For what value of <span class="eq">k</span> does this system have <b>NO</b> solution? <span class="eq">2x + 3y = 7</span> and <span class="eq">kx + 6y = 10</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">k = 4</div>
+            <ol class="steps">
+              <li>"No solution" = the lines never meet = <b>parallel</b> = same left side, different right side.</li>
+              <li><span class="eq">kx + 6y</span> must be a multiple of <span class="eq">2x + 3y</span>: comparing coefficients, <span class="eq">k/2 = 6/3</span> → <span class="eq">k/2 = 2</span> → <span class="eq">k = 4</span>.</li>
+              <li>Check: with <span class="eq">k = 4</span>, doubling the first gives <span class="eq">4x + 6y = 14 ≠ 10</span> → parallel and distinct → no solution ✓.</li>
+            </ol><p class="checkline">If the right side had also been 14, it'd be the <em>same line</em> → infinitely many solutions. Same left, different right = zero; same left, same right = infinite.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Solution = intersection point. No solution = parallel (same slope, different intercept). Infinite = same line. Read the <b>relationship</b> before you start solving.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"How many solutions?" questions punish anyone who starts grinding algebra first. Check the relationship between the equations — it takes five seconds.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 4 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">4</span>
+          <span class="ptitles"><span class="pn">"True for all x" is a secret instruction to plug in</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Most linear equations have exactly one solution. But sometimes the variable <b>cancels entirely</b>: you get either a true statement (<span class="eq">6 = 6</span> → <em>every</em> <span class="eq">x</span> works, infinitely many solutions) or a false one (<span class="eq">3 = 7</span> → <em>no</em> <span class="eq">x</span> works). The SAT loves these edge cases because they test whether you understand what an equation <em>means</em>. And when the test says an equation "is true for all <span class="eq">x</span>," you barely need algebra at all — pick any <span class="eq">x</span> (like 1 or 0) and plug it in.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>How many solutions does <span class="eq">3(2x − 4) = 5x + 7</span> have?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Exactly one: x = 19</div>
+            <ol class="steps"><li>Expand: <span class="eq">6x − 12 = 5x + 7</span> → <span class="eq">x = 19</span>.</li></ol><p class="checkline">The variable survives → one solution. Check: <span class="eq">3(38 − 4) = 102 = 5(19) + 7</span> ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>How many solutions does <span class="eq">4(x + 1) = 4x + 5</span> have?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">None</div>
+            <ol class="steps"><li>Expand: <span class="eq">4x + 4 = 4x + 5</span>. The <span class="eq">x</span>'s cancel → <span class="eq">4 = 5</span>, which is false.</li>
+            <li>False statement = no value of <span class="eq">x</span> works. <b>Zero solutions.</b></li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>For what value of <span class="eq">a</span> is <span class="eq">2(ax − 3) = 4x − 6</span> true for <b>all</b> values of <span class="eq">x</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">a = 2</div>
+            <ol class="steps">
+              <li>Expand: <span class="eq">2ax − 6 = 4x − 6</span>. For this to hold for <em>every</em> <span class="eq">x</span>, the <span class="eq">x</span>-coefficients must match: <span class="eq">2a = 4</span> → <span class="eq">a = 2</span>. (The <span class="eq">−6 = −6</span> already matches.)</li>
+              <li>Shortcut check: plug <span class="eq">x = 1</span> with <span class="eq">a = 2</span>: <span class="eq">2(2 − 3) = −2</span>; <span class="eq">4 − 6 = −2</span> ✓</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Variable cancels → look at what's left: true statement = infinite solutions, false = none. "True for all <span class="eq">x</span>" → just plug in a number.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Distributing wrong — e.g. turning <span class="eq">2(ax − 3)</span> into <span class="eq">2ax − 3</span>. Slow down on the expansion step; that's where these are won or lost.</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ DOMAIN 2: ADVANCED MATH ============ -->
+  <section class="domain d2" id="d2" aria-labelledby="d2h">
+    <div class="dhead">
+      <div><div class="dnum">2</div></div>
+      <div><h2 id="d2h">Advanced Math</h2><p>≈35% of the test · Patterns 5–10 · Where 700 becomes 800</p></div>
+    </div>
+
+    <!-- PATTERN 5 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">5</span>
+          <span class="ptitles"><span class="pn">Quadratics wear three costumes</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Every quadratic is the same parabola dressed three ways, and each costume <b>gives away</b> a different secret for free: <b>factored form</b> <span class="eq">y = a(x − r₁)(x − r₂)</span> → the x-intercepts (roots) are <span class="eq">r₁</span> and <span class="eq">r₂</span>; <b>vertex form</b> <span class="eq">y = a(x − h)² + k</span> → the vertex (max/min point) is <span class="eq">(h, k)</span>; <b>standard form</b> <span class="eq">y = ax² + bx + c</span> → the y-intercept is <span class="eq">c</span>. Bonus truths: the axis of symmetry is <span class="eq">x = (r₁ + r₂)/2</span> (midpoint of the roots); cup ∪ = <span class="eq">a &gt; 0</span>, cap ∩ = <span class="eq">a &lt; 0</span>. Every hard quadratic question is just asking you to <b>change costumes</b>.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p5"></div><figcaption><b>The cup/cap rule:</b> <span class="eq">a &gt; 0</span> opens up (cup — vertex is the <b>minimum</b>); <span class="eq">a &lt; 0</span> opens down (cap — vertex is the <b>maximum</b>).</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>For <span class="eq">f(x) = (x − 3)(x + 5)</span>, find the vertex.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Vertex: (−1, −16) — a minimum</div>
+            <ol class="steps">
+              <li>Factored form → roots at <span class="eq">x = 3</span> and <span class="eq">x = −5</span>.</li>
+              <li>Axis of symmetry = midpoint = <span class="eq">(3 + (−5))/2 = −1</span>.</li>
+              <li>Plug in: <span class="eq">f(−1) = (−4)(4) = −16</span>. Opens upward (<span class="eq">a = 1 &gt; 0</span>), so this is the <b>minimum</b> ✓</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A ball's height after <span class="eq">t</span> seconds is <span class="eq">h(t) = −16t² + 64t + 5</span>. What is the maximum height?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">69 feet</div>
+            <ol class="steps">
+              <li><span class="eq">a = −16 &lt; 0</span> → cap shape → the vertex is the <b>maximum</b>.</li>
+              <li>Vertex <span class="eq">t</span>-value: <span class="eq">t = −b/(2a) = −64/(2·(−16)) = 2</span>.</li>
+              <li><span class="eq">h(2) = −16(4) + 64(2) + 5 = −64 + 128 + 5 = 69</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>The line <span class="eq">2y = 4.5</span> intersects the parabola <span class="eq">y = −4x² + bx</span>, where <span class="eq">b</span> is a positive constant, at <b>exactly one point</b>. What is <span class="eq">b</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">b = 6</div>
+            <ol class="steps">
+              <li>Line: <span class="eq">y = 2.25</span>. Substitute: <span class="eq">2.25 = −4x² + bx</span> → <span class="eq">4x² − bx + 2.25 = 0</span>.</li>
+              <li>"Exactly one intersection" = the quadratic has exactly one solution = <b>discriminant equals zero</b>.</li>
+              <li><span class="eq">b² − 4(4)(2.25) = 0</span> → <span class="eq">b² = 36</span> → <span class="eq">b = ±6</span>. Since <span class="eq">b</span> is positive: <b>6</b>.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Factored → roots. Vertex form → max/min. Standard → y-intercept. Cup ∪ = positive, cap ∩ = negative. Hard questions = translate between costumes.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"Exactly one point/solution" is code for <b>discriminant = 0</b> (see Pattern 6). Also: ± — always read whether the constant is specified positive or negative.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 6 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">6</span>
+          <span class="ptitles"><span class="pn">The discriminant is the lie detector</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>For <span class="eq">ax² + bx + c = 0</span>, the number <span class="eq">b² − 4ac</span> interrogates the equation and reports back: <b>positive</b> = two distinct real solutions (parabola crosses the x-axis twice), <b>zero</b> = exactly one (touches once), <b>negative</b> = none (floats entirely above or below). You never need the full quadratic formula to answer "how many solutions?" — just the lie detector.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>How many real solutions does <span class="eq">x² − 5x + 6 = 0</span> have?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Two real solutions</div>
+            <ol class="steps"><li><span class="eq">b² − 4ac = 25 − 24 = 1 &gt; 0</span> → two real solutions. (Indeed <span class="eq">x = 2, 3</span> ✓)</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>For what value of <span class="eq">k</span> does <span class="eq">x² − 6x + k = 0</span> have exactly one real solution?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">k = 9</div>
+            <ol class="steps">
+              <li>"Exactly one" → discriminant <span class="eq">= 0</span>: <span class="eq">36 − 4k = 0</span> → <span class="eq">k = 9</span>.</li>
+              <li>Check: <span class="eq">x² − 6x + 9 = (x − 3)² = 0</span> → one repeated root, <span class="eq">x = 3</span> ✓</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>For how many integer values of <span class="eq">k</span> does <span class="eq">x² + kx + 9 = 0</span> have <b>NO</b> real solutions?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">11 integer values</div>
+            <ol class="steps">
+              <li>No real solutions → discriminant <span class="eq">&lt; 0</span>: <span class="eq">k² − 4(1)(9) &lt; 0</span> → <span class="eq">k² &lt; 36</span> → <span class="eq">−6 &lt; k &lt; 6</span>.</li>
+              <li>Integers strictly between −6 and 6: <span class="eq">−5, −4, …, 5</span> → <b>11 values</b>.</li>
+            </ol><p class="checkline">At <span class="eq">k = ±6</span> the discriminant is 0 → exactly one solution — so the inequality is <em>strict</em>. That's the whole question.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div><span class="eq">b² − 4ac &gt; 0</span> → two solutions; <span class="eq">= 0</span> → one; <span class="eq">&lt; 0</span> → none. "Exactly one" vs "none" = non-strict vs strict inequality.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Sign errors in <span class="eq">−4ac</span> (especially when <span class="eq">c</span> is negative), and forgetting that "no real solutions" <b>excludes</b> the discriminant = 0 case.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 7 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">7</span>
+          <span class="ptitles"><span class="pn">Linear adds, exponential multiplies</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>The single most tested idea in this domain: a <b>linear</b> function <b>adds</b> the same amount each step (constant <b>difference</b>); an <b>exponential</b> function <b>multiplies</b> by the same factor each step (constant <b>ratio</b>). Given a table, check differences first, then ratios — the answer announces itself. In formulas: linear is <span class="eq">y = mx + b</span>, exponential is <span class="eq">y = abˣ</span> (or <span class="eq">a(1 + r)ˣ</span> for growth rate <span class="eq">r</span>). Percent growth is multiplication in disguise: "grows by 7% per year" = ×1.07 each year.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p7"></div><figcaption><b>Spot the growth type:</b> linear climbs the <b>same step</b> each time (+5); exponential climbs by the <b>same factor</b> each time (×2) — watch it explode.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p><span class="eq">x</span>: 0, 1, 2, 3 → <span class="eq">y</span>: 5, 10, 20, 40. Linear or exponential?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Exponential: y = 5(2ˣ)</div>
+            <ol class="steps">
+              <li>Differences: 5, 10, 20 — not constant. Not linear.</li>
+              <li>Ratios: <span class="eq">10/5 = 2</span>, <span class="eq">20/10 = 2</span>, <span class="eq">40/20 = 2</span> — constant! Exponential with factor 2, starting at 5.</li>
+            </ol><p class="checkline">Check: <span class="eq">5·2³ = 40</span> ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A savings account earns 5% interest per year, compounded annually. You deposit $1,000. Write the balance function for <span class="eq">t</span> years, and find the balance after 3 years.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">B(t) = 1000(1.05)ᵗ; after 3 years: $1,157.63</div>
+            <ol class="steps">
+              <li>"Grows by 5% per year" = multiply by <span class="eq">1 + 0.05 = 1.05</span> each year → <span class="eq">B(t) = 1000(1.05)ᵗ</span>.</li>
+              <li><span class="eq">B(3) = 1000(1.05)³ = 1000(1.157625)</span> = $1,157.63.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A bacteria culture starts at 200 cells and <b>triples</b> every hour. After how many hours will it reach 48,600 cells?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">5 hours</div>
+            <ol class="steps">
+              <li><span class="eq">200 · 3ᵗ = 48{,}600</span> → <span class="eq">3ᵗ = 243</span>.</li>
+              <li><span class="eq">243 = 3⁵</span> → <span class="eq">t = 5</span> hours.</li>
+            </ol><p class="checkline">"Triples" = ×3 (it <em>grows by</em> 200%, <em>grows to</em> 300% — same thing). "Increases by 300%" would be ×4. Percent language is the trap, not the math.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Table → check differences, then ratios. "Grows by <span class="eq">r</span>%" = multiply by <span class="eq">(1 + r)</span>. "Triples" = ×3, not ×2.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"Increased by 150%" means ×2.5, not ×1.5. And "doubles every day" from a day-1 value <span class="eq">V</span> means day <span class="eq">d</span> has <span class="eq">V·2ᵈ⁻¹</span> — off-by-one errors on the exponent are the classic distractor.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 8 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">8</span>
+          <span class="ptitles"><span class="pn">Exponents have five moves — learn them, and expressions surrender</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Every exponent question is built from five moves: <b>(1)</b> <span class="eq">xᵃ·xᵇ = xᵃ⁺ᵇ</span>, <b>(2)</b> <span class="eq">xᵃ / xᵇ = xᵃ⁻ᵇ</span>, <b>(3)</b> <span class="eq">(xᵃ)ᵇ = xᵃᵇ</span>, <b>(4)</b> <span class="eq">x⁻ᵃ = 1/xᵃ</span>, <b>(5)</b> <span class="eq">xᵃᐟᵇ = ᵇ√(xᵃ)</span> — fractional exponent means <em>root</em>. The hard ones just ask you to rewrite everything with the <b>same base</b> (usually 2, 3, or 10) — then it's arithmetic.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Simplify <span class="eq">(2x³)² · x⁻¹</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">4x⁵</div>
+            <ol class="steps">
+              <li><span class="eq">(2x³)² = 4x⁶</span> (move 3: power of a power multiplies exponents; don't forget the 2!).</li>
+              <li><span class="eq">4x⁶ · x⁻¹ = 4x⁶⁻¹ = 4x⁵</span> (moves 1 + 4).</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Simplify <span class="eq">(3x⁴)² / x³</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">9x⁵</div>
+            <ol class="steps">
+              <li>Expand the power: <span class="eq">(3x⁴)² = 9x⁸</span>.</li>
+              <li>Divide same bases → subtract exponents: <span class="eq">9x⁸ / x³ = 9x⁵</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>Which expression is equivalent to <span class="eq">8²ˣ / 4ˣ</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">2⁴ˣ (equivalently 16ˣ)</div>
+            <ol class="steps">
+              <li>Same base (2): <span class="eq">8²ˣ = (2³)²ˣ = 2⁶ˣ</span>; <span class="eq">4ˣ = (2²)ˣ = 2²ˣ</span>.</li>
+              <li><span class="eq">2⁶ˣ / 2²ˣ = 2⁶ˣ⁻²ˣ = 2⁴ˣ = 16ˣ</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Five moves; when stuck, rewrite everything as powers of the same small base (2, 3, 10) — then subtract/add exponents.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div><span class="eq">(x + y)²</span> is <b>not</b> <span class="eq">x² + y²</span>. Exponents distribute over multiplication, never over addition. Also: <span class="eq">xᵃ + xᵇ</span> does <b>not</b> combine — only multiplication/division of same bases.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 9 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">9</span>
+          <span class="ptitles"><span class="pn">Equivalent expressions: it's always factoring</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>"Which expression is equivalent?" really means: <em>can you see through the disguise?</em> The disguises are always the same: <b>FOIL</b> it out, or <b>factor</b> it back — especially <b>difference of squares</b> <span class="eq">a² − b² = (a−b)(a+b)</span>, perfect squares, and plain GCF. Always factor out the <b>greatest common factor first</b>; it makes everything smaller and the pattern visible.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Factor <span class="eq">x² − 9</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">(x − 3)(x + 3)</div>
+            <ol class="steps"><li>Difference of squares: <span class="eq">x² − 3² = (x − 3)(x + 3)</span>.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Which expression is equivalent to <span class="eq">2x(x + 5) − (x + 5)(x − 3)</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x² + 8x + 15</div>
+            <ol class="steps">
+              <li>FOIL both: <span class="eq">2x² + 10x − (x² − 3x + 5x − 15)</span>.</li>
+              <li>Distribute the minus: <span class="eq">2x² + 10x − x² − 2x + 15 = x² + 8x + 15</span>.</li>
+            </ol><p class="checkline">Verify quickly: at <span class="eq">x = 1</span>, original = <span class="eq">2(1)(6) − (6)(−2) = 24</span>; answer = <span class="eq">1 + 8 + 15 = 24</span> ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>The equation <span class="eq">(x + 2)(x − 5) = ax² + bx + c</span> is true for all <span class="eq">x</span>, where <span class="eq">a, b, c</span> are constants. What is <span class="eq">a + b + c</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">−12</div>
+            <ol class="steps">
+              <li>Expand: <span class="eq">x² − 5x + 2x − 10 = x² − 3x − 10</span> → <span class="eq">a = 1, b = −3, c = −10</span>.</li>
+              <li><span class="eq">a + b + c = 1 − 3 − 10 = −12</span>.</li>
+            </ol><p class="checkline">Speed-run: "true for all <span class="eq">x</span>" → plug in <span class="eq">x = 1</span>: <span class="eq">(3)(−4) = −12 = a + b + c</span>. Ten seconds.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Equivalent = FOIL out or factor back; GCF first. "True for all <span class="eq">x</span>" → plug in <span class="eq">x = 1</span> (or 0).</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Sign errors when FOILing (the <span class="eq">−5x + 2x</span> step), and doing full algebra when the plug-in shortcut exists.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 10 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">10</span>
+          <span class="ptitles"><span class="pn">Square both sides — then interrogate your answers</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>To kill a square root, square both sides; to kill a denominator, multiply through. But both moves are <b>one-way doors</b>: squaring can create <b>extraneous solutions</b> — phantom answers that satisfy the squared equation but not the original. So the pattern is always two steps: <b>solve</b>, then <b>check every answer in the original equation</b>. The SAT deliberately includes the extraneous value as an answer choice.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Solve <span class="eq">√(2x + 6) = 4</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x = 5</div>
+            <ol class="steps">
+              <li>Square: <span class="eq">2x + 6 = 16</span> → <span class="eq">2x = 10</span> → <span class="eq">x = 5</span>.</li>
+              <li>Check: <span class="eq">√16 = 4</span> ✓.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Solve <span class="eq">√x = x − 6</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x = 9 only (x = 4 is extraneous)</div>
+            <ol class="steps">
+              <li>Square: <span class="eq">x = x² − 12x + 36</span> → <span class="eq">x² − 13x + 36 = 0</span> → <span class="eq">(x − 9)(x − 4) = 0</span> → <span class="eq">x = 9</span> or <span class="eq">x = 4</span>.</li>
+              <li>Interrogate in the original: <span class="eq">x = 9</span> → <span class="eq">3 = 9 − 6</span> ✓. <span class="eq">x = 4</span> → <span class="eq">2 = 4 − 6 = −2</span> ✗ — phantom, kill it.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>What is the solution to <span class="eq">√(x + 5) = x − 1</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">x = 4 only</div>
+            <ol class="steps">
+              <li>Square: <span class="eq">x + 5 = (x − 1)² = x² − 2x + 1</span> → <span class="eq">x² − 3x − 4 = 0</span> → <span class="eq">(x − 4)(x + 1) = 0</span> → <span class="eq">x = 4</span> or <span class="eq">x = −1</span>.</li>
+              <li>Interrogate: <span class="eq">x = 4</span> → <span class="eq">√9 = 3 = 4 − 1</span> ✓. <span class="eq">x = −1</span> → <span class="eq">√4 = 2 ≠ −2</span> ✗ — extraneous, kill it.</li>
+            </ol><p class="checkline">−1 will absolutely be sitting there as choice B. That's why you check.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>After squaring or clearing denominators, plug each candidate back into the <b>original</b> equation. The fake answer is always one of the choices.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Stopping after solving. The check isn't optional — <b>it is the question</b>.</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ DOMAIN 3: PROBLEM-SOLVING & DATA ============ -->
+  <section class="domain d3" id="d3" aria-labelledby="d3h">
+    <div class="dhead">
+      <div><div class="dnum">3</div></div>
+      <div><h2 id="d3h">Problem-Solving &amp; Data Analysis</h2><p>≈15% of the test · Patterns 11–16 · Easy points, if you read carefully</p></div>
+    </div>
+
+    <!-- PATTERN 11 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">11</span>
+          <span class="ptitles"><span class="pn">"Of" means multiply; percent change is (new − old)/old</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Two formulas run this whole pattern family: "<span class="eq">p</span>% <b>of</b> <span class="eq">N</span>" = <span class="eq">(p/100)·N</span> (of = ×), and <b>percent change</b> = <span class="eq">(new − old)/old × 100%</span>. The SAT's favorite trick is <b>successive</b> percent changes: a 20% increase followed by a 20% decrease does <b>not</b> return to the start — percents multiply, they don't add.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>A $40 shirt is marked up to $50. What is the percent increase?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">25%</div>
+            <ol class="steps"><li><span class="eq">(50 − 40)/40 = 10/40 = 0.25 = 25%</span>. Old price is the denominator, always.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A value increases by 25% to reach 150. What was the original value?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">120</div>
+            <ol class="steps">
+              <li>Let the original be <span class="eq">x</span>: a 25% increase means you now have 125% of <span class="eq">x</span>: <span class="eq">1.25x = 150</span>.</li>
+              <li><span class="eq">x = 150/1.25 = 120</span>. (Check: <span class="eq">120 × 1.25 = 150</span> ✓)</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A store raises all prices by 20%, then applies a 20%-off coupon. What does a $100 item cost now?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">$96 — not $100</div>
+            <ol class="steps">
+              <li><span class="eq">100 × 1.20 = 120</span>; then <span class="eq">120 × 0.80 = 96</span>.</li>
+              <li>The second 20% is taken <b>off the bigger number</b>. General truth: <span class="eq">×1.2 × 0.8 = ×0.96</span>. Stacked percents multiply.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Percent change = (new − old)/old. Successive changes multiply — never add or cancel them.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"Increased by 200%" = ×3 (you keep the original 100% and add 200%). Distractors always include the ×2 answer.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 12 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">12</span>
+          <span class="ptitles"><span class="pn">Ratios are recipes — scale everything together</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>A ratio is a <b>recipe</b>: 3 cups flour : 2 cups sugar works at any scale as long as you multiply <b>everything</b> by the same number. Unit conversion is the same idea — multiply by a clever form of 1 (like <span class="eq">5280 ft / 1 mi</span>) so the unwanted units cancel. If the units don't cancel to what you want, you set the fraction upside down.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>A recipe uses 3 cups of flour for every 2 cups of sugar. With 9 cups of flour, how much sugar?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">6 cups</div>
+            <ol class="steps"><li>9 is <span class="eq">3 × 3</span>, so scale everything by 3: <span class="eq">2 × 3 = 6</span>.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>The ratio of boys to girls in a class is 5:4, and there are 27 students total. How many boys?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">15 boys</div>
+            <ol class="steps"><li>5 + 4 = 9 "parts"; <span class="eq">27/9 = 3</span> students per part.</li>
+              <li>Boys: <span class="eq">5 × 3 = 15</span>. (Girls: <span class="eq">4 × 3 = 12</span>; <span class="eq">15 + 12 = 27</span> ✓)</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A car travels at 60 miles per hour. What is its speed in feet per second?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">88 ft/s</div>
+            <ol class="steps">
+              <li><span class="eq">60 mi/hr × (5280 ft / 1 mi) × (1 hr / 3600 s)</span>.</li>
+              <li><span class="eq">= (60 × 5280)/3600 = 316800/3600 = 88</span>.</li>
+            </ol><p class="checkline">The units guide you: miles cancel, hours cancel, feet/second remain. If they don't, flip the fraction.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Scale every part of a ratio by the same factor. Convert units by multiplying by fractions equal to 1 — let unit-cancellation check your work.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Inverting the conversion (getting 0.011 instead of 88). Always write the units and watch them cancel.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 13 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">13</span>
+          <span class="ptitles"><span class="pn">The mean gets bullied; the median doesn't</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>The <b>mean</b> is the balancing point — every value pulls on it, so one huge outlier drags it hard. The <b>median</b> is the middle value — outliers barely touch it. So: add or remove a very large value → mean moves a lot, median barely moves. The SAT asks this <b>qualitatively</b> ("what happens to the mean and median if…") more often than it asks you to compute.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p13"></div><figcaption><b>One outlier walks in:</b> the mean gets dragged from 6 to 29.5 while the median barely budges (6 → 7). The mean gets bullied; the median shrugs.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Data: 4, 6, 8. Mean = 6, median = 6. Now add an outlier, 100 → 4, 6, 8, 100. What happens to the mean and the median?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Mean: 6 → 29.5 (bullied). Median: 6 → 7 (unfazed).</div>
+            <ol class="steps">
+              <li>New mean = <span class="eq">118/4 = 29.5</span> — dragged way up by 100.</li>
+              <li>New median = middle of 4 numbers = <span class="eq">(6 + 8)/2 = 7</span> — barely moved.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Data set {10, 11, 12, 13, 100} has mean 29.2 and median 12. If the outlier 100 is removed, what happens to each?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Mean: 29.2 → 11.5. Median: 12 → 11.5.</div>
+            <ol class="steps">
+              <li>Without the outlier: mean = <span class="eq">46/4 = 11.5</span> — dropped by 17.7.</li>
+              <li>Median = <span class="eq">(11 + 12)/2 = 11.5</span> — dropped by only 0.5. The median resisted.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>Ten students average 80 on a test. An 11th student scores 100. What's the new mean?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">≈ 81.8</div>
+            <ol class="steps"><li>Don't re-average from scratch — use <b>totals</b>: <span class="eq">10 × 80 = 800</span> points; <span class="eq">+100 = 900</span>; <span class="eq">900/11 ≈ 81.8</span>.</li></ol><p class="checkline">Totals-first is the speed move for every "adding a value" question.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Outliers yank the mean, not the median — the median is the <b>resistant</b> one. For "new mean after adding" questions, work with totals, not the average.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Answer choices that move the median as much as the mean. If the change is an extreme value, the median is the resistant one — that's the vocabulary the test uses.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 14 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">14</span>
+          <span class="ptitles"><span class="pn">Standard deviation is just spread-out-ness</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>You will <b>never compute</b> a standard deviation on the SAT — you only need the <em>idea</em>: SD measures how <b>spread out</b> data is around the mean. Tight cluster → small SD; values scattered far and wide → large SD. Same mean, different SD = same center, different spread. <b>Margin of error</b> is the pollster's version: "52% ± 3%" means the truth is plausibly anywhere in 49–53%. Bigger sample → smaller margin of error → more precise.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Two datasets both have mean 50. A: {48, 49, 51, 52}. B: {10, 40, 60, 90}. Which has the greater standard deviation?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">B</div>
+            <ol class="steps"><li><b>B</b> — its values sprawl far from 50; A's huddle near it. No calculation needed: spread, not center.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Team A scores {70, 70, 70, 70}; Team B scores {50, 60, 80, 90}. Compare their means and their standard deviations.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Equal means (70); B has the greater SD</div>
+            <ol class="steps">
+              <li>Both means are 70 — check: <span class="eq">(50 + 60 + 80 + 90)/4 = 280/4 = 70</span>. Same center.</li>
+              <li>A has zero spread (SD = 0); B's values spread widely. <b>Same mean, different spread</b> — SD says nothing about the center.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A poll of 1,000 voters finds 52% support for a candidate, margin of error ±3%. Which conclusion is valid: "The candidate definitely has majority support" or "Support is plausibly between 49% and 55%"?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">"Support is plausibly between 49% and 55%"</div>
+            <ol class="steps">
+              <li>Plausible true support: <span class="eq">52% ± 3%</span> → 49% to 55%.</li>
+              <li>"Definitely has majority support" is <b>invalid</b> — 49% (below half) is inside the range. Margin of error defines a <em>range of plausibility</em>, not a guarantee.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>SD = spread; compare visually, never compute. Margin of error = plausible range; larger samples shrink it.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Treating "52% ± 3%" as "exactly 52%." Also: a bigger margin of error means <em>less</em> precision, not a different result.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 15 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">15</span>
+          <span class="ptitles"><span class="pn">Two-way tables: read the RIGHT row</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>A two-way table is just sorted counting. <b>Conditional probability</b> ("given that…") means: <em>throw away everyone who doesn't satisfy the condition</em>, then compute the fraction within who's left. The #1 error is dividing by the grand total instead of the subgroup total.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>60 students surveyed:
+          <span class="tablebox"><table class="dt"><caption>Students who play sports, by gender</caption>
+          <tr><th></th><th>Plays sports</th><th>Doesn't</th><th>Total</th></tr>
+          <tr><th>Boys</th><td>25</td><td>15</td><td>40</td></tr>
+          <tr><th>Girls</th><td>12</td><td>8</td><td>20</td></tr>
+          <tr><th>Total</th><td>37</td><td>23</td><td>60</td></tr></table></span>
+          Given that a student plays sports, what's the probability they're a girl?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">12/37</div>
+            <ol class="steps">
+              <li>Condition = "plays sports" → restrict to the 37 sports players. Girls among them: 12.</li>
+              <li>P = <span class="eq">12/37</span> (<b>not</b> <span class="eq">12/60</span> — the condition shrank your world to 37 people).</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>200 voters surveyed: 120 support candidate X; of those 120, 80 are under 40. Of the 80 who don't support X, 50 are 40 or older. Given that a voter is under 40, what's the probability they support X?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">8/11</div>
+            <ol class="steps">
+              <li>Build the under-40 group: 80 supporters under 40 + (80 − 50 = 30) non-supporters under 40 = 110 voters.</li>
+              <li>P = <span class="eq">80/110 = 8/11</span>. The denominator is the <em>given</em> group — 110, not 200.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>Using the table from the Simple example: (a) What fraction of <em>girls</em> play sports? (b) What fraction of <em>sports players</em> are girls? Why do they differ?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">(a) 3/5 &nbsp; (b) 12/37 — because the denominators differ</div>
+            <ol class="steps">
+              <li>(a) Condition = girl → <span class="eq">12/20 = 3/5</span>.</li>
+              <li>(b) Condition = plays sports → <span class="eq">12/37</span>.</li>
+              <li>They differ because the <b>denominator</b> — the "given" group — changed. P(A given B) ≠ P(B given A). The test baits you with one when it asked for the other.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>"Given X" → denominator = the X subgroup only. P(A|B) and P(B|A) are different questions with different denominators.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>The grand total. Every two-way table question includes a tempting choice with the total as denominator.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 16 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">16</span>
+          <span class="ptitles"><span class="pn">The line is the trend; the points are the noise</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>On a scatterplot, the <b>line of best fit</b> captures the overall trend; individual points wobble around it. Its <b>slope</b> = predicted change in <span class="eq">y</span> per unit of <span class="eq">x</span>; its <b>y-intercept</b> = predicted <span class="eq">y</span> when <span class="eq">x = 0</span>. Predictions <b>inside</b> the data's range (interpolation) are trustworthy; predictions far <b>outside</b> it (extrapolation) are guesses dressed as math.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p16"></div><figcaption><b>Trust the wobbles, not the wish:</b> the best-fit line describes study hours 0–10. Predictions inside that band are fine; extending the line far beyond is extrapolation — a guess.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>A line of best fit for (study hours, test score) is <span class="eq">y = 2.5x + 60</span>. Interpret the slope and intercept.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Slope: +2.5 points per hour. Intercept: 60 points at zero hours.</div>
+            <ol class="steps">
+              <li>Slope 2.5: each additional study hour predicts a <b>2.5-point</b> score increase.</li>
+              <li>Intercept 60: zero hours predicts a score of 60.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>For (temperature °F, ice cream sales $), a line of best fit has slope 12 and y-intercept 40. (a) Interpret the slope. (b) Predict sales at 90°F. (c) The data covers 60–85°F — is the prediction trustworthy?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">(a) $12 more sales per degree (b) $1,120 (c) Less — 90°F is outside the data</div>
+            <ol class="steps">
+              <li>(a) Each extra degree predicts <b>$12 more</b> in sales.</li>
+              <li>(b) <span class="eq">12(90) + 40 = 1120</span> → $1,120.</li>
+              <li>(c) 90°F is <b>outside</b> the observed 60–85°F → extrapolation → less trustworthy than an in-range prediction.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>The data covers 0–10 study hours. The line <span class="eq">y = 2.5x + 60</span> predicts a score of 160 at 40 hours. Should you trust it?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">No</div>
+            <ol class="steps">
+              <li>40 hours is far outside the observed data (extrapolation).</li>
+              <li>The linear trend may not continue — and a test maxes out at 100. The test rewards you for <b>distrusting</b> extrapolation.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Slope of the best-fit line = rate of predicted change. Trust interpolation; distrust extrapolation.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Swapping the slope's meaning ("2.5 hours per point" instead of "2.5 points per hour"). Units: slope is always (y-units) per (x-unit).</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ DOMAIN 4: GEOMETRY & TRIG ============ -->
+  <section class="domain d4" id="d4" aria-labelledby="d4h">
+    <div class="dhead">
+      <div><div class="dnum">4</div></div>
+      <div><h2 id="d4h">Geometry &amp; Trigonometry</h2><p>≈15% of the test · Patterns 17–22 · Smallest domain — memorize the greatest hits</p></div>
+    </div>
+
+    <!-- PATTERN 17 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">17</span>
+          <span class="ptitles"><span class="pn">45-45-90 and 30-60-90 are the only triangles worth memorizing</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>The SAT reuses exactly two special right triangles, because their side ratios are fixed forever: <b>45-45-90</b> (isosceles): legs 1, 1 → hypotenuse <span class="eq">√2</span>; scale: leg <span class="eq">L</span> → hypotenuse <span class="eq">L√2</span>. <b>30-60-90</b>: short leg 1, long leg <span class="eq">√3</span>, hypotenuse 2 — the hypotenuse is always double the <em>short</em> leg (the one across from 30°). Recognize them and you skip the Pythagorean theorem entirely.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p17"></div><figcaption><b>The two triangles that run geometry questions:</b> 45-45-90 → multiply by <span class="eq">√2</span>; 30-60-90 → short : long : hypotenuse = <span class="eq">1 : √3 : 2</span>.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>A 45-45-90 triangle has legs of length 5. What is the hypotenuse?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">5√2</div>
+            <ol class="steps"><li>45-45-90: hypotenuse = leg × <span class="eq">√2</span> → <span class="eq">5√2</span>.</li></ol><p class="checkline"><span class="eq">5² + 5² = 50 = (5√2)²</span> ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A 30-60-90 triangle has a hypotenuse of 14. Find the two legs.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Short leg 7, long leg 7√3</div>
+            <ol class="steps">
+              <li>Hypotenuse = 2 × short leg → short leg = 7.</li>
+              <li>Long leg = <span class="eq">√3</span> × short leg = <span class="eq">7√3</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A square has diagonal 10. What is its area?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">50</div>
+            <ol class="steps">
+              <li>The diagonal cuts the square into two 45-45-90 triangles: diagonal = side·<span class="eq">√2</span> → side = <span class="eq">10/√2</span>.</li>
+              <li>Area = side² = <span class="eq">(10/√2)² = 100/2 = 50</span>. (No need to rationalize — squaring kills the root.)</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>45-45-90 → ×<span class="eq">√2</span>. 30-60-90 → <span class="eq">1 : √3 : 2</span>, hypotenuse = 2 × short leg.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>In 30-60-90, mixing up which leg gets <span class="eq">√3</span> — it's the <em>long</em> leg, across from the 60° angle. Draw it and label before computing.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 18 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">18</span>
+          <span class="ptitles"><span class="pn">Similar triangles: same shape, scaled</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Similar triangles have identical angles — they're the same shape at different sizes, so every side is scaled by one common factor. Set up the proportion with <b>corresponding</b> sides (match them by the angles across from them), then cross-multiply. Shadows, mirrors, and "a line parallel to the base" are the classic setups.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p18"></div><figcaption><b>Same sun, same angles:</b> the person's <span class="frac"><span>height</span><span>shadow</span></span> ratio equals the tree's — one common scale factor, so the proportions match.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Two similar triangles: the small one has sides 3, 4, 5. The side corresponding to 4 measures 12 in the large triangle. What's the scale factor, and the side corresponding to 3?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Scale factor 3; side is 9</div>
+            <ol class="steps"><li>Scale = <span class="eq">12/4 = 3</span> → the side corresponding to 3 is <span class="eq">3 × 3 = 9</span>.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>In triangle <span class="eq">ABC</span>, segment <span class="eq">DE</span> connects the midpoints of sides <span class="eq">AB</span> and <span class="eq">AC</span>, with <span class="eq">DE</span> parallel to <span class="eq">BC</span>. If <span class="eq">DE = 8</span>, what is <span class="eq">BC</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">BC = 16</div>
+            <ol class="steps"><li>The midpoints cut each side in half → triangle <span class="eq">ADE</span> is similar to <span class="eq">ABC</span> with linear scale 2.</li>
+              <li><span class="eq">BC = 2 × DE = 2 × 8 = 16</span>.</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A 6-ft person casts a 4-ft shadow. At the same time, a tree casts a 20-ft shadow. How tall is the tree?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">30 ft</div>
+            <ol class="steps"><li>Same sun angle → similar triangles: <span class="eq">6/4 = h/20</span> → <span class="eq">h = (6 × 20)/4 = 30</span>.</li></ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Similar = same angles → proportional sides. Match corresponding sides via their opposite angles, then cross-multiply.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Proportioning non-corresponding sides (short-to-long). Label which side matches which <em>before</em> writing the proportion.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 19 -->
+    <article class="pattern" data-tag="must">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">19</span>
+          <span class="ptitles"><span class="pn">Circle equation: (x−h)² + (y−k)² = r² — and r² is NOT r</span>
+          <span class="prow"><span class="tag must">Must-know</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>The circle equation is just the Pythagorean theorem in disguise: every point <span class="eq">(x, y)</span> on the circle is distance <span class="eq">r</span> from the center <span class="eq">(h, k)</span>. Burn in two things: the signs <b>flip</b> (<span class="eq">x − 2</span> means <span class="eq">h = +2</span>), and the number on the right is <span class="eq">r²</span> — take the square root to get the radius.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p19"></div><figcaption><b>Read it like this:</b> <span class="eq">(x − 2)² + (y + 3)² = 25</span> → center <span class="eq">(2, −3)</span> (signs flip), radius <span class="eq">√25 = 5</span> (right side is <span class="eq">r²</span>).</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p><span class="eq">(x − 2)² + (y + 3)² = 25</span>. Find the center and radius.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Center (2, −3); radius 5</div>
+            <ol class="steps">
+              <li>Center: <b>(2, −3)</b> — the signs flip from what you see in the parentheses.</li>
+              <li>Radius: <span class="eq">√25 = 5</span> — the right side is <span class="eq">r²</span>, not <span class="eq">r</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>Which of these points does <b>NOT</b> lie on the circle <span class="eq">(x + 1)² + (y − 2)² = 13</span>? <span class="eq">A(2, 4)</span>, <span class="eq">B(−3, 5)</span>, <span class="eq">C(3, 5)</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">C(3, 5) is not on the circle</div>
+            <ol class="steps">
+              <li>A: <span class="eq">(2+1)² + (4−2)² = 9 + 4 = 13</span> ✓ on the circle.</li>
+              <li>B: <span class="eq">(−3+1)² + (5−2)² = 4 + 9 = 13</span> ✓ on the circle.</li>
+              <li>C: <span class="eq">(3+1)² + (5−2)² = 16 + 9 = 25 ≠ 13</span> ✗ not on the circle.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p><span class="eq">x² + y² − 6x + 8y = 0</span>. Find the center and radius.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">Center (3, −4); radius 5</div>
+            <ol class="steps">
+              <li>Complete the square: <span class="eq">(x² − 6x + 9) + (y² + 8y + 16) = 9 + 16</span>.</li>
+              <li>→ <span class="eq">(x − 3)² + (y + 4)² = 25</span> → center <b>(3, −4)</b>, radius <b>5</b>.</li>
+            </ol><p class="checkline">What you add to the left, you must add to the right — that's the whole move.</p></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Center <span class="eq">(h, k)</span> with flipped signs; radius = √(right side). Not in center form? Complete the square.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Answering radius = 25, or center (−2, 3) — both wrong answers are always among the choices. Also: balancing both sides when completing the square.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 20 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">20</span>
+          <span class="ptitles"><span class="pn">SOHCAHTOA: label from the angle's point of view</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Sine = <b>O</b>pposite/<b>H</b>ypotenuse, Cosine = <b>A</b>djacent/<b>H</b>ypotenuse, Tangent = <b>O</b>pposite/<b>A</b>djacent — but "opposite" and "adjacent" depend on <b>which acute angle</b> you're standing at. Step one is always: point at the angle, label the three sides from its perspective. Bonus pattern: complementary angles swap sin and cos — <span class="eq">sin(θ) = cos(90° − θ)</span>.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p20"></div><figcaption><b>SOHCAHTOA:</b> plant yourself at one acute angle — the hypotenuse is always across from the right angle; "opposite" and "adjacent" change with your seat.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Right triangle, hypotenuse 10, one acute angle 30°. Find the side opposite the 30° angle.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">5</div>
+            <ol class="steps"><li><span class="eq">sin(30°) = opposite/10</span> → opposite = <span class="eq">10 × 0.5 = 5</span>.</li></ol><p class="checkline">It's the short leg — matches the 30-60-90 ratio from Pattern 17 ✓</p></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>In right triangle <span class="eq">DEF</span> with right angle at <span class="eq">E</span>, angle <span class="eq">D = 40°</span>, and hypotenuse <span class="eq">DF = 20</span>. Find the length of side <span class="eq">DE</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">20·cos(40°) ≈ 15.3</div>
+            <ol class="steps">
+              <li>Plant yourself at <span class="eq">D</span>: <span class="eq">DE</span> is the <b>adjacent</b> side, <span class="eq">DF</span> the hypotenuse → use cosine.</li>
+              <li><span class="eq">cos(40°) = DE/20</span> → <span class="eq">DE = 20·cos(40°) ≈ 15.3</span> (calculator in <b>degree</b> mode).</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>If <span class="eq">sin(25°) ≈ 0.423</span>, what is <span class="eq">cos(65°)</span>?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">≈ 0.423</div>
+            <ol class="steps"><li><span class="eq">25° + 65° = 90°</span> → complementary → <span class="eq">cos(65°) = sin(25°) ≈ 0.423</span>. No triangle needed.</li></ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Label opposite/adjacent from the given angle, then pick S, C, or T. Complementary angles: <span class="eq">sin(θ) = cos(90° − θ)</span>.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Using the <b>wrong angle's</b> perspective (labeling from angle A but plugging into angle B's ratio). Also: make sure the calculator is in <em>degree</em> mode.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 21 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">21</span>
+          <span class="ptitles"><span class="pn">The formula sheet is free — know what's on it and what's not</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>Bluebook gives you a reference sheet (area/circumference of a circle, triangle area, Pythagorean theorem, volumes of box/cylinder/sphere/cone/pyramid, etc.). Strategy: don't memorize what's given — memorize what's <b>not</b> (special triangle ratios, circle equation, SOHCAHTOA) and practice <b>recognizing</b> which formula a word problem wants. Composite shapes = add or subtract simple ones.</p>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p>Cylinder with radius 3 and height 7. What's the volume?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">63π</div>
+            <ol class="steps"><li><span class="eq">V = πr²h = π(3)²(7) = 63π</span>. (On the reference sheet — just reach for it.)</li></ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>A rectangular box has dimensions 4 × 5 × 6. A cylinder has the same volume as the box and a radius of 5. What is the cylinder's height?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">24/(5π) ≈ 1.53</div>
+            <ol class="steps">
+              <li>Box volume = <span class="eq">4 × 5 × 6 = 120</span>.</li>
+              <li><span class="eq">π(5)²h = 120</span> → <span class="eq">h = 120/(25π) = 24/(5π) ≈ 1.53</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>A cone and a cylinder have the same radius and height. The cone's volume is 100. What's the cylinder's?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">300</div>
+            <ol class="steps"><li>Cone = <span class="eq">⅓</span>(cylinder with same base and height) → cylinder = <span class="eq">3 × 100 = 300</span>. The ⅓ is the whole question.</li></ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Use the reference sheet instead of memory for standard formulas; memorize only what's missing from it. Cone/pyramid = <span class="eq">⅓</span> of the corresponding prism.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>Diameter vs. radius (halve it first!), and forgetting the ⅓ on cones and pyramids — the single most common geometry distractor.</div>
+      </div>
+    </article>
+
+    <!-- PATTERN 22 -->
+    <article class="pattern" data-tag="nice">
+      <div class="p-head">
+        <button class="p-toggle" aria-expanded="false"><span class="pnum">22</span>
+          <span class="ptitles"><span class="pn">Inside the parentheses moves sideways — and lies about direction</span>
+          <span class="prow"><span class="tag nice">Nice-to-have</span></span></span>
+        </button><span class="chev"></span>
+        <button class="p-seen" aria-pressed="false">Mark <span class="long">pattern </span>seen</button>
+      </div>
+      <div class="p-body">
+        <div class="insight"><div class="k">The intuition</div>
+          <p>For <span class="eq">y = f(x)</span>: changes <b>outside</b> (<span class="eq">f(x) + k</span>) move the graph vertically and tell the truth (+3 = up 3). Changes <b>inside</b> (<span class="eq">f(x − h)</span>) move it horizontally and <b>lie</b> about direction (<span class="eq">x − 2</span> = shift <em>right</em> 2; <span class="eq">x + 4</span> = shift <em>left</em> 4). Think of it as: inside the parentheses, <span class="eq">x</span> has to work harder to get the same output, so the graph slides toward the sign's opposite.</p>
+        </div>
+        <figure class="sketch"><div data-sketch="p22"></div><figcaption><b>The lying rule:</b> <span class="eq">y = (x − 2)²</span> looks like "minus = left" but shifts <b>right</b>, because <span class="eq">x</span> must go 2 further to reach the same value.</figcaption></figure>
+        <div class="ex"><div class="ex-top"><span class="diff d-simple">Simple</span><div class="ex-q"><p><span class="eq">f(x) = x²</span>. Describe the graphs of <span class="eq">g(x) = f(x) + 3</span> and <span class="eq">h(x) = f(x − 2)</span>.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">g: up 3 · h: right 2</div>
+            <ol class="steps">
+              <li><span class="eq">g(x) = f(x) + 3</span>: outside → vertical, truthful → shift <b>up</b> 3.</li>
+              <li><span class="eq">h(x) = f(x − 2)</span>: inside → horizontal, lies → shift <b>right</b> 2.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-mid">Mid</span><div class="ex-q"><p>The graph of <span class="eq">f(x) = |x|</span> is shifted 3 units right and 1 unit up. Write the new equation.</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">g(x) = |x − 3| + 1</div>
+            <ol class="steps">
+              <li>Right 3 → inside, opposite sign: <span class="eq">|x − 3|</span>.</li>
+              <li>Up 1 → outside, truthful: <span class="eq">+ 1</span> → <span class="eq">g(x) = |x − 3| + 1</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="ex"><div class="ex-top"><span class="diff d-stretch">Stretch</span><div class="ex-q"><p>The graph of <span class="eq">y = f(x)</span> is shifted 4 units <b>left</b> and 2 units <b>down</b>. Which equation describes the new graph?</p></div></div>
+          <div class="ex-foot"><button class="reveal">Show the walkthrough</button></div>
+          <div class="walk"><div class="walk-inner"><div class="ans">y = f(x + 4) − 2</div>
+            <ol class="steps">
+              <li>Left 4 → inside, opposite sign: <span class="eq">f(x + 4)</span>.</li>
+              <li>Down 2 → outside, truthful: <span class="eq">− 2</span> → <span class="eq">y = f(x + 4) − 2</span>.</li>
+            </ol></div></div>
+        </div>
+        <div class="takeaway"><div class="k">The can't-unsee-it</div>Outside = vertical, truthful. Inside = horizontal, reversed.</div>
+        <div class="trap"><div class="k">The SAT's favorite trap</div>"Shift left 4" → writing <span class="eq">f(x − 4)</span>. The inside shift always goes the "wrong" way — that's exactly what the question is testing.</div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ============ STRATEGY ============ -->
+  <section class="strategy" id="strategy" aria-labelledby="strat-h">
+    <h2 id="strat-h">Test-day strategy</h2>
+    <p class="sec-sub">Content is the weapon; these are the rules of engagement.</p>
+    <div class="strat">
+      <div class="si"><div class="si-n">1</div><div><h3>Module 1 is the whole game</h3><p>Your overall Module 1 performance routes you to a harder or easier Module 2 — position within the module doesn't change a question's weight. So prioritize accuracy over speed across the entire first module; careless misses there are the surest way to lose your preferred route. <span class="k">Accuracy across the whole module, first.</span></p></div></div>
+      <div class="si"><div class="si-n">2</div><div><h3>Never leave a blank</h3><p>No guessing penalty: an eliminated guess beats a blank 100% of the time. With ~2 minutes left, fill every remaining question. <span class="k">Blank = wrong, always.</span></p></div></div>
+      <div class="si"><div class="si-n">3</div><div><h3>Desmos is a power tool, not a lifestyle</h3><p>It <em>trivializes</em>: systems (graph both, click the intersection), quadratics (read roots/vertex), algebra verification, tables, means, regression. It <em>wastes time</em> on: simple percents, one-step algebra, anything solvable mentally in ~10 seconds. <span class="k">Desmos for graphs, systems, and verification; brain for arithmetic.</span></p></div></div>
+      <div class="si"><div class="si-n">4</div><div><h3>Pace like a banker</h3><p>≈95 seconds per question — but not evenly. Easy ones should take 30–45s, buying 2–3 minutes for the hard ones at each module's end. If a question eats 3 minutes with no progress, flag it, move on, come back — stuck time is the most expensive kind.</p></div></div>
+      <div class="si"><div class="si-n">5</div><div><h3>Word problems: translate before you calculate</h3><p>≈30% of questions are "in context." Write the equation first — <b>define the variable!</b> — then solve. Most word-problem errors are translation errors, not math errors.</p></div></div>
+      <div class="si"><div class="si-n">6</div><div><h3>Grid-ins have rules</h3><p>Negative answers are allowed — enter the minus sign. Fractions and decimals are both accepted (no mixed numbers — enter 7/2, not 3½). If the value won't fit, enter the decimal, truncating or rounding at the fourth digit; never include %, commas, or $.</p></div></div>
+      <div class="si"><div class="si-n">7</div><div><h3>Use the reference sheet</h3><p>It's in the app — area, volume, Pythagorean theorem, and more. Don't burn memory on what's given; burn it on what's <b>not</b>: exponents (Pattern 8), special triangles (17), the circle equation (19), SOHCAHTOA (20).</p></div></div>
+      <div class="si"><div class="si-n">8</div><div><h3>The "does this make sense" filter</h3><p>A percent increase over 100% should more than double; a probability over 1 is impossible; a slope described backwards (hours per point) is a trap. One second of sanity-checking catches a third of careless errors.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ============ ROADMAP ============ -->
+  <section class="roadmap" aria-labelledby="road-h">
+    <h2 id="road-h" class="sec-title">The 900 → 1400 study order</h2>
+    <p class="sec-sub">Maximum points per hour. Read a domain here, then drill it on Khan Academy or Bluebook before moving on.</p>
+    <div class="road">
+      <div class="step"><span class="sn">1</span><div><h3>Algebra · Patterns 1–4</h3><p>≈35% of the test; the foundation everything else stands on. <b>Master first.</b></p></div></div>
+      <div class="step"><span class="sn">2</span><div><h3>Advanced Math core · Patterns 5–9</h3><p>≈35% more; quadratics + exponents + equivalent expressions are the densest point-per-hour topics on the test.</p></div></div>
+      <div class="step"><span class="sn">3</span><div><h3>Problem-Solving &amp; Data · Patterns 11–16</h3><p>≈15%; mostly reading comprehension plus two formulas. Fast points.</p></div></div>
+      <div class="step"><span class="sn">4</span><div><h3>Geometry &amp; Trig · Patterns 17–22</h3><p>≈15%; memorize the five greatest hits — special triangles, circle equation, SOHCAHTOA, ⅓ volumes, transformations — and move on.</p></div></div>
+      <div class="step"><span class="sn">5</span><div><h3>Timed practice tests + drill your misses</h3><p>Bluebook practice tests + Khan Academy drills. Review every miss by asking: <b>"Which pattern did I fail to see?"</b></p></div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b style="color:var(--ink)">About this guide.</b> The patterns above were distilled from the official College Board digital-SAT structure (domain weights, module format, adaptive rules) and a study of the concepts that recur on released tests — not from generic tips. Question shares and frequencies are approximate and vary test to test.</p>
+    <p>How to get to 1400+: read each pattern until the intuition clicks, attempt every example before revealing the walkthrough, then practice on Khan Academy and Bluebook. This guide teaches you to see — the reps make it permanent.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var $ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var SEEN_ON = '✓ Seen', SEEN_OFF = 'Mark <span class="long">pattern <\/span>seen';
+
+  /* ---------- accordions ---------- */
+  $(".p-toggle").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var card = btn.closest(".pattern");
+      var open = card.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+  /* open the first pattern so visitors see how it works */
+  var first = $(".p-toggle")[0];
+  if(first){ first.closest(".pattern").classList.add("open"); first.setAttribute("aria-expanded","true"); }
+
+  /* ---------- reveal walkthroughs ---------- */
+  $(".reveal").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var walk = btn.closest(".ex").querySelector(".walk");
+      var open = walk.classList.toggle("open");
+      btn.textContent = open ? "Hide the walkthrough" : "Show the walkthrough";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+
+  /* ---------- seen tracking (in-memory, this session) ---------- */
+  var bar = document.getElementById("bar"), seenCount = document.getElementById("seenCount");
+  function refreshSeen(){
+    var on = $(".p-seen[aria-pressed='true']").length;
+    seenCount.textContent = on;
+    bar.style.width = Math.round(on / 22 * 100) + "%";
+  }
+  $(".p-seen").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var pressed = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", pressed ? "true" : "false");
+      btn.innerHTML = pressed ? SEEN_ON : SEEN_OFF;
+      refreshSeen();
+    });
+  });
+
+  /* ---------- filter: must-knows only ---------- */
+  var filterBtn = document.getElementById("filterMust");
+  filterBtn.addEventListener("click", function(){
+    var mustOnly = filterBtn.getAttribute("aria-pressed") !== "true";
+    filterBtn.setAttribute("aria-pressed", mustOnly ? "true" : "false");
+    $(".pattern").forEach(function(p){
+      p.hidden = mustOnly && p.getAttribute("data-tag") !== "must";
+    });
+    $(".domain").forEach(function(d){
+      d.hidden = $(".pattern:not([hidden])", d).length === 0;
+    });
+  });
+  /* expand / collapse all */
+  function setAll(open){
+    $(".pattern:not([hidden])").forEach(function(p){
+      p.classList.toggle("open", open);
+      $(".p-toggle", p)[0].setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  document.getElementById("expandAll").addEventListener("click", function(){ setAll(true); });
+  document.getElementById("collapseAll").addEventListener("click", function(){ setAll(false); });
+
+  /* =====================================================
+     SVG sketches — drawn from the actual math in each example
+     ===================================================== */
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent){
+    var n = document.createElementNS(NS, tag);
+    for(var k in attrs){ n.setAttribute(k, attrs[k]); }
+    if(parent) parent.appendChild(n);
+    return n;
+  }
+  function text(parent, x, y, s, style, anchor, weight){
+    var t = el("text", {x: x, y: y, "text-anchor": anchor || "start"}, parent);
+    if(style) t.setAttribute("style", style);
+    if(weight) t.setAttribute("font-weight", weight);
+    t.textContent = s;
+    return t;
+  }
+  function plotBox(o){
+    var W = o.w || 440, H = o.h || 320, P = o.pad || 46;
+    var svg = el("svg", {viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": o.alt || "Math diagram"});
+    var xs = o.xMin, xe = o.xMax, ys = o.yMin, ye = o.yMax;
+    if(o.aspectY !== undefined){
+      var xr = xe - xs, yr = xr * (H - 2*P) / (W - 2*P);
+      ys = o.aspectY - yr/2; ye = o.aspectY + yr/2;
+    }
+    var X = function(x){ return P + (x - xs) / (xe - xs) * (W - 2*P); };
+    var Y = function(y){ return H - P - (y - ys) / (ye - ys) * (H - 2*P); };
+    if(o.title) text(svg, W/2, 22, o.title, "fill:var(--ink)", "middle", 700);
+    (o.bands || []).forEach(function(b){
+      el("rect", {x: X(b.x1), y: P, width: X(b.x2) - X(b.x1), height: H - 2*P,
+        style: "fill:" + (b.color || "var(--dc)") + ";opacity:.06"}, svg);
+    });
+    var gx = o.stepX || 1, gy = o.stepY || 1;
+    for(var x = Math.ceil((xs - 1e-9)/gx)*gx; x <= xe + 1e-9; x += gx){
+      el("line", {x1: X(x), y1: P, x2: X(x), y2: H - P, "class": "grid"}, svg);
+      text(svg, X(x), H - P + 17, String(Math.round(x*100)/100), null, "middle");
+    }
+    for(var y = Math.ceil((ys - 1e-9)/gy)*gy; y <= ye + 1e-9; y += gy){
+      el("line", {x1: P, y1: Y(y), x2: W - P, y2: Y(y), "class": "grid"}, svg);
+      if(Math.abs(y) > 1e-9) text(svg, P - 7, Y(y) + 4, String(Math.round(y*100)/100), null, "end");
+    }
+    if(ys < 0 && ye > 0){ el("line", {x1: P, y1: Y(0), x2: W - P, y2: Y(0), "class": "ax"}, svg);
+      text(svg, W - P + 7, Y(0) + 4, "x"); }
+    if(xs < 0 && xe > 0){ el("line", {x1: X(0), y1: P, x2: X(0), y2: H - P, "class": "ax"}, svg);
+      text(svg, X(0) + 7, P - 7, "y"); }
+    var uid = 0;
+    (o.fns || []).forEach(function(F){
+      var sx = F.x1 !== undefined ? F.x1 : xs, ex2 = F.x2 !== undefined ? F.x2 : xe;
+      var d = "", n = 180, started = false;
+      for(var i = 0; i <= n; i++){
+        var px = sx + (ex2 - sx) * i / n, py = F.f(px), pxr = +X(px).toFixed(1);
+        if(isFinite(px) && isFinite(py) && py >= ys && py <= ye){
+          d += (started ? " L" : "M") + pxr + " " + (+Y(py).toFixed(1)); started = true;
+        } else started = false;
+      }
+      var path = el("path", {d: d, "class": "fn", style: "stroke:" + (F.color || "var(--dc)")}, svg);
+      if(F.dash) path.setAttribute("stroke-dasharray", F.dash);
+      if(F.label) text(svg, X(F.lx), Y(F.ly), F.label, "fill:" + (F.color || "var(--dc)"), F.anchor || "start", 700);
+    });
+    (o.segments || []).forEach(function(s){
+      var l = el("line", {x1: X(s.x1), y1: Y(s.y1), x2: X(s.x2), y2: Y(s.y2),
+        style: "stroke:" + (s.color || "var(--d3)") + ";stroke-width:2", "stroke-dasharray": s.dash || "5,4"}, svg);
+      if(s.label) text(svg, X(s.lx), Y(s.ly), s.label, "fill:" + (s.color || "var(--d3)"), "middle", 700);
+    });
+    (o.circles || []).forEach(function(c){
+      var rx = c.r * (W - 2*P) / (xe - xs);
+      el("circle", {cx: X(c.cx), cy: Y(c.cy), r: rx, style: "fill:none;stroke:" + (c.color || "var(--dc)") + ";stroke-width:2.6"}, svg);
+    });
+    (o.points || []).forEach(function(p){
+      el("circle", {cx: X(p.x), cy: Y(p.y), r: p.r || 5.5, "class": "pt", style: p.color ? "fill:" + p.color : ""}, svg);
+      if(p.label) text(svg, X(p.x) + (p.lx || 10), Y(p.y) + (p.ly || -10), p.label,
+        "fill:" + (p.color || "var(--dc)"), "start", 700);
+    });
+    (o.arrows || []).forEach(function(A){
+      uid++;
+      var id = "arr" + uid + Math.floor(Math.random()*1e5);
+      var mk = el("marker", {id: id, viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 8, markerHeight: 8, orient: "auto"}, el("defs", {}, svg));
+      el("path", {d: "M 0 1 L 9 5 L 0 9 z", style: "fill:" + (A.color || "var(--dc)")}, mk);
+      el("line", {x1: X(A.x1), y1: Y(A.y1), x2: X(A.x2), y2: Y(A.y2),
+        style: "stroke:" + (A.color || "var(--dc)") + ";stroke-width:2.4", "marker-end": "url(#" + id + ")"}, svg);
+      if(A.label) text(svg, X(A.lx), Y(A.ly), A.label, "fill:" + (A.color || "var(--dc)"), "middle", 700);
+    });
+    (o.texts || []).forEach(function(t2){
+      text(svg, X(t2.x), Y(t2.y), t2.s, t2.color ? "fill:" + t2.color : null, t2.anchor || "middle", t2.weight || 700);
+    });
+    return svg;
+  }
+  function twoPanel(holder, o1, o2){
+    holder.style.display = "flex"; holder.style.gap = "10px"; holder.style.flexWrap = "wrap";
+    [o1, o2].forEach(function(o){
+      var d = document.createElement("div");
+      d.style.flex = "1 1 240px"; d.style.minWidth = "240px";
+      d.appendChild(plotBox(Object.assign({w: 300, h: 280, pad: 40}, o)));
+      holder.appendChild(d);
+    });
+  }
+
+  /* ---- Pattern 1: slope & intercept ---- */
+  function sk1(h){
+    h.appendChild(plotBox({
+      alt: "Line y equals 2x plus 1 with intercept and slope rise-over-run marked",
+      xMin: -1, xMax: 4, yMin: -2, yMax: 10, stepX: 1, stepY: 2,
+      fns: [{f: function(x){ return 2*x + 1; }, label: "y = 2x + 1", lx: 2.4, ly: 8.7, anchor: "end"}],
+      points: [{x: 0, y: 1, label: "b = 1 (starts here)", lx: 10, ly: 22, color: "var(--d3)"}],
+      segments: [
+        {x1: 2, y1: 5, x2: 3, y2: 5, lx: 2.5, ly: 4.35, label: "run 1", color: "var(--d3)"},
+        {x1: 3, y1: 5, x2: 3, y2: 7, lx: 3.32, ly: 5.6, label: "rise 2", color: "var(--d3)"}
+      ],
+      texts: [{x: 1.55, y: 8.4, s: "m = 2", color: "var(--dc)"}]
+    }));
+  }
+
+  /* ---- Pattern 3: systems as intersection ---- */
+  function sk3(h){
+    h.appendChild(plotBox({
+      alt: "Two lines intersecting at the point (3, 1)",
+      xMin: 0, xMax: 6, yMin: -3, yMax: 7, stepX: 1, stepY: 2,
+      fns: [
+        {f: function(x){ return 7 - 2*x; }, color: "var(--dc)", label: "2x + y = 7", lx: 0.2, ly: 6.4},
+        {f: function(x){ return x - 2; }, color: "var(--d4)", label: "x − y = 2", lx: 5.9, ly: 4.7, anchor: "end"}
+      ],
+      points: [{x: 3, y: 1, r: 6.5, label: "(3, 1): makes BOTH true", lx: 12, ly: -16, color: "var(--d3)"}]
+    }));
+  }
+
+  /* ---- Pattern 5: cup vs cap ---- */
+  function sk5(h){
+    twoPanel(h,
+      {title: "a > 0 → ∪ cup: vertex is the MINIMUM", alt: "Upward-opening parabola",
+       xMin: -2, xMax: 2, yMin: -1, yMax: 4, stepX: 1, stepY: 1,
+       fns: [{f: function(x){ return x*x; }}],
+       points: [{x: 0, y: 0, label: "min (0, 0)", lx: 10, ly: 16}]},
+      {title: "a < 0 → ∩ cap: vertex is the MAXIMUM", alt: "Downward-opening parabola",
+       xMin: -2, xMax: 2, yMin: -4, yMax: 1, stepX: 1, stepY: 1,
+       fns: [{f: function(x){ return -x*x; }}],
+       points: [{x: 0, y: 0, label: "max (0, 0)", lx: 10, ly: 16}]});
+  }
+
+  /* ---- Pattern 7: linear adds, exponential multiplies ---- */
+  function sk7(h){
+    var linPts = [], expPts = [], linTxt = [], expTxt = [];
+    for(var i = 0; i <= 4; i++){
+      linPts.push({x: i, y: 5 + 5*i, r: 4.5});
+      if(i < 4) linTxt.push({x: i + 0.5, y: 5 + 5*i + 3.4, s: "+5", color: "var(--dc)", weight: 400, anchor: "middle"});
+    }
+    for(var j = 0; j <= 3; j++){
+      expPts.push({x: j, y: 5*Math.pow(2, j), r: 4.5});
+    }
+    [[0.5, 7], [1.5, 15.5], [2.5, 29]].forEach(function(q){
+      expTxt.push({x: q[0], y: q[1], s: "×2", color: "var(--dc)", weight: 400, anchor: "middle"});
+    });
+    twoPanel(h,
+      {title: "Linear: +5 every step", alt: "Linear growth adding 5 each step",
+       xMin: -0.5, xMax: 4.5, yMin: 0, yMax: 50, stepX: 1, stepY: 10,
+       fns: [{f: function(x){ return 5*x + 5; }}], points: linPts, texts: linTxt},
+      {title: "Exponential: ×2 every step", alt: "Exponential growth multiplying by 2 each step",
+       xMin: -0.5, xMax: 3.5, yMin: 0, yMax: 50, stepX: 1, stepY: 10,
+       fns: [{f: function(x){ return 5*Math.pow(2, x); }}], points: expPts, texts: expTxt});
+  }
+
+  /* ---- Pattern 13: mean vs median dot strips ---- */
+  function strip(o){
+    var W = 440, H = 165, P = 46;
+    var svg = el("svg", {viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": o.alt});
+    var X = function(x){ return P + (x - o.xMin) / (o.xMax - o.xMin) * (W - 2*P); };
+    var yLine = H - 44, yDot = yLine - 26;
+    text(svg, W/2, 18, o.title, "fill:var(--ink)", "middle", 700);
+    el("line", {x1: P, y1: yLine, x2: W - P, y2: yLine, "class": "ax"}, svg);
+    for(var x = o.xMin; x <= o.xMax + 1e-9; x += o.step){
+      el("line", {x1: X(x), y1: yLine, x2: X(x), y2: yLine + 6, "class": "tick"}, svg);
+      text(svg, X(x), yLine + 20, String(Math.round(x*10)/10), null, "middle");
+    }
+    o.marks.forEach(function(m){
+      el("line", {x1: X(m.x), y1: 30, x2: X(m.x), y2: yLine,
+        style: "stroke:" + m.color + ";stroke-width:2.4", "stroke-dasharray": m.dash ? "6,4" : ""}, svg);
+      text(svg, X(m.x), 44, m.label, "fill:" + m.color, "middle", 700);
+    });
+    o.values.forEach(function(v){
+      el("circle", {cx: X(v), cy: yDot, r: 5.5, "class": "pt", style: "fill:var(--ink)"}, svg);
+    });
+    return svg;
+  }
+  function sk13(h){
+    h.style.display = "flex"; h.style.flexDirection = "column"; h.style.gap = "8px";
+    h.appendChild(strip({alt: "Dot plot 4, 6, 8: mean equals median equals 6", title: "Before: 4, 6, 8",
+      xMin: 0, xMax: 12, step: 2, values: [4, 6, 8],
+      marks: [{x: 6, color: "var(--dc)", label: "mean = median = 6"}]}));
+    h.appendChild(strip({alt: "Dot plot 4, 6, 8, 100: mean dragged to 29.5, median nearly still at 7", title: "After: add the outlier 100",
+      xMin: 0, xMax: 104, step: 20, values: [4, 6, 8, 100],
+      marks: [
+        {x: 29.5, color: "var(--red)", label: "mean → 29.5", dash: true},
+        {x: 7, color: "var(--teal)", label: "median → 7"}
+      ]}));
+  }
+
+  /* ---- Pattern 16: line of best fit ---- */
+  function sk16(h){
+    h.appendChild(plotBox({
+      alt: "Scatterplot with a line of best fit; extrapolation beyond the data is dashed",
+      xMin: 0, xMax: 22, yMin: 50, yMax: 130, stepX: 5, stepY: 20,
+      bands: [{x1: 0, x2: 10, color: "var(--dc)"}, {x1: 10, x2: 22, color: "var(--red)"}],
+      fns: [
+        {f: function(x){ return 2.5*x + 60; }, x1: 0, x2: 10, color: "var(--dc)", label: "best fit: y = 2.5x + 60", lx: 5.4, ly: 99},
+        {f: function(x){ return 2.5*x + 60; }, x1: 10, x2: 22, color: "var(--red)", dash: "6,4", label: "extrapolation (don't trust!)", lx: 13.5, ly: 124}
+      ],
+      points: [[0,58],[1,63],[2,64],[3,68],[4,70],[5,73],[6,74],[7,79],[8,79],[9,82],[10,86]]
+        .map(function(p){ return {x: p[0], y: p[1], r: 4, color: "var(--ink)"}; }),
+      texts: [
+        {x: 3.4, y: 74, s: "hours", color: "var(--muted)", weight: 400},
+        {x: 10.7, y: 90, s: "extrapolation territory", color: "var(--red)", weight: 400}
+      ]
+    }));
+  }
+
+  /* ---- Pattern 17: special triangles ---- */
+  function triSketch(o){
+    var svg = el("svg", {viewBox: "0 0 260 235", role: "img", "aria-label": o.alt});
+    text(svg, 130, 20, o.title, "fill:var(--ink)", "middle", 700);
+    var p = o.pts;
+    el("polygon", {points: p.join(" "), style: "fill:var(--dc-s);stroke:var(--dc);stroke-width:2.4"}, svg);
+    var B = o.right;
+    el("path", {d: "M " + (B.x - 13) + " " + B.y + " L " + (B.x - 13) + " " + (B.y - 13) + " L " + B.x + " " + (B.y - 13),
+      style: "fill:none;stroke:var(--dc);stroke-width:1.8"}, svg);
+    o.labels.forEach(function(l){
+      var t = text(svg, l.x, l.y, l.s, l.color || "fill:var(--dc)", l.anchor || "middle", 700);
+      if(l.rotate) t.setAttribute("transform", "rotate(" + l.rotate + " " + l.x + " " + l.y + ")");
+    });
+    return svg;
+  }
+  function sk17(h){
+    h.style.display = "flex"; h.style.gap = "10px"; h.style.flexWrap = "wrap";
+    var d1 = document.createElement("div"); d1.style.flex = "1 1 220px"; d1.style.minWidth = "220px";
+    d1.appendChild(triSketch({
+      alt: "45-45-90 triangle with leg L and hypotenuse L root 2", title: "45-45-90",
+      pts: ["30,195", "195,195", "195,30"], right: {x: 195, y: 195},
+      labels: [
+        {x: 112, y: 216, s: "leg L"},
+        {x: 214, y: 116, s: "leg L", rotate: 90},
+        {x: 100, y: 105, s: "hyp = L√2", rotate: -44},
+        {x: 48, y: 180, s: "45°", color: "fill:var(--muted)"},
+        {x: 178, y: 52,  s: "45°", color: "fill:var(--muted)"}
+      ]
+    }));
+    var d2 = document.createElement("div"); d2.style.flex = "1 1 220px"; d2.style.minWidth = "220px";
+    d2.appendChild(triSketch({
+      alt: "30-60-90 triangle with sides 1, root 3, 2", title: "30-60-90",
+      pts: ["20,195", "141,195", "141,125"], right: {x: 141, y: 195},
+      labels: [
+        {x: 80, y: 216, s: "√3 (long)", color: "fill:var(--dc)"},
+        {x: 161, y: 163, s: "1 (short)", rotate: 90, anchor: "middle"},
+        {x: 68, y: 160, s: "2", rotate: -30},
+        {x: 38, y: 182, s: "30°", color: "fill:var(--muted)"},
+        {x: 120, y: 140, s: "60°", color: "fill:var(--muted)"}
+      ]
+    }));
+    h.appendChild(d1); h.appendChild(d2);
+  }
+
+  /* ---- Pattern 18: similar triangles ---- */
+  function sk18(h){
+    var svg = el("svg", {viewBox: "0 0 440 210", role: "img", "aria-label": "Two similar 3-4-5 triangles with a times-3 scale arrow"});
+    var small = ["30,165", "102,165", "102,111"];
+    var big = ["200,170", "344,170", "344,62"];
+    el("polygon", {points: small.join(" "), style: "fill:var(--dc-s);stroke:var(--dc);stroke-width:2.4"}, svg);
+    el("polygon", {points: big.join(" "), style: "fill:var(--dc-s);stroke:var(--dc);stroke-width:2.4"}, svg);
+    [ [66, 181, "4"], [116, 140, "3"], [58, 130, "5"] ].forEach(function(l){
+      text(svg, l[0], l[1], l[2], "fill:var(--dc)", "middle", 700); });
+    [ [272, 186, "12"], [358, 120, "9"], [266, 105, "15"] ].forEach(function(l){
+      text(svg, l[0], l[1], l[2], "fill:var(--dc)", "middle", 700); });
+    var mk = el("marker", {id: "sarr", viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: "auto"}, el("defs", {}, svg));
+    el("path", {d: "M 0 1 L 9 5 L 0 9 z", style: "fill:var(--d3)"}, mk);
+    el("line", {x1: 115, y1: 140, x2: 192, y2: 140, style: "stroke:var(--d3);stroke-width:2.4", "marker-end": "url(#sarr)"}, svg);
+    text(svg, 153, 128, "×3", "fill:var(--d3)", "middle", 700);
+    text(svg, 220, 30, "same angles → each side scaled by ONE factor", "fill:var(--ink)", "middle", 700);
+    h.appendChild(svg);
+  }
+
+  /* ---- Pattern 19: circle with flipped signs + r² ---- */
+  function sk19(h){
+    h.appendChild(plotBox({
+      alt: "Circle with center (2, negative 3) and radius 5",
+      xMin: -4, xMax: 8, yMin: -8.4, yMax: 2.5, aspectY: -3, stepX: 2, stepY: 2,
+      fns: [], circles: [{cx: 2, cy: -3, r: 5}],
+      segments: [{x1: 2, y1: -3, x2: 7, y2: -3, lx: 4.5, ly: -2.3, label: "r = 5 (√25)", color: "var(--d3)"}],
+      points: [
+        {x: 2, y: -3, r: 6, label: "(2, −3): signs flip!", lx: 12, ly: 4},
+        {x: 7, y: -3, r: 4}
+      ]
+    }));
+  }
+
+  /* ---- Pattern 20: SOHCAHTOA from the angle's view ---- */
+  function sk20(h){
+    var svg = el("svg", {viewBox: "0 0 440 235", role: "img", "aria-label": "Right triangle labeled opposite, adjacent, hypotenuse from angle theta"});
+    var A = {x: 24, y: 190}, B = {x: 320, y: 190}, C = {x: 320, y: 70};
+    el("polygon", {points: [A.x + "," + A.y, B.x + "," + B.y, C.x + "," + C.y].join(" "),
+      style: "fill:var(--dc-s);stroke:var(--dc);stroke-width:2.4"}, svg);
+    el("path", {d: "M 306 190 L 306 176 L 320 176", style: "fill:none;stroke:var(--dc);stroke-width:1.8"}, svg);
+    el("path", {d: "M 64 190 A 40 40 0 0 0 61 174.9", style: "fill:none;stroke:var(--d3);stroke-width:2"}, svg);
+    text(svg, 76, 186, "θ", "fill:var(--d3)", "middle", 700);
+    text(svg, 172, 212, "adjacent (by θ)", "fill:var(--dc)", "middle", 700);
+    var op = text(svg, 346, 132, "opposite (across from θ)", "fill:var(--dc)", "middle", 700);
+    op.setAttribute("transform", "rotate(90 346 132)");
+    var hy = text(svg, 168, 126, "hypotenuse", "fill:var(--dc)", "middle", 700);
+    hy.setAttribute("transform", "rotate(-22 168 126)");
+    text(svg, 220, 26, "sin θ = O/H · cos θ = A/H · tan θ = O/A", "fill:var(--ink)", "middle", 700);
+    var cap = text(svg, 220, 226, "swap seats and \"opposite\" / \"adjacent\" switch — label from YOUR angle", "fill:var(--muted)", "middle", 400);
+    cap.setAttribute("font-size", "11");
+    h.appendChild(svg);
+  }
+
+  /* ---- Pattern 22: the lying horizontal shift ---- */
+  function sk22(h){
+    h.appendChild(plotBox({
+      alt: "Parabola y equals x squared shifted right by the minus in y equals x minus 2 squared",
+      xMin: -3, xMax: 5, yMin: -1, yMax: 10, stepX: 1, stepY: 2,
+      fns: [
+        {f: function(x){ return x*x; }, color: "var(--muted)", dash: "6,5", label: "y = x² (before)", lx: -2.9, ly: 9.4, anchor: "start"},
+        {f: function(x){ return (x-2)*(x-2); }, color: "var(--dc)", label: "y = (x−2)² (after)", lx: 4.9, ly: 9.4, anchor: "end"}
+      ],
+      points: [
+        {x: 2, y: 0, r: 5.5, label: "vertex → right 2", lx: 12, ly: -14}
+      ],
+      arrows: [{x1: 0, y1: 0.6, x2: 1.9, y2: 0.6, lx: 0.95, ly: 1.9, label: "right 2 (the − lied)", color: "var(--d3)"}],
+      texts: [{x: -0.55, y: -0.4, s: "0 →", color: "var(--muted)", weight: 400}]
+    }));
+  }
+
+  var SK = {p1: sk1, p3: sk3, p5: sk5, p7: sk7, p13: sk13, p16: sk16, p17: sk17, p18: sk18, p19: sk19, p20: sk20, p22: sk22};
+  document.addEventListener("DOMContentLoaded", function(){
+    $("[data-sketch]").forEach(function(h){
+      var f = SK[h.getAttribute("data-sketch")];
+      if(f){ try{ f(h); }catch(e){ /* keep the page working even if a sketch fails */ } }
+    });
+  });
+})();
+</script>
+</body>
+</html>
